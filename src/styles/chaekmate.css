@@ -1,0 +1,369 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #000;
+    background: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==================== Header ==================== */
+header {
+    border-bottom: 2px solid #000;
+    padding: 20px 0;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    z-index: 1000;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.nav-links a:hover {
+    opacity: 0.6;
+}
+
+/* ==================== Hero Section ==================== */
+.hero {
+    padding: 100px 0;
+    text-align: center;
+    border-bottom: 2px solid #000;
+}
+
+.hero h1 {
+    font-size: 72px;
+    font-weight: 900;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+}
+
+.hero .subtitle {
+    font-size: 24px;
+    margin-bottom: 40px;
+    opacity: 0.7;
+}
+
+.hero .tagline {
+    font-size: 48px;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+/* ==================== Buttons ==================== */
+.cta-button {
+    display: inline-block;
+    padding: 18px 40px;
+    background: #000;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    border: 3px solid #000;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.cta-button:hover {
+    background: #fff;
+    color: #000;
+}
+
+.cta-button.secondary {
+    background: #fff;
+    color: #000;
+    border: 3px solid #000;
+}
+
+.cta-button.secondary:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* ==================== Section Title ==================== */
+.section-title {
+    text-align: center;
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 60px;
+}
+
+/* ==================== Features Section ==================== */
+.features {
+    padding: 80px 0;
+    border-bottom: 2px solid #000;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.feature-card {
+    border: 3px solid #000;
+    padding: 40px;
+    transition: all 0.3s;
+    background: #fff;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 0 #000;
+}
+
+.feature-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    font-size: 16px;
+    line-height: 1.8;
+    opacity: 0.8;
+}
+
+/* ==================== How It Works Section ==================== */
+.how-it-works {
+    padding: 80px 0;
+    background: #000;
+    color: #fff;
+}
+
+.how-it-works .section-title {
+    color: #fff;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.step {
+    text-align: center;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 900;
+    margin: 0 auto 20px;
+}
+
+.step h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.step p {
+    opacity: 0.8;
+}
+
+/* ==================== Stats Section ==================== */
+.stats {
+    padding: 80px 0;
+    border-bottom: 2px solid #000;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 40px;
+    text-align: center;
+}
+
+.stat-item h4 {
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.stat-item p {
+    font-size: 18px;
+    opacity: 0.7;
+}
+
+/* ==================== Pricing Section ==================== */
+.pricing {
+    padding: 80px 0;
+    border-bottom: 2px solid #000;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.pricing-card {
+    border: 3px solid #000;
+    padding: 40px;
+    transition: all 0.3s;
+}
+
+.pricing-card.featured {
+    background: #000;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 0 #000;
+}
+
+.pricing-card.featured:hover {
+    box-shadow: 10px 10px 0 #666;
+}
+
+.plan-name {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.plan-price {
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.plan-price span {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.plan-features li {
+    padding: 10px 0;
+    border-top: 1px solid #000;
+}
+
+.pricing-card.featured .plan-features li {
+    border-top-color: #fff;
+}
+
+/* ==================== CTA Section ==================== */
+.cta-section {
+    padding: 100px 0;
+    text-align: center;
+    background: #000;
+    color: #fff;
+}
+
+.cta-section h2 {
+    font-size: 56px;
+    font-weight: 900;
+    margin-bottom: 30px;
+}
+
+.cta-section p {
+    font-size: 24px;
+    margin-bottom: 40px;
+    opacity: 0.8;
+}
+
+.cta-section .cta-button {
+    border-color: #fff;
+}
+
+/* ==================== Footer ==================== */
+footer {
+    padding: 40px 0;
+    text-align: center;
+    border-top: 2px solid #000;
+}
+
+footer p {
+    opacity: 0.6;
+}
+
+/* ==================== Animations ==================== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero, .feature-card, .step, .stat-item, .pricing-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* ==================== Responsive ==================== */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 48px;
+    }
+
+    .hero .tagline {
+        font-size: 32px;
+    }
+
+    .section-title {
+        font-size: 36px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .pricing-card.featured {
+        transform: scale(1);
+    }
+}
