@@ -42,25 +42,13 @@ const initSignupForm = (): void => {
 
     // TODO: 실제 API 연동
     alert(`회원가입 기능은 준비 중입니다!\n\n입력하신 정보:\n이름: ${name}\n이메일: ${email}`);
-    
-    // 실제로는 API 호출 후 로그인 페이지로 이동
-    // const response = await fetch('/api/auth/signup', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ name, email, password, phone, marketing: marketingChecked })
-    // });
-    //
-    // if (response.ok) {
-    //   alert('회원가입이 완료되었습니다!');
-    //   window.location.href = '/login.html';
-    // }
   });
 
   console.log('✅ 회원가입 폼 초기화 완료');
 };
 
 // ==================== 전체 동의 체크박스 ====================
-const initAgreeAll = (): void => {
+const initSignupAgreeAll = (): void => {
   const agreeAll = document.getElementById('agreeAll') as HTMLInputElement;
   
   if (!agreeAll) return;
@@ -86,7 +74,7 @@ const initAgreeAll = (): void => {
 };
 
 // ==================== 소셜 회원가입 ====================
-const initSocialSignup = (): void => {
+const initSignupSocial = (): void => {
   const socialButtons = document.querySelectorAll('.btn-social');
   
   socialButtons.forEach(button => {
@@ -99,9 +87,6 @@ const initSocialSignup = (): void => {
       
       // TODO: 실제 소셜 회원가입 연동
       alert(`${socialType} 회원가입 기능은 준비 중입니다!`);
-      
-      // 실제로는 OAuth 인증 URL로 이동
-      // window.location.href = `/api/auth/${socialType.toLowerCase()}`;
     });
   });
 
@@ -109,7 +94,7 @@ const initSocialSignup = (): void => {
 };
 
 // ==================== 비밀번호 실시간 검증 ====================
-const initPasswordValidation = (): void => {
+const initSignupPasswordValidation = (): void => {
   const passwordInput = document.getElementById('password') as HTMLInputElement;
   const passwordConfirmInput = document.getElementById('password-confirm') as HTMLInputElement;
   
@@ -146,7 +131,6 @@ const initPasswordValidation = (): void => {
       return;
     }
 
-    // 8자 이상, 영문+숫자 포함
     const hasLength = password.length >= 8;
     const hasLetter = /[a-zA-Z]/.test(password);
     const hasNumber = /[0-9]/.test(password);
@@ -164,7 +148,7 @@ const initPasswordValidation = (): void => {
 };
 
 // ==================== 이메일 형식 검증 ====================
-const initEmailValidation = (): void => {
+const initSignupEmailValidation = (): void => {
   const emailInput = document.getElementById('email') as HTMLInputElement;
   
   if (!emailInput) return;
@@ -178,7 +162,6 @@ const initEmailValidation = (): void => {
       return;
     }
 
-    // 이메일 형식 체크
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
     if (emailRegex.test(email)) {
@@ -194,7 +177,7 @@ const initEmailValidation = (): void => {
 };
 
 // ==================== 약관 링크 처리 ====================
-const initTermsLinks = (): void => {
+const initSignupTermsLinks = (): void => {
   const termsLinks = document.querySelectorAll('.terms-link');
   
   termsLinks.forEach(link => {
@@ -207,9 +190,6 @@ const initTermsLinks = (): void => {
                        href === '#marketing' ? '마케팅 정보 수신' : '';
       
       alert(`${termsType} 내용 보기 기능은 준비 중입니다.`);
-      
-      // TODO: 약관 내용 모달 또는 새 페이지로 표시
-      // showTermsModal(termsType);
     });
   });
 
@@ -217,18 +197,18 @@ const initTermsLinks = (): void => {
 };
 
 // ==================== 메인 초기화 ====================
-const init = (): void => {
+const initSignup = (): void => {
   console.log('🎬 ChaekMate Signup 초기화 시작...');
   
   initSignupForm();
-  initAgreeAll();
-  initSocialSignup();
-  initPasswordValidation();
-  initEmailValidation();
-  initTermsLinks();
+  initSignupAgreeAll();
+  initSignupSocial();
+  initSignupPasswordValidation();
+  initSignupEmailValidation();
+  initSignupTermsLinks();
   
   console.log('✨ ChaekMate Signup 초기화 완료!');
 };
 
 // DOMContentLoaded 이벤트에서 초기화
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', initSignup);

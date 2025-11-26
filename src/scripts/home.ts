@@ -6,7 +6,7 @@
 console.log('🏠 ChaekMate Home 로드 완료!');
 
 // ==================== 검색 기능 ====================
-const initSearch = (): void => {
+const initHomeSearch = (): void => {
   const searchBtn = document.querySelector('.search-btn');
   const searchInput = document.querySelector('.search-input') as HTMLInputElement;
 
@@ -138,10 +138,10 @@ const initHeaderScroll = (): void => {
 };
 
 // ==================== 메인 초기화 ====================
-const init = (): void => {
+const initHome = (): void => {
   console.log('🎬 ChaekMate Home 초기화 시작...');
   
-  initSearch();
+  initHomeSearch();
   initSmoothScroll();
   initBookClick();
   initRecommendClick();
@@ -153,4 +153,4 @@ const init = (): void => {
 };
 
 // DOMContentLoaded 이벤트에서 초기화
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', initHome);
