@@ -22,28 +22,17 @@ const initLoginForm = (): void => {
     console.log('로그인 시도:', { email, remember: !!remember });
 
     // TODO: 실제 API 연동
-    // 임시로 성공 메시지
     alert(`로그인 기능은 준비 중입니다!\n\n입력하신 이메일: ${email}`);
     
     // 실제로는 API 호출 후 홈으로 이동
-    // const response = await fetch('/api/auth/login', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify({ email, password, remember })
-    // });
-    // 
-    // if (response.ok) {
-    //   const data = await response.json();
-    //   localStorage.setItem('token', data.token);
-    //   window.location.href = '/home.html';
-    // }
+    // window.location.href = '/home.html';
   });
 
   console.log('✅ 로그인 폼 초기화 완료');
 };
 
 // ==================== 소셜 로그인 ====================
-const initSocialLogin = (): void => {
+const initLoginSocial = (): void => {
   const socialButtons = document.querySelectorAll('.btn-social');
   
   socialButtons.forEach(button => {
@@ -56,9 +45,6 @@ const initSocialLogin = (): void => {
       
       // TODO: 실제 소셜 로그인 연동
       alert(`${socialType} 로그인 기능은 준비 중입니다!`);
-      
-      // 실제로는 OAuth 인증 URL로 이동
-      // window.location.href = `/api/auth/${socialType.toLowerCase()}`;
     });
   });
 
@@ -66,7 +52,7 @@ const initSocialLogin = (): void => {
 };
 
 // ==================== 이메일 형식 검증 ====================
-const initEmailValidation = (): void => {
+const initLoginEmailValidation = (): void => {
   const emailInput = document.getElementById('email') as HTMLInputElement;
   
   if (!emailInput) return;
@@ -80,7 +66,6 @@ const initEmailValidation = (): void => {
       return;
     }
 
-    // 이메일 형식 체크
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
     if (emailRegex.test(email)) {
@@ -103,27 +88,23 @@ const initFindPassword = (): void => {
 
   findPasswordLink.addEventListener('click', (e: Event) => {
     e.preventDefault();
-    
     alert('비밀번호 찾기 기능은 준비 중입니다!');
-    
-    // TODO: 비밀번호 찾기 페이지로 이동
-    // window.location.href = '/find-password.html';
   });
 
   console.log('✅ 비밀번호 찾기 초기화 완료');
 };
 
 // ==================== 메인 초기화 ====================
-const init = (): void => {
+const initLogin = (): void => {
   console.log('🎬 ChaekMate Login 초기화 시작...');
   
   initLoginForm();
-  initSocialLogin();
-  initEmailValidation();
+  initLoginSocial();
+  initLoginEmailValidation();
   initFindPassword();
   
   console.log('✨ ChaekMate Login 초기화 완료!');
 };
 
 // DOMContentLoaded 이벤트에서 초기화
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener('DOMContentLoaded', initLogin);
