@@ -90,10 +90,15 @@ const initCategoryClick = (): void => {
   
   categoryItems.forEach(item => {
     item.addEventListener('click', (e: Event) => {
+      const href = (item as HTMLAnchorElement).getAttribute('href');
+      
+      // book-list.html 링크는 정상 이동 (alert 없음)
+      if (href && href.includes('book-list.html')) {
+        return;
+      }
+      
+      // 그 외는 막기
       e.preventDefault();
-      const categoryName = item.querySelector('.category-name')?.textContent;
-      alert(`"${categoryName}" 카테고리 페이지는 준비 중입니다!`);
-      // TODO: 카테고리 페이지로 이동
     });
   });
 

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서 목록 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/book-list.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="#customer">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="#mypage" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="#cart" class="icon-link">
+                        <span class="icon">🛒</span>
+                        <span>장바구니</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="#bestseller">베스트셀러</a></li>
+                    <li><a href="#new">신간</a></li>
+                    <li><a href="#recommend">추천</a></li>
+                    <li><a href="#sale">할인</a></li>
+                    <li><a href="#event">이벤트</a></li>
+                    <li><a href="#store">매장안내</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <!-- 카테고리 헤더 -->
+        <section class="category-header">
+            <div class="container">
+                <h1 class="category-title" id="categoryTitle">소설</h1>
+                <p class="category-description" id="categoryDescription">다양한 감동과 이야기가 담긴 소설 작품들</p>
+                <div class="filter-section">
+                    <select class="filter-select" id="sortFilter">
+                        <option value="popular">인기순</option>
+                        <option value="recent">최신순</option>
+                        <option value="rating">평점순</option>
+                        <option value="title">제목순</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <!-- 도서 목록 -->
+        <section class="book-list-section">
+            <div class="container">
+                <div class="book-grid" id="bookGrid">
+                    <!-- 도서 카드 1 -->
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/180x260?text=Book+1" alt="책 표지">
+                            <div class="book-overlay">
+                                <button class="quick-view-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">채식주의자</h3>
+                            <p class="book-author">한강</p>
+                            <p class="book-publisher">창비 · 2007</p>
+                            <div class="book-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-score">4.2</span>
+                            </div>
+                            <p class="book-price">12,600원</p>
+                        </div>
+                    </div>
+
+                    <!-- 도서 카드 2 -->
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/180x260?text=Book+2" alt="책 표지">
+                            <div class="book-overlay">
+                                <button class="quick-view-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">82년생 김지영</h3>
+                            <p class="book-author">조남주</p>
+                            <p class="book-publisher">민음사 · 2016</p>
+                            <div class="book-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-score">4.5</span>
+                            </div>
+                            <p class="book-price">13,800원</p>
+                        </div>
+                    </div>
+
+                    <!-- 도서 카드 3 -->
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/180x260?text=Book+3" alt="책 표지">
+                            <div class="book-overlay">
+                                <button class="quick-view-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">달러구트 꿈 백화점</h3>
+                            <p class="book-author">이미예</p>
+                            <p class="book-publisher">팩토리나인 · 2020</p>
+                            <div class="book-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-score">4.8</span>
+                            </div>
+                            <p class="book-price">14,400원</p>
+                        </div>
+                    </div>
+
+                    <!-- 도서 카드 4 -->
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/180x260?text=Book+4" alt="책 표지">
+                            <div class="book-overlay">
+                                <button class="quick-view-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">미드나잇 라이브러리</h3>
+                            <p class="book-author">매트 헤이그</p>
+                            <p class="book-publisher">인플루엔셜 · 2021</p>
+                            <div class="book-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-score">4.3</span>
+                            </div>
+                            <p class="book-price">15,120원</p>
+                        </div>
+                    </div>
+
+                    <!-- 도서 카드 5 -->
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/180x260?text=Book+5" alt="책 표지">
+                            <div class="book-overlay">
+                                <button class="quick-view-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">트렌드 코리아 2025</h3>
+                            <p class="book-author">김난도 외</p>
+                            <p class="book-publisher">미래의창 · 2024</p>
+                            <div class="book-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-score">4.6</span>
+                            </div>
+                            <p class="book-price">18,000원</p>
+                        </div>
+                    </div>
+
+                    <!-- 도서 카드 6 -->
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/180x260?text=Book+6" alt="책 표지">
+                            <div class="book-overlay">
+                                <button class="quick-view-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">아몬드</h3>
+                            <p class="book-author">손원평</p>
+                            <p class="book-publisher">창비 · 2017</p>
+                            <div class="book-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-score">4.4</span>
+                            </div>
+                            <p class="book-price">12,420원</p>
+                        </div>
+                    </div>
+
+                    <!-- 도서 카드 7 -->
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/180x260?text=Book+7" alt="책 표지">
+                            <div class="book-overlay">
+                                <button class="quick-view-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">작별하지 않는다</h3>
+                            <p class="book-author">한강</p>
+                            <p class="book-publisher">문학동네 · 2021</p>
+                            <div class="book-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span class="rating-score">4.1</span>
+                            </div>
+                            <p class="book-price">13,500원</p>
+                        </div>
+                    </div>
+
+                    <!-- 도서 카드 8 -->
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/180x260?text=Book+8" alt="책 표지">
+                            <div class="book-overlay">
+                                <button class="quick-view-btn">미리보기</button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">어린 왕자</h3>
+                            <p class="book-author">생텍쥐페리</p>
+                            <p class="book-publisher">문학동네 · 2000</p>
+                            <div class="book-rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="rating-score">4.9</span>
+                            </div>
+                            <p class="book-price">10,800원</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 더보기 버튼 -->
+                <div class="load-more-container">
+                    <button class="load-more-btn" id="loadMoreBtn">더 많은 도서 보기</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ChaekMate</h3>
+                    <p>AI 기반 도서 추천 플랫폼</p>
+                </div>
+                <div class="footer-section">
+                    <h4>서비스</h4>
+                    <a href="#">도서 검색</a>
+                    <a href="/ai-recommend.html">AI 추천</a>
+                    <a href="#">문장 SNS</a>
+                </div>
+                <div class="footer-section">
+                    <h4>고객 지원</h4>
+                    <a href="#">FAQ</a>
+                    <a href="#">문의하기</a>
+                </div>
+                <div class="footer-section">
+                    <h4>정보</h4>
+                    <a href="#">이용약관</a>
+                    <a href="#">개인정보처리방침</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ChaekMate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/book-list.ts"></script>
+</body>
+</html>
