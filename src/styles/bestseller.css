@@ -1,0 +1,623 @@
+/* 기본 스타일 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #000;
+    background-color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* 헤더 스타일 (home.html과 동일) */
+.main-header {
+    background-color: #fff;
+    border-bottom: 3px solid #000;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.top-bar {
+    background-color: #000;
+    color: #fff;
+    padding: 8px 0;
+    font-size: 13px;
+}
+
+.top-menu {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.top-menu a {
+    color: #fff;
+    transition: opacity 0.2s;
+}
+
+.top-menu a:hover {
+    opacity: 0.7;
+}
+
+.header-main {
+    padding: 20px 0;
+}
+
+.header-main .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    flex-shrink: 0;
+}
+
+.logo a {
+    color: #000;
+}
+
+.logo a:hover {
+    opacity: 0.7;
+}
+
+.search-area {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    border: 3px solid #000;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    font-size: 16px;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.search-btn {
+    padding: 0 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.search-btn:hover {
+    opacity: 0.8;
+}
+
+.header-icons {
+    display: flex;
+    gap: 24px;
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    transition: opacity 0.2s;
+}
+
+.icon-link:hover {
+    opacity: 0.6;
+}
+
+.icon {
+    font-size: 24px;
+}
+
+.main-nav {
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 0;
+}
+
+.nav-menu li {
+    flex: 1;
+    text-align: center;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 16px 24px;
+    font-weight: 600;
+    font-size: 15px;
+    border-right: 1px solid #ddd;
+    transition: background-color 0.2s;
+}
+
+.nav-menu a.active {
+    background-color: #000;
+    color: #fff;
+}
+
+.nav-menu li:last-child a {
+    border-right: none;
+}
+
+.nav-menu a:hover {
+    background-color: #f5f5f5;
+}
+
+.nav-menu a.active:hover {
+    background-color: #000;
+}
+
+/* 컨테이너 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* 메인 */
+.main {
+    padding: 60px 0 80px;
+}
+
+/* 페이지 헤더 */
+.page-header {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid #000;
+}
+
+.page-title {
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 12px;
+}
+
+.page-description {
+    font-size: 18px;
+    color: #666;
+}
+
+/* 필터 섹션 */
+.filter-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    border: 2px solid #000;
+}
+
+.period-filter {
+    display: flex;
+    gap: 0;
+    border: 2px solid #000;
+}
+
+.period-btn {
+    padding: 12px 24px;
+    font-weight: 700;
+    font-size: 15px;
+    background-color: #fff;
+    color: #000;
+    border-right: 2px solid #000;
+    transition: all 0.2s;
+}
+
+.period-btn:last-child {
+    border-right: none;
+}
+
+.period-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.period-btn.active {
+    background-color: #000;
+    color: #fff;
+}
+
+.category-select {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid #000;
+    background-color: #fff;
+    cursor: pointer;
+    min-width: 150px;
+}
+
+.category-select:focus {
+    outline: none;
+}
+
+/* 베스트셀러 리스트 */
+.bestseller-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bestseller-item {
+    display: grid;
+    grid-template-columns: 80px 120px 1fr 200px;
+    gap: 24px;
+    padding: 24px;
+    border: 2px solid #000;
+    transition: all 0.2s;
+}
+
+.bestseller-item:hover {
+    box-shadow: 8px 8px 0 #000;
+    transform: translate(-4px, -4px);
+}
+
+/* 상위 3개 강조 */
+.bestseller-item.rank-1,
+.bestseller-item.rank-2,
+.bestseller-item.rank-3 {
+    border-width: 3px;
+}
+
+/* 순위 배지 */
+.rank-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rank-number {
+    font-size: 42px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+.rank-1 .rank-number {
+    color: #FFD700;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.rank-2 .rank-number {
+    color: #C0C0C0;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.rank-3 .rank-number {
+    color: #CD7F32;
+    text-shadow: 2px 2px 0 #000;
+}
+
+/* 책 표지 */
+.book-cover {
+    position: relative;
+}
+
+.book-cover img {
+    width: 120px;
+    height: 180px;
+    object-fit: cover;
+    border: 2px solid #000;
+}
+
+.rank-change {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: #fff;
+    border: 2px solid #000;
+}
+
+.rank-change.up {
+    color: #f00;
+}
+
+.rank-change.down {
+    color: #00f;
+}
+
+.rank-change.new {
+    background-color: #000;
+    color: #fff;
+}
+
+.rank-change.same {
+    color: #666;
+}
+
+/* 책 정보 */
+.book-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.book-title {
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 4px;
+}
+
+.book-author {
+    font-size: 16px;
+    color: #666;
+}
+
+.book-publisher {
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 8px;
+}
+
+.book-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.stars {
+    color: #000;
+    font-size: 16px;
+}
+
+.rating-score {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.book-description {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* 책 액션 */
+.book-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+}
+
+.book-price {
+    font-size: 24px;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.btn-cart,
+.btn-buy {
+    padding: 14px 24px;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.2s;
+}
+
+.btn-cart {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+}
+
+.btn-cart:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+.btn-buy {
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+}
+
+.btn-buy:hover {
+    opacity: 0.8;
+}
+
+/* 푸터 */
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 60px 0 30px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    font-size: 24px;
+    font-weight: 900;
+    margin-bottom: 12px;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.footer-section p {
+    color: #999;
+    font-size: 14px;
+}
+
+.footer-section a {
+    display: block;
+    color: #ccc;
+    font-size: 14px;
+    margin-bottom: 12px;
+    transition: color 0.2s;
+}
+
+.footer-section a:hover {
+    color: #fff;
+}
+
+.footer-bottom {
+    padding-top: 30px;
+    border-top: 1px solid #333;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #666;
+    font-size: 14px;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+    .bestseller-item {
+        grid-template-columns: 60px 100px 1fr;
+    }
+
+    .book-actions {
+        grid-column: 2 / -1;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .book-price {
+        margin-bottom: 0;
+        margin-right: auto;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 32px;
+    }
+
+    .filter-section {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+    }
+
+    .period-filter {
+        width: 100%;
+    }
+
+    .period-btn {
+        flex: 1;
+    }
+
+    .category-select {
+        width: 100%;
+    }
+
+    .bestseller-item {
+        grid-template-columns: auto 80px 1fr;
+        gap: 16px;
+    }
+
+    .rank-badge {
+        align-items: flex-start;
+        padding-top: 8px;
+    }
+
+    .rank-number {
+        font-size: 32px;
+    }
+
+    .book-cover img {
+        width: 80px;
+        height: 120px;
+    }
+
+    .book-title {
+        font-size: 18px;
+    }
+
+    .book-description {
+        font-size: 14px;
+    }
+
+    .book-actions {
+        grid-column: 1 / -1;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
+    .bestseller-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .rank-badge {
+        justify-content: center;
+    }
+
+    .book-cover {
+        margin: 0 auto;
+    }
+
+    .book-actions {
+        flex-direction: column;
+    }
+
+    .book-price {
+        margin-right: 0;
+        margin-bottom: 12px;
+    }
+}
