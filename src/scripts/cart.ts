@@ -283,21 +283,15 @@ function initSearch(): void {
 
 // ==================== 추천 상품 장바구니 담기 ====================
 function initRecommendedItems(): void {
-    const addCartButtons = document.querySelectorAll('.btn-add-cart');
-
-    addCartButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const item = button.closest('.recommended-item');
-            const title = item?.querySelector('h3')?.textContent;
-
-            console.log('장바구니 담기:', title);
-            alert(`"${title}"이(가) 장바구니에 담겼습니다.`);
-            // TODO: 장바구니에 아이템 추가 로직
-            // 페이지 새로고침 또는 동적 추가
+    const recommendedItems = document.querySelectorAll('.recommended-item');
+    
+    recommendedItems.forEach(item => {
+        item.addEventListener('click', () => {
+            // ✅ 추가: 상세 페이지로 이동
+            const bookId = item.getAttribute('data-book-id') || '1';
+            window.location.href = `/book-detail.html?id=${bookId}`;
         });
     });
-
-    console.log('✅ 추천 상품 초기화 완료');
 }
 
 // ==================== 메인 초기화 ====================

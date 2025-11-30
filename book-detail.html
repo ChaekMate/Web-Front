@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채식주의자 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/book-detail.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="#customer">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/cart.html" class="icon-link">
+                        <span class="icon">🛒</span>
+                        <span>장바구니</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="#new">신간</a></li>
+                    <li><a href="#recommend">추천</a></li>
+                    <li><a href="#sale">할인</a></li>
+                    <li><a href="#event">이벤트</a></li>
+                    <li><a href="#store">매장안내</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container">
+            <!-- 책 기본 정보 -->
+            <section class="book-main">
+                <div class="book-image">
+                    <img src="https://via.placeholder.com/350x500?text=채식주의자" alt="채식주의자" id="bookCover">
+                    <button class="wishlist-btn" id="wishlistBtn">
+                        <span class="heart">♡</span>
+                    </button>
+                </div>
+
+                <div class="book-info">
+                    <div class="book-category">소설 · 한국문학</div>
+                    <h1 class="book-title" id="bookTitle">채식주의자</h1>
+                    <p class="book-author" id="bookAuthor">한강 저</p>
+                    
+                    <div class="book-rating">
+                        <div class="stars">★★★★☆</div>
+                        <span class="rating-score" id="ratingScore">4.2</span>
+                        <span class="rating-count" id="ratingCount">(1,234명)</span>
+                    </div>
+
+                    <div class="book-meta">
+                        <div class="meta-row">
+                            <span class="meta-label">출판사</span>
+                            <span class="meta-value" id="publisher">창비</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-label">출간일</span>
+                            <span class="meta-value" id="publishDate">2007년 10월 30일</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-label">쪽수</span>
+                            <span class="meta-value" id="pageCount">188쪽</span>
+                        </div>
+                        <div class="meta-row">
+                            <span class="meta-label">ISBN</span>
+                            <span class="meta-value" id="isbn">9788936433598</span>
+                        </div>
+                    </div>
+
+                    <div class="book-price-section">
+                        <div class="price-original">정가 <span id="originalPrice">14,000원</span></div>
+                        <div class="price-discount">
+                            <span class="discount-rate" id="discountRate">10%</span>
+                            <span class="price-final" id="finalPrice">12,600원</span>
+                        </div>
+                        <div class="price-point">
+                            <span>적립</span>
+                            <span id="point">630P (5%)</span>
+                        </div>
+                    </div>
+
+                    <div class="book-delivery">
+                        <div class="delivery-info">
+                            <span class="delivery-label">배송</span>
+                            <span class="delivery-text">무료배송 (30,000원 이상)</span>
+                        </div>
+                        <div class="delivery-date">
+                            <span class="delivery-label">도착</span>
+                            <span class="delivery-text">내일 도착 예정</span>
+                        </div>
+                    </div>
+
+                    <div class="book-quantity">
+                        <label>수량</label>
+                        <div class="quantity-control">
+                            <button class="qty-btn minus">−</button>
+                            <input type="number" class="qty-input" value="1" min="1" max="99" id="quantity">
+                            <button class="qty-btn plus">+</button>
+                        </div>
+                    </div>
+
+                    <div class="book-actions">
+                        <button class="btn-cart" id="addToCartBtn">장바구니</button>
+                        <button class="btn-buy" id="buyNowBtn">바로구매</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 탭 메뉴 -->
+            <nav class="book-tabs">
+                <button class="tab-btn active" data-tab="description">책 소개</button>
+                <button class="tab-btn" data-tab="toc">목차</button>
+                <button class="tab-btn" data-tab="author">저자 소개</button>
+                <button class="tab-btn" data-tab="reviews">리뷰 (<span id="reviewCount">234</span>)</button>
+            </nav>
+
+            <!-- 탭 컨텐츠 -->
+            <div class="tab-content-container">
+                <!-- 책 소개 -->
+                <section class="tab-content active" id="descriptionTab">
+                    <h2 class="section-title">책 소개</h2>
+                    <div class="book-description" id="bookDescription">
+                        <p>
+                            한강의 대표작 『채식주의자』는 평범한 여자가 어느 날 고기를 먹지 않겠다고 선언하면서 시작되는 이야기다. 
+                            이 작품은 인간 존재의 폭력성과 순수성에 대한 깊이 있는 탐구를 담고 있다.
+                        </p>
+                        <p>
+                            작가는 육식을 거부하는 한 여성의 선택이 불러오는 파장을 세 개의 연작 형식으로 그려낸다. 
+                            '채식주의자', '몽고반점', '나무 불꽃'의 세 부분으로 구성된 이 소설은 각기 다른 시점에서 
+                            주인공 영혜와 그 주변 인물들의 내면을 섬세하게 포착한다.
+                        </p>
+                        <p>
+                            2016년 맨부커상 인터내셔널 부문을 수상하며 한국 문학의 위상을 세계에 알린 작품이다. 
+                            한강 특유의 시적이고 절제된 문체는 인간 내면의 어둠과 빛을 동시에 비추며, 
+                            독자들에게 존재의 본질에 대한 깊은 사유를 촉발한다.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- 목차 -->
+                <section class="tab-content" id="tocTab">
+                    <h2 class="section-title">목차</h2>
+                    <div class="book-toc">
+                        <ol>
+                            <li>채식주의자</li>
+                            <li>몽고반점</li>
+                            <li>나무 불꽃</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <!-- 저자 소개 -->
+                <section class="tab-content" id="authorTab">
+                    <h2 class="section-title">저자 소개</h2>
+                    <div class="author-info">
+                        <div class="author-profile">
+                            <div class="author-image">
+                                <img src="https://via.placeholder.com/120x120?text=한강" alt="한강">
+                            </div>
+                            <div class="author-details">
+                                <h3 class="author-name">한강</h3>
+                                <p class="author-bio">
+                                    1970년 광주에서 태어났다. 연세대학교 국문과를 졸업했다. 
+                                    1993년 「서울신문」 신춘문예에 시가 당선되고, 1994년 「문학과사회」에 소설이 추천 완료되어 
+                                    작품 활동을 시작했다. 소설집 『여수의 사랑』 『내 여자의 열매』, 
+                                    장편소설 『검은 사슴』 『그대의 차가운 손』 『바람이 분다, 가라』 『소년이 온다』 『흰』 등을 발표했다.
+                                </p>
+                                <p class="author-bio">
+                                    2016년 『채식주의자』로 맨부커 인터내셔널상을 수상했으며, 
+                                    이외에도 이상문학상, 동리문학상, 만해문학상 등을 수상했다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 리뷰 -->
+                <section class="tab-content" id="reviewsTab">
+                    <div class="reviews-header">
+                        <h2 class="section-title">리뷰</h2>
+                        <button class="btn-write-review" id="writeReviewBtn">리뷰 작성</button>
+                    </div>
+
+                    <div class="reviews-summary">
+                        <div class="summary-score">
+                            <div class="score-big">4.2</div>
+                            <div class="score-stars">★★★★☆</div>
+                            <div class="score-count">1,234명의 평가</div>
+                        </div>
+                        <div class="summary-distribution">
+                            <div class="dist-row">
+                                <span class="dist-label">5점</span>
+                                <div class="dist-bar">
+                                    <div class="dist-fill" style="width: 60%"></div>
+                                </div>
+                                <span class="dist-count">740</span>
+                            </div>
+                            <div class="dist-row">
+                                <span class="dist-label">4점</span>
+                                <div class="dist-bar">
+                                    <div class="dist-fill" style="width: 25%"></div>
+                                </div>
+                                <span class="dist-count">308</span>
+                            </div>
+                            <div class="dist-row">
+                                <span class="dist-label">3점</span>
+                                <div class="dist-bar">
+                                    <div class="dist-fill" style="width: 10%"></div>
+                                </div>
+                                <span class="dist-count">123</span>
+                            </div>
+                            <div class="dist-row">
+                                <span class="dist-label">2점</span>
+                                <div class="dist-bar">
+                                    <div class="dist-fill" style="width: 3%"></div>
+                                </div>
+                                <span class="dist-count">37</span>
+                            </div>
+                            <div class="dist-row">
+                                <span class="dist-label">1점</span>
+                                <div class="dist-bar">
+                                    <div class="dist-fill" style="width: 2%"></div>
+                                </div>
+                                <span class="dist-count">26</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="reviews-list">
+                        <!-- 리뷰 1 -->
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">김**</span>
+                                    <span class="review-date">2025.11.25</span>
+                                </div>
+                                <div class="review-rating">★★★★★</div>
+                            </div>
+                            <div class="review-content">
+                                강렬하고 인상 깊은 작품이었습니다. 한강 작가의 문체가 정말 아름답고, 
+                                인간 내면의 폭력성과 순수함에 대해 깊이 생각하게 만드는 소설입니다. 
+                                읽는 내내 숨이 막힐 듯한 긴장감과 동시에 시적인 아름다움을 느꼈어요.
+                            </div>
+                            <div class="review-actions">
+                                <button class="review-helpful">도움됨 <span>45</span></button>
+                            </div>
+                        </div>
+
+                        <!-- 리뷰 2 -->
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">이**</span>
+                                    <span class="review-date">2025.11.20</span>
+                                </div>
+                                <div class="review-rating">★★★★☆</div>
+                            </div>
+                            <div class="review-content">
+                                독특한 시선으로 인간의 본성을 탐구하는 작품. 
+                                다소 무겁고 어두운 내용이지만 문학적 가치가 높은 소설입니다.
+                            </div>
+                            <div class="review-actions">
+                                <button class="review-helpful">도움됨 <span>32</span></button>
+                            </div>
+                        </div>
+
+                        <!-- 리뷰 3 -->
+                        <div class="review-item">
+                            <div class="review-header">
+                                <div class="reviewer-info">
+                                    <span class="reviewer-name">박**</span>
+                                    <span class="review-date">2025.11.15</span>
+                                </div>
+                                <div class="review-rating">★★★★★</div>
+                            </div>
+                            <div class="review-content">
+                                맨부커상을 받은 이유를 알 것 같습니다. 
+                                한국 문학의 수준을 세계에 보여준 작품이라고 생각해요.
+                            </div>
+                            <div class="review-actions">
+                                <button class="review-helpful">도움됨 <span>28</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-more-reviews" id="loadMoreReviews">리뷰 더보기</button>
+                </section>
+            </div>
+
+            <!-- 추천 도서 -->
+            <section class="recommended-books">
+                <h2 class="section-title">이 책과 함께 본 책</h2>
+                <div class="recommended-grid">
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/150x220?text=Book" alt="추천 도서">
+                        </div>
+                        <div class="book-info">
+                            <h3>소년이 온다</h3>
+                            <p>한강</p>
+                            <p class="price">13,500원</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/150x220?text=Book" alt="추천 도서">
+                        </div>
+                        <div class="book-info">
+                            <h3>흰</h3>
+                            <p>한강</p>
+                            <p class="price">12,600원</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/150x220?text=Book" alt="추천 도서">
+                        </div>
+                        <div class="book-info">
+                            <h3>작별하지 않는다</h3>
+                            <p>한강</p>
+                            <p class="price">13,500원</p>
+                        </div>
+                    </div>
+
+                    <div class="book-card">
+                        <div class="book-cover">
+                            <img src="https://via.placeholder.com/150x220?text=Book" alt="추천 도서">
+                        </div>
+                        <div class="book-info">
+                            <h3>바람이 분다, 가라</h3>
+                            <p>한강</p>
+                            <p class="price">14,400원</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ChaekMate</h3>
+                    <p>AI 기반 도서 추천 플랫폼</p>
+                </div>
+                <div class="footer-section">
+                    <h4>서비스</h4>
+                    <a href="#">도서 검색</a>
+                    <a href="/ai-recommend.html">AI 추천</a>
+                    <a href="#">문장 SNS</a>
+                </div>
+                <div class="footer-section">
+                    <h4>고객 지원</h4>
+                    <a href="#">FAQ</a>
+                    <a href="#">문의하기</a>
+                </div>
+                <div class="footer-section">
+                    <h4>정보</h4>
+                    <a href="#">이용약관</a>
+                    <a href="#">개인정보처리방침</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ChaekMate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/book-detail.ts"></script>
+</body>
+</html>

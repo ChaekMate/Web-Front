@@ -60,13 +60,11 @@ const initBookClick = (): void => {
   
   bookItems.forEach(item => {
     item.addEventListener('click', () => {
-      alert('책 상세 페이지는 준비 중입니다!');
-      // TODO: 실제 상세 페이지로 이동
-      // window.location.href = '/book/detail?id=...';
+      // ✅ 수정: 상세 페이지로 이동
+      const bookId = item.getAttribute('data-book-id') || '1';
+      window.location.href = `/book-detail.html?id=${bookId}`;
     });
   });
-
-  console.log('✅ 책 클릭 이벤트 초기화 완료');
 };
 
 // ==================== AI 추천 카드 클릭 ====================
