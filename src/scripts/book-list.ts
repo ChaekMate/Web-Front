@@ -248,13 +248,13 @@ function initBookCardClick(): void {
             // 미리보기 버튼 클릭 시
             if ((e.target as HTMLElement).classList.contains('quick-view-btn')) {
                 console.log('미리보기:', bookId);
-                // TODO: 미리보기 모달 표시
                 return;
             }
             
-            // 카드 전체 클릭 시 상세 페이지로 이동
-            console.log('도서 상세 페이지로 이동:', bookId);
-            // window.location.href = `/book-detail.html?id=${bookId}`;
+            // ✅ 수정: 상세 페이지로 이동
+            if (bookId) {
+                window.location.href = `/book-detail.html?id=${bookId}`;
+            }
         }
     });
 }

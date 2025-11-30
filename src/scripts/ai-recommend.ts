@@ -290,6 +290,18 @@ const initChatForm = (): void => {
   console.log('✅ 채팅 폼 초기화 완료');
 };
 
+function initBookCardClick(): void {
+    const bookCards = document.querySelectorAll('.book-card');
+    
+    bookCards.forEach(card => {
+        card.addEventListener('click', () => {
+            // ✅ 추가: 상세 페이지로 이동
+            const bookId = card.getAttribute('data-book-id') || '1';
+            window.location.href = `/book-detail.html?id=${bookId}`;
+        });
+    });
+}
+
 // ==================== 텍스트 영역 자동 높이 조절 ====================
 const initAutoResize = (): void => {
   const chatInput = document.getElementById('chatInput') as HTMLTextAreaElement;

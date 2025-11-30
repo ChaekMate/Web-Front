@@ -122,19 +122,30 @@ function initOrders(): void {
     orderItems.forEach(item => {
         const trackBtn = item.querySelector('.btn-outline:first-child');
         const reviewBtn = item.querySelector('.btn-outline:last-child');
+        const bookCover = item.querySelector('.book-cover'); // ✅ 추가
 
-        trackBtn?.addEventListener('click', () => {
+        // 배송 조회
+        trackBtn?.addEventListener('click', (e) => {
+            e.stopPropagation(); // ✅ 이벤트 전파 방지
             const orderNumber = item.querySelector('.order-number')?.textContent;
             console.log('배송 조회:', orderNumber);
             alert('배송 조회 기능은 준비 중입니다.');
             // TODO: 배송 조회 페이지로 이동
         });
 
-        reviewBtn?.addEventListener('click', () => {
+        // 리뷰 작성
+        reviewBtn?.addEventListener('click', (e) => {
+            e.stopPropagation(); // ✅ 이벤트 전파 방지
             const bookTitle = item.querySelector('.book-info h3')?.textContent;
             console.log('리뷰 작성:', bookTitle);
             alert('리뷰 작성 기능은 준비 중입니다.');
             // TODO: 리뷰 작성 페이지로 이동
+        });
+
+        // ✅ 추가: 책 표지 클릭 시 상세 페이지로 이동
+        bookCover?.addEventListener('click', () => {
+            const bookId = item.getAttribute('data-book-id') || '1';
+            window.location.href = `/book-detail.html?id=${bookId}`;
         });
     });
 
@@ -172,29 +183,16 @@ function initReviews(): void {
 // ==================== 위시리스트 ====================
 function initWishlist(): void {
     const wishlistItems = document.querySelectorAll('.wishlist-item');
-
+    
     wishlistItems.forEach(item => {
-        const removeBtn = item.querySelector('.remove-btn');
-        const cartBtn = item.querySelector('.btn-cart');
-
-        removeBtn?.addEventListener('click', () => {
-            const bookTitle = item.querySelector('h3')?.textContent;
-            if (confirm(`"${bookTitle}"을(를) 위시리스트에서 제거하시겠습니까?`)) {
-                console.log('위시리스트 제거:', bookTitle);
-                item.remove();
-                // TODO: API 호출
-            }
-        });
-
-        cartBtn?.addEventListener('click', () => {
-            const bookTitle = item.querySelector('h3')?.textContent;
-            console.log('장바구니 추가:', bookTitle);
-            alert(`"${bookTitle}"이(가) 장바구니에 추가되었습니다.`);
-            // TODO: API 호출
+        const bookCover = item.querySelector('.book-cover');
+        
+        bookCover?.addEventListener('click', () => {
+            // ✅ 추가: 상세 페이지로 이동
+            const bookId = item.getAttribute('data-book-id') || '1';
+            window.location.href = `/book-detail.html?id=${bookId}`;
         });
     });
-
-    console.log('✅ 위시리스트 초기화 완료');
 }
 
 // ==================== 독서 기록 ====================
