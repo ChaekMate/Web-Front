@@ -10,19 +10,20 @@ const initHomeSearch = (): void => {
   const searchBtn = document.querySelector('.search-btn');
   const searchInput = document.querySelector('.search-input') as HTMLInputElement;
 
-  searchBtn?.addEventListener('click', () => {
+  const handleSearch = (): void => {
     const keyword = searchInput?.value.trim();
     if (keyword) {
-      alert(`"${keyword}" 검색 기능은 준비 중입니다!`);
-      // TODO: 실제 검색 페이지로 이동
-      // window.location.href = `/search?q=${encodeURIComponent(keyword)}`;
+      // ✅ 수정: 검색 페이지로 이동
+      window.location.href = `/search.html?q=${encodeURIComponent(keyword)}`;
     }
-  });
+  };
+
+  searchBtn?.addEventListener('click', handleSearch);
 
   // Enter 키로 검색
   searchInput?.addEventListener('keypress', (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
-      searchBtn?.dispatchEvent(new Event('click'));
+      handleSearch();
     }
   });
 
