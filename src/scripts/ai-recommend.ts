@@ -14,6 +14,7 @@ interface Message {
 }
 
 interface RecommendedBook {
+  id?: string;
   title: string;
   author: string;
   publisher: string;
@@ -114,9 +115,10 @@ const createBookRecommendation = (books: RecommendedBook[]): HTMLElement => {
     detailBtn.className = 'book-detail-btn';
     detailBtn.textContent = '자세히 보기';
     detailBtn.onclick = () => {
-      alert(`"${book.title}" 상세 페이지는 준비 중입니다!`);
-      // TODO: 책 상세 페이지로 이동
-      // window.location.href = `/book-detail.html?title=${encodeURIComponent(book.title)}`;
+      // ✅ 상세 페이지로 이동
+      const bookId = book.id || '1'; // 실제로는 API에서 받은 ID 사용
+      console.log(`도서 상세 페이지 이동: ${book.title} (ID: ${bookId})`);
+      window.location.href = `/book-detail.html?id=${bookId}`;
     };
 
     info.appendChild(bookTitle);
@@ -199,18 +201,21 @@ const getAIResponse = async (userMessage: string): Promise<{ text: string; books
 
   const dummyBooks: RecommendedBook[] = [
     {
+      id: '1',
       title: '아몬드',
       author: '손원평',
       publisher: '창비',
       reason: '감정에 대한 깊은 이해와 공감을 다룬 소설입니다'
     },
     {
+      id: '2',
       title: '달러구트 꿈 백화점',
       author: '이미예',
       publisher: '팩토리나인',
       reason: '위로와 힐링이 필요한 당신에게 추천합니다'
     },
     {
+      id: '3',
       title: '트렌드 코리아 2025',
       author: '김난도 외',
       publisher: '미래의창',
@@ -290,18 +295,6 @@ const initChatForm = (): void => {
   console.log('✅ 채팅 폼 초기화 완료');
 };
 
-function initBookCardClick(): void {
-    const bookCards = document.querySelectorAll('.book-card');
-    
-    bookCards.forEach(card => {
-        card.addEventListener('click', () => {
-            // ✅ 추가: 상세 페이지로 이동
-            const bookId = card.getAttribute('data-book-id') || '1';
-            window.location.href = `/book-detail.html?id=${bookId}`;
-        });
-    });
-}
-
 // ==================== 텍스트 영역 자동 높이 조절 ====================
 const initAutoResize = (): void => {
   const chatInput = document.getElementById('chatInput') as HTMLTextAreaElement;
@@ -337,22 +330,24 @@ const initAISearch = (): void => {
   const searchBtn = document.querySelector('.search-btn') as HTMLButtonElement | null;
   const searchInput = document.querySelector('.search-input') as HTMLInputElement | null;
 
+  const handleSearch = (): void => {
+    const keyword = searchInput?.value.trim();
+    if (keyword) {
+      // ✅ 검색 페이지로 이동
+      console.log('검색:', keyword);
+      window.location.href = `/search.html?q=${encodeURIComponent(keyword)}`;
+    }
+  };
+
   if (searchBtn) {
-    searchBtn.addEventListener('click', () => {
-      const keyword = searchInput?.value.trim();
-      if (keyword) {
-        alert(`"${keyword}" 검색 기능은 준비 중입니다!`);
-      }
-    });
+    searchBtn.addEventListener('click', handleSearch);
   }
 
   if (searchInput) {
     searchInput.addEventListener('keypress', (e: KeyboardEvent) => {
       if (e.key === 'Enter') {
         e.preventDefault();
-        if (searchBtn) {
-          searchBtn.click();
-        }
+        handleSearch();
       }
     });
   }
