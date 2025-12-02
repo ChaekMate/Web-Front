@@ -61,22 +61,40 @@ const initBookClick = (): void => {
   
   bookItems.forEach(item => {
     item.addEventListener('click', () => {
-      // ✅ 수정: 상세 페이지로 이동
+      // ✅ 상세 페이지로 이동
       const bookId = item.getAttribute('data-book-id') || '1';
+      console.log('베스트셀러 도서 클릭:', bookId);
       window.location.href = `/book-detail.html?id=${bookId}`;
     });
   });
+
+  console.log('✅ 베스트셀러 클릭 이벤트 초기화 완료');
 };
 
 // ==================== AI 추천 카드 클릭 ====================
 const initRecommendClick = (): void => {
+  const recommendCards = document.querySelectorAll('.recommend-card');
+  
+  recommendCards.forEach(card => {
+    // 카드 전체 클릭
+    card.addEventListener('click', () => {
+      const bookId = card.getAttribute('data-book-id') || '1';
+      console.log('AI 추천 도서 클릭:', bookId);
+      window.location.href = `/book-detail.html?id=${bookId}`;
+    });
+  });
+
+  // 버튼 클릭 (카드 클릭과 동일하게 처리)
   const recommendBtns = document.querySelectorAll('.recommend-btn');
   
   recommendBtns.forEach(btn => {
     btn.addEventListener('click', (e: Event) => {
-      e.stopPropagation();
-      alert('AI 추천 상세보기 기능은 준비 중입니다!');
-      // TODO: AI 추천 상세 페이지로 이동
+      e.stopPropagation(); // 이벤트 버블링 방지
+      
+      const card = btn.closest('.recommend-card');
+      const bookId = card?.getAttribute('data-book-id') || '1';
+      console.log('AI 추천 버튼 클릭:', bookId);
+      window.location.href = `/book-detail.html?id=${bookId}`;
     });
   });
 
