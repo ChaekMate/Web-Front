@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>신간 도서 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/new-books.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="/cs.html">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/cart.html" class="icon-link">
+                        <span class="icon">🛒</span>
+                        <span>장바구니</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/new-books.html" class="active">신간</a></li>
+                    <li><a href="#recommend">추천</a></li>
+                    <li><a href="#sale">할인</a></li>
+                    <li><a href="/event.html">이벤트</a></li>
+                    <li><a href="#store">매장안내</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container">
+            <!-- 페이지 헤더 -->
+            <div class="page-header">
+                <h1 class="page-title">신간 도서</h1>
+                <p class="page-description">이번 주 새로 출간된 도서를 만나보세요</p>
+            </div>
+
+            <!-- 필터 영역 -->
+            <div class="filter-section">
+                <div class="filter-left">
+                    <button class="filter-btn active" data-period="week">이번 주</button>
+                    <button class="filter-btn" data-period="month">이번 달</button>
+                    <button class="filter-btn" data-period="three-months">최근 3개월</button>
+                </div>
+                <div class="filter-right">
+                    <select class="category-select" id="categorySelect">
+                        <option value="all">전체</option>
+                        <option value="novel">소설</option>
+                        <option value="essay">에세이</option>
+                        <option value="self-improvement">자기계발</option>
+                        <option value="economics">경제경영</option>
+                        <option value="humanities">인문</option>
+                        <option value="science">과학</option>
+                        <option value="children">아동</option>
+                        <option value="comic">만화</option>
+                    </select>
+                    <select class="sort-select" id="sortSelect">
+                        <option value="recent">최신순</option>
+                        <option value="popular">인기순</option>
+                        <option value="review">리뷰많은순</option>
+                        <option value="price-low">낮은가격순</option>
+                        <option value="price-high">높은가격순</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 신간 그리드 -->
+            <div class="books-grid" id="booksGrid">
+                <!-- 더미 데이터 1 -->
+                <div class="book-card" data-book-id="1">
+                    <div class="book-badge new">NEW</div>
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16'%3E신간 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">소설</p>
+                        <h3 class="book-title">작별하지 않는다</h3>
+                        <p class="book-author">한강</p>
+                        <p class="book-publisher">문학동네 · 2025.01.03</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.8</span>
+                            <span class="rating-count">(328)</span>
+                        </div>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">16,000원</span>
+                            <span class="price">14,400원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 2 -->
+                <div class="book-card" data-book-id="2">
+                    <div class="book-badge new">NEW</div>
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16'%3E신간 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">에세이</p>
+                        <h3 class="book-title">불안한 사람들</h3>
+                        <p class="book-author">프레드릭 배크만</p>
+                        <p class="book-publisher">다산북스 · 2025.01.05</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-score">4.5</span>
+                            <span class="rating-count">(256)</span>
+                        </div>
+                        <p class="book-price">
+                            <span class="discount">15%</span>
+                            <span class="original-price">17,000원</span>
+                            <span class="price">14,450원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 3 -->
+                <div class="book-card" data-book-id="3">
+                    <div class="book-badge new">NEW</div>
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16'%3E신간 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">자기계발</p>
+                        <h3 class="book-title">나는 매일 아침 시를 읽는다</h3>
+                        <p class="book-author">김민철</p>
+                        <p class="book-publisher">웅진지식하우스 · 2025.01.08</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.7</span>
+                            <span class="rating-count">(412)</span>
+                        </div>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">15,000원</span>
+                            <span class="price">13,500원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 4 -->
+                <div class="book-card" data-book-id="4">
+                    <div class="book-badge new">NEW</div>
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16'%3E신간 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">경제경영</p>
+                        <h3 class="book-title">2025 대한민국 트렌드</h3>
+                        <p class="book-author">김난도 외</p>
+                        <p class="book-publisher">미래의창 · 2025.01.10</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-score">4.6</span>
+                            <span class="rating-count">(589)</span>
+                        </div>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">18,000원</span>
+                            <span class="price">16,200원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 5 -->
+                <div class="book-card" data-book-id="5">
+                    <div class="book-badge new">NEW</div>
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16'%3E신간 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">인문</p>
+                        <h3 class="book-title">철학은 어떻게 삶이 되는가</h3>
+                        <p class="book-author">마르쿠스 가브리엘</p>
+                        <p class="book-publisher">열린책들 · 2025.01.12</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.9</span>
+                            <span class="rating-count">(201)</span>
+                        </div>
+                        <p class="book-price">
+                            <span class="discount">15%</span>
+                            <span class="original-price">20,000원</span>
+                            <span class="price">17,000원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 6 -->
+                <div class="book-card" data-book-id="6">
+                    <div class="book-badge new">NEW</div>
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16'%3E신간 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">과학</p>
+                        <h3 class="book-title">AI 시대, 인간의 조건</h3>
+                        <p class="book-author">정재승</p>
+                        <p class="book-publisher">어크로스 · 2025.01.15</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-score">4.4</span>
+                            <span class="rating-count">(178)</span>
+                        </div>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">19,000원</span>
+                            <span class="price">17,100원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 7 -->
+                <div class="book-card" data-book-id="7">
+                    <div class="book-badge new">NEW</div>
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16'%3E신간 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">아동</p>
+                        <h3 class="book-title">별빛 여행자</h3>
+                        <p class="book-author">김은주</p>
+                        <p class="book-publisher">비룡소 · 2025.01.18</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.8</span>
+                            <span class="rating-count">(145)</span>
+                        </div>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">12,000원</span>
+                            <span class="price">10,800원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 8 -->
+                <div class="book-card" data-book-id="8">
+                    <div class="book-badge new">NEW</div>
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16'%3E신간 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <p class="book-category">만화</p>
+                        <h3 class="book-title">나 혼자만 레벨업 10권</h3>
+                        <p class="book-author">추공</p>
+                        <p class="book-publisher">디앤씨미디어 · 2025.01.20</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.9</span>
+                            <span class="rating-count">(1024)</span>
+                        </div>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">13,000원</span>
+                            <span class="price">11,700원</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="pagination">
+                <button class="page-btn prev" disabled>이전</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn">4</button>
+                <button class="page-btn">5</button>
+                <button class="page-btn next">다음</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-menu">
+                    <a href="#company">회사소개</a>
+                    <a href="/terms.html">이용약관</a>
+                    <a href="/privacy.html"><strong>개인정보처리방침</strong></a>
+                    <a href="/youth-protection.html">청소년보호정책</a>
+                </div>
+            </div>
+
+            <div class="footer-info">
+                <p class="company-name">ChaekMate (주)책메이트</p>
+                <p>대표이사: 김현우 | 사업자등록번호: 123-45-67890</p>
+                <p>주소: 서울특별시 강남구 테헤란로 123</p>
+                <p>통신판매업신고: 2025-서울강남-00000</p>
+                <p>이메일: contact@chaekmate.com | 고객센터: 1544-0000</p>
+            </div>
+
+            <div class="footer-bottom">
+                <p>COPYRIGHT © ChaekMate Inc. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/new-books.ts"></script>
+</body>
+</html>
