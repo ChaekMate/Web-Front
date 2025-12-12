@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/event.css">
+</head>
+<body>
+    <!-- 헤더는 new-books.html과 동일 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="/cs.html">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo"><a href="/home.html">ChaekMate</a></h1>
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link"><span class="icon">👤</span><span>마이페이지</span></a>
+                    <a href="/cart.html" class="icon-link"><span class="icon">🛒</span><span>장바구니</span></a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/new-books.html">신간</a></li>
+                    <li><a href="#recommend">추천</a></li>
+                    <li><a href="#sale">할인</a></li>
+                    <li><a href="/event.html" class="active">이벤트</a></li>
+                    <li><a href="#store">매장안내</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">진행중인 이벤트</h1>
+                <p class="page-description">ChaekMate의 다양한 혜택을 만나보세요</p>
+            </div>
+
+            <!-- 탭 -->
+            <div class="event-tabs">
+                <button class="tab-btn active" data-tab="all">전체</button>
+                <button class="tab-btn" data-tab="ongoing">진행중</button>
+                <button class="tab-btn" data-tab="upcoming">예정</button>
+                <button class="tab-btn" data-tab="ended">종료</button>
+            </div>
+
+            <!-- 이벤트 그리드 -->
+            <div class="events-grid">
+                <!-- 이벤트 카드 1 -->
+                <div class="event-card" data-status="ongoing">
+                    <div class="event-badge ongoing">진행중</div>
+                    <div class="event-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23000' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E신규회원 혜택%3C/text%3E%3C/svg%3E" alt="이벤트">
+                    </div>
+                    <div class="event-info">
+                        <h3 class="event-title">신규회원 가입 시 즉시 1,000원 적립!</h3>
+                        <p class="event-period">2025.01.01 ~ 2025.12.31</p>
+                        <p class="event-desc">지금 가입하고 첫 구매 시 사용 가능한 적립금을 받으세요</p>
+                    </div>
+                </div>
+
+                <!-- 이벤트 카드 2 -->
+                <div class="event-card" data-status="ongoing">
+                    <div class="event-badge ongoing">진행중</div>
+                    <div class="event-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23000' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E출석체크%3C/text%3E%3C/svg%3E" alt="이벤트">
+                    </div>
+                    <div class="event-info">
+                        <h3 class="event-title">매일 출석체크로 최대 150원 적립</h3>
+                        <p class="event-period">2025.01.01 ~ 2025.12.31</p>
+                        <p class="event-desc">매일 방문하고 포인트를 쌓아보세요</p>
+                    </div>
+                </div>
+
+                <!-- 이벤트 카드 3 -->
+                <div class="event-card" data-status="ongoing">
+                    <div class="event-badge ongoing">진행중</div>
+                    <div class="event-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23000' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E베스트리뷰%3C/text%3E%3C/svg%3E" alt="이벤트">
+                    </div>
+                    <div class="event-info">
+                        <h3 class="event-title">베스트 리뷰 이벤트</h3>
+                        <p class="event-period">2025.01.01 ~ 2025.01.31</p>
+                        <p class="event-desc">이달의 베스트 리뷰 작성자에게 5만원 상품권 증정</p>
+                    </div>
+                </div>
+
+                <!-- 이벤트 카드 4 -->
+                <div class="event-card" data-status="ongoing">
+                    <div class="event-badge ongoing">진행중</div>
+                    <div class="event-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23000' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E무료배송%3C/text%3E%3C/svg%3E" alt="이벤트">
+                    </div>
+                    <div class="event-info">
+                        <h3 class="event-title">3만원 이상 구매 시 무료배송</h3>
+                        <p class="event-period">상시 진행</p>
+                        <p class="event-desc">전 도서 3만원 이상 구매 시 배송비 무료</p>
+                    </div>
+                </div>
+
+                <!-- 이벤트 카드 5 -->
+                <div class="event-card" data-status="upcoming">
+                    <div class="event-badge upcoming">예정</div>
+                    <div class="event-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23666' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E설 특가%3C/text%3E%3C/svg%3E" alt="이벤트">
+                    </div>
+                    <div class="event-info">
+                        <h3 class="event-title">설 연휴 특가 할인</h3>
+                        <p class="event-period">2025.01.25 ~ 2025.02.02</p>
+                        <p class="event-desc">전 도서 최대 30% 할인</p>
+                    </div>
+                </div>
+
+                <!-- 이벤트 카드 6 -->
+                <div class="event-card" data-status="ended">
+                    <div class="event-badge ended">종료</div>
+                    <div class="event-image">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23999' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E연말결산%3C/text%3E%3C/svg%3E" alt="이벤트">
+                    </div>
+                    <div class="event-info">
+                        <h3 class="event-title">2024 연말결산 세일</h3>
+                        <p class="event-period">2024.12.20 ~ 2024.12.31</p>
+                        <p class="event-desc">전 도서 20% 할인 (종료)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-info">
+                <p class="company-name">ChaekMate (주)책메이트</p>
+                <p>COPYRIGHT © ChaekMate Inc. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/event.ts"></script>
+</body>
+</html>
