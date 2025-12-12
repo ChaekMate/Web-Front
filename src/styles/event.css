@@ -1,0 +1,118 @@
+/* event.css - new-books.css 기반 간소화 버전 */
+@import url('new-books.css');
+
+.event-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.tab-btn {
+    padding: 12px 32px;
+    border: 2px solid #000;
+    background-color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.tab-btn.active {
+    background-color: #000;
+    color: #fff;
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.event-card {
+    border: 2px solid #000;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+}
+
+.event-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 8px 8px 0 #000;
+}
+
+.event-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    padding: 8px 16px;
+    font-weight: 900;
+    font-size: 13px;
+    z-index: 1;
+}
+
+.event-badge.ongoing {
+    background-color: #00aa00;
+    color: #fff;
+}
+
+.event-badge.upcoming {
+    background-color: #0066cc;
+    color: #fff;
+}
+
+.event-badge.ended {
+    background-color: #999;
+    color: #fff;
+}
+
+.event-image {
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-bottom: 2px solid #000;
+    overflow: hidden;
+}
+
+.event-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.event-info {
+    padding: 24px;
+}
+
+.event-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.event-period {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 12px;
+}
+
+.event-desc {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tab-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
