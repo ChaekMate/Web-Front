@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테마별 추천 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/theme-recommend.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="/cs.html">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/cart.html" class="icon-link">
+                        <span class="icon">🛒</span>
+                        <span>장바구니</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/new-books.html">신간</a></li>
+                    <li><a href="/recommend.html" class="active">추천</a></li>
+                    <li><a href="#sale">할인</a></li>
+                    <li><a href="/event.html">이벤트</a></li>
+                    <li><a href="#store">매장안내</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container">
+            <!-- 브레드크럼 -->
+            <div class="breadcrumb">
+                <a href="/home.html">홈</a>
+                <span>›</span>
+                <a href="/recommend.html">추천</a>
+                <span>›</span>
+                <span id="breadcrumbTheme">테마별 추천</span>
+            </div>
+
+            <!-- 테마 헤더 -->
+            <div class="theme-header" id="themeHeader">
+                <div class="theme-icon-large" id="themeIcon">💼</div>
+                <h1 class="theme-title" id="themeTitle">직장인을 위한 필독서</h1>
+                <p class="theme-description" id="themeDescription">
+                    업무 효율을 높이고 커리어 성장을 돕는 실용적인 책들을 모았습니다.
+                    시간 관리, 생산성, 리더십, 업무 스킬 향상에 도움이 되는 베스트셀러들입니다.
+                </p>
+            </div>
+
+            <!-- 테마 네비게이션 -->
+            <div class="theme-nav">
+                <a href="?theme=work" class="theme-nav-item active" data-theme="work">
+                    <span class="nav-icon">💼</span>
+                    <span>직장인 필독서</span>
+                </a>
+                <a href="?theme=bedtime" class="theme-nav-item" data-theme="bedtime">
+                    <span class="nav-icon">🌙</span>
+                    <span>잠들기 전</span>
+                </a>
+                <a href="?theme=weekend" class="theme-nav-item" data-theme="weekend">
+                    <span class="nav-icon">☕</span>
+                    <span>주말 오후</span>
+                </a>
+                <a href="?theme=goals" class="theme-nav-item" data-theme="goals">
+                    <span class="nav-icon">🎯</span>
+                    <span>목표 달성</span>
+                </a>
+                <a href="?theme=healing" class="theme-nav-item" data-theme="healing">
+                    <span class="nav-icon">🌿</span>
+                    <span>힐링</span>
+                </a>
+                <a href="?theme=growth" class="theme-nav-item" data-theme="growth">
+                    <span class="nav-icon">📈</span>
+                    <span>자기계발</span>
+                </a>
+            </div>
+
+            <!-- 필터 및 정렬 -->
+            <div class="filter-section">
+                <div class="filter-info">
+                    총 <strong id="bookCount">24</strong>권
+                </div>
+                <div class="filter-controls">
+                    <select class="sort-select" id="sortSelect">
+                        <option value="popular">인기순</option>
+                        <option value="recent">최신순</option>
+                        <option value="review">리뷰많은순</option>
+                        <option value="rating">평점높은순</option>
+                        <option value="price-low">낮은가격순</option>
+                        <option value="price-high">높은가격순</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 도서 그리드 -->
+            <div class="books-grid" id="booksGrid">
+                <!-- 더미 데이터 1 -->
+                <div class="book-card" data-book-id="1">
+                    <div class="book-badge bestseller">베스트</div>
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='14'%3E추천 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">아웃풋 트레이닝</h3>
+                        <p class="book-author">류시오</p>
+                        <p class="book-publisher">토네이도</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.8</span>
+                            <span class="rating-count">(1,245)</span>
+                        </div>
+                        <p class="book-summary">배운 것을 제대로 써먹는 법. 인풋보다 아웃풋이 중요한 시대의 필독서</p>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">17,000원</span>
+                            <span class="price">15,300원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 2 -->
+                <div class="book-card" data-book-id="2">
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='14'%3E추천 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">타이탄의 도구들</h3>
+                        <p class="book-author">팀 페리스</p>
+                        <p class="book-publisher">토네이도</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-score">4.5</span>
+                            <span class="rating-count">(892)</span>
+                        </div>
+                        <p class="book-summary">세계 최고의 성공한 사람들이 사용하는 전략, 습관, 도구</p>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">25,000원</span>
+                            <span class="price">22,500원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 3 -->
+                <div class="book-card" data-book-id="3">
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='14'%3E추천 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">1만 시간의 재발견</h3>
+                        <p class="book-author">안데르스 에릭슨</p>
+                        <p class="book-publisher">비즈니스북스</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.7</span>
+                            <span class="rating-count">(654)</span>
+                        </div>
+                        <p class="book-summary">단순한 연습이 아닌 '의도적 수련'으로 전문가가 되는 법</p>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">16,000원</span>
+                            <span class="price">14,400원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 4 -->
+                <div class="book-card" data-book-id="4">
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='14'%3E추천 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">디자인 씽킹</h3>
+                        <p class="book-author">팀 브라운</p>
+                        <p class="book-publisher">김영사</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-score">4.4</span>
+                            <span class="rating-count">(432)</span>
+                        </div>
+                        <p class="book-summary">혁신적인 문제해결 방법론, 비즈니스를 바꾸는 창의적 사고</p>
+                        <p class="book-price">
+                            <span class="discount">15%</span>
+                            <span class="original-price">18,000원</span>
+                            <span class="price">15,300원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 5 -->
+                <div class="book-card" data-book-id="5">
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='14'%3E추천 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">에센셜리즘</h3>
+                        <p class="book-author">그렉 맥커운</p>
+                        <p class="book-publisher">알에이치코리아</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.6</span>
+                            <span class="rating-count">(1,089)</span>
+                        </div>
+                        <p class="book-summary">정말 중요한 것만 남기고 나머지는 버리는 기술</p>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">15,000원</span>
+                            <span class="price">13,500원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 6 -->
+                <div class="book-card" data-book-id="6">
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='14'%3E추천 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">딥 워크</h3>
+                        <p class="book-author">칼 뉴포트</p>
+                        <p class="book-publisher">민음사</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.7</span>
+                            <span class="rating-count">(978)</span>
+                        </div>
+                        <p class="book-summary">산만함 없이 집중해서 몰입하는 4가지 원칙</p>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">16,500원</span>
+                            <span class="price">14,850원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 7 -->
+                <div class="book-card" data-book-id="7">
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='14'%3E추천 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">린 스타트업</h3>
+                        <p class="book-author">에릭 리스</p>
+                        <p class="book-publisher">인사이트</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★☆</span>
+                            <span class="rating-score">4.5</span>
+                            <span class="rating-count">(567)</span>
+                        </div>
+                        <p class="book-summary">지속 가능한 비즈니스를 만드는 혁신적 방법론</p>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">17,000원</span>
+                            <span class="price">15,300원</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 더미 데이터 8 -->
+                <div class="book-card" data-book-id="8">
+                    <div class="book-cover">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23000' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='14'%3E추천 도서%3C/text%3E%3C/svg%3E" alt="책">
+                    </div>
+                    <div class="book-info">
+                        <h3 class="book-title">싱크 어게인</h3>
+                        <p class="book-author">애덤 그랜트</p>
+                        <p class="book-publisher">한국경제신문</p>
+                        <div class="book-rating">
+                            <span class="stars">★★★★★</span>
+                            <span class="rating-score">4.8</span>
+                            <span class="rating-count">(823)</span>
+                        </div>
+                        <p class="book-summary">생각을 바꾸는 힘, 다시 생각하는 능력의 중요성</p>
+                        <p class="book-price">
+                            <span class="discount">10%</span>
+                            <span class="original-price">18,000원</span>
+                            <span class="price">16,200원</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="pagination">
+                <button class="page-btn prev" disabled>이전</button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn next">다음</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-menu">
+                    <a href="#company">회사소개</a>
+                    <a href="/terms.html">이용약관</a>
+                    <a href="/privacy.html"><strong>개인정보처리방침</strong></a>
+                    <a href="/youth-protection.html">청소년보호정책</a>
+                </div>
+            </div>
+
+            <div class="footer-info">
+                <p class="company-name">ChaekMate (주)책메이트</p>
+                <p>대표이사: 김현우 | 사업자등록번호: 123-45-67890</p>
+                <p>이메일: contact@chaekmate.com | 고객센터: 1544-0000</p>
+            </div>
+
+            <div class="footer-bottom">
+                <p>COPYRIGHT © ChaekMate Inc. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/theme-recommend.ts"></script>
+</body>
+</html>
