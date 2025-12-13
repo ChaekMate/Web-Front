@@ -37,12 +37,12 @@ function initThemeCards(): void {
             e.stopPropagation();
 
             const themeCard = btn.closest('.theme-card');
-            const themeName = themeCard?.querySelector('h3')?.textContent;
+            const themeKey = themeCard?.getAttribute('data-theme') || 'work';
 
-            console.log('테마 클릭:', themeName);
+            console.log('테마 클릭:', themeKey);
 
-            // TODO: 테마별 도서 목록 페이지로 이동
-            alert(`"${themeName}" 테마의 도서 목록 페이지 준비 중입니다!`);
+            // 테마별 추천 페이지로 이동
+            window.location.href = `/theme-recommend.html?theme=${themeKey}`;
         });
     });
 
