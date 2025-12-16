@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리뷰 작성 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/review.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="/cs.html">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/cart.html" class="icon-link">
+                        <span class="icon">🛒</span>
+                        <span>장바구니</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/new-books.html">신간</a></li>
+                    <li><a href="/recommend.html">추천</a></li>
+                    <li><a href="#sale">할인</a></li>
+                    <li><a href="/event.html">이벤트</a></li>
+                    <li><a href="#store">매장안내</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container">
+            <!-- 페이지 헤더 -->
+            <div class="page-header">
+                <h1 class="page-title" id="pageTitle">리뷰 작성</h1>
+            </div>
+
+            <!-- 도서 정보 -->
+            <div class="book-info-card" id="bookInfo">
+                <div class="book-cover-small">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='140'%3E%3Crect fill='%23000' width='100' height='140'/%3E%3C/svg%3E" alt="책" id="bookCover">
+                </div>
+                <div class="book-details">
+                    <h2 class="book-title" id="bookTitle">채식주의자</h2>
+                    <p class="book-author" id="bookAuthor">한강</p>
+                    <p class="book-publisher" id="bookPublisher">창비</p>
+                </div>
+            </div>
+
+            <!-- 리뷰 작성 폼 -->
+            <form class="review-form" id="reviewForm">
+                <!-- 별점 -->
+                <div class="form-section">
+                    <label class="form-label">
+                        별점 <span class="required">*</span>
+                    </label>
+                    <div class="rating-input">
+                        <button type="button" class="star-btn" data-rating="1">☆</button>
+                        <button type="button" class="star-btn" data-rating="2">☆</button>
+                        <button type="button" class="star-btn" data-rating="3">☆</button>
+                        <button type="button" class="star-btn" data-rating="4">☆</button>
+                        <button type="button" class="star-btn" data-rating="5">☆</button>
+                        <span class="rating-text" id="ratingText">별점을 선택해주세요</span>
+                    </div>
+                    <input type="hidden" id="rating" name="rating" value="0">
+                </div>
+
+                <!-- 리뷰 제목 -->
+                <div class="form-section">
+                    <label class="form-label" for="reviewTitle">
+                        제목 <span class="required">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="reviewTitle" 
+                        name="reviewTitle"
+                        class="form-input" 
+                        placeholder="리뷰 제목을 입력하세요 (최대 50자)"
+                        maxlength="50"
+                        required
+                    >
+                    <div class="char-count">
+                        <span id="titleCount">0</span> / 50
+                    </div>
+                </div>
+
+                <!-- 리뷰 내용 -->
+                <div class="form-section">
+                    <label class="form-label" for="reviewContent">
+                        내용 <span class="required">*</span>
+                    </label>
+                    <textarea 
+                        id="reviewContent" 
+                        name="reviewContent"
+                        class="form-textarea" 
+                        placeholder="이 책을 읽고 느낀 점을 자유롭게 작성해주세요. (최소 20자, 최대 2000자)"
+                        maxlength="2000"
+                        rows="10"
+                        required
+                    ></textarea>
+                    <div class="char-count">
+                        <span id="contentCount">0</span> / 2000
+                        <span class="min-text" id="minText">(최소 20자)</span>
+                    </div>
+                </div>
+
+                <!-- 장점 (선택) -->
+                <div class="form-section">
+                    <label class="form-label" for="reviewPros">
+                        좋았던 점 <span class="optional">(선택)</span>
+                    </label>
+                    <textarea 
+                        id="reviewPros" 
+                        name="reviewPros"
+                        class="form-textarea short" 
+                        placeholder="이 책의 장점을 간단히 적어주세요"
+                        maxlength="500"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <!-- 단점 (선택) -->
+                <div class="form-section">
+                    <label class="form-label" for="reviewCons">
+                        아쉬운 점 <span class="optional">(선택)</span>
+                    </label>
+                    <textarea 
+                        id="reviewCons" 
+                        name="reviewCons"
+                        class="form-textarea short" 
+                        placeholder="아쉬웠던 점이 있다면 적어주세요"
+                        maxlength="500"
+                        rows="3"
+                    ></textarea>
+                </div>
+
+                <!-- 추천 대상 -->
+                <div class="form-section">
+                    <label class="form-label">
+                        추천 대상 <span class="optional">(선택, 중복 선택 가능)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="recommend" value="beginner">
+                            <span>입문자</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="recommend" value="student">
+                            <span>학생</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="recommend" value="worker">
+                            <span>직장인</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="recommend" value="professional">
+                            <span>전문가</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="recommend" value="general">
+                            <span>일반 독자</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 스포일러 체크 -->
+                <div class="form-section">
+                    <label class="checkbox-label spoiler-check">
+                        <input type="checkbox" id="hasSpoiler" name="hasSpoiler">
+                        <span>⚠️ 이 리뷰에는 스포일러가 포함되어 있습니다</span>
+                    </label>
+                </div>
+
+                <!-- 공개 설정 -->
+                <div class="form-section">
+                    <label class="form-label">공개 설정</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="visibility" value="public" checked>
+                            <span>전체 공개</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="visibility" value="friends">
+                            <span>친구만 공개</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="visibility" value="private">
+                            <span>나만 보기</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 가이드라인 -->
+                <div class="guidelines">
+                    <h3>📝 리뷰 작성 가이드</h3>
+                    <ul>
+                        <li>구매 또는 읽어보신 도서에 대해서만 리뷰를 작성해주세요</li>
+                        <li>다른 회원에게 도움이 되는 솔직한 의견을 남겨주세요</li>
+                        <li>욕설, 비방, 광고성 내용은 삭제될 수 있습니다</li>
+                        <li>스포일러가 포함된 경우 반드시 체크해주세요</li>
+                        <li>저작권을 침해하는 내용은 작성하지 말아주세요</li>
+                    </ul>
+                </div>
+
+                <!-- 버튼 그룹 -->
+                <div class="button-group">
+                    <button type="button" class="btn-secondary" id="cancelBtn">취소</button>
+                    <button type="button" class="btn-preview" id="previewBtn">미리보기</button>
+                    <button type="submit" class="btn-primary" id="submitBtn">등록하기</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- 미리보기 모달 -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>리뷰 미리보기</h2>
+                <button class="modal-close" id="closeModal">×</button>
+            </div>
+            <div class="modal-body" id="previewContent">
+                <!-- 미리보기 내용이 여기에 표시됩니다 -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="closePreviewBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-menu">
+                    <a href="#company">회사소개</a>
+                    <a href="/terms.html">이용약관</a>
+                    <a href="/privacy.html"><strong>개인정보처리방침</strong></a>
+                    <a href="/youth-protection.html">청소년보호정책</a>
+                </div>
+            </div>
+
+            <div class="footer-info">
+                <p class="company-name">ChaekMate (주)책메이트</p>
+                <p>대표이사: 김현우 | 사업자등록번호: 123-45-67890</p>
+                <p>이메일: contact@chaekmate.com | 고객센터: 1544-0000</p>
+            </div>
+
+            <div class="footer-bottom">
+                <p>COPYRIGHT © ChaekMate Inc. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/review.ts"></script>
+</body>
+</html>
