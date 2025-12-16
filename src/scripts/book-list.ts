@@ -152,10 +152,12 @@ function initBookListSearch(): void {
             if (e.key === 'Enter' && searchInput.value.trim()) {
                 console.log('검색:', searchInput.value);
                 // TODO: 실제 검색 API 연동
-                searchOverlay.classList.remove('active');
+                window.location.href = `/search.html?q=${encodeURIComponent(searchInput.value)}`;
             }
         });
     }
+
+    console.log('✅ 검색 기능 초기화 완료');
 }
 
 // 정렬 필터
@@ -169,6 +171,8 @@ function initSortFilter(): void {
             // TODO: 정렬 로직 구현
         });
     }
+
+    console.log('✅ 정렬 필터 초기화 완료');
 }
 
 // 카테고리 정보 설정
@@ -176,7 +180,6 @@ function setCategoryInfo(): void {
     const urlParams = new URLSearchParams(window.location.search);
     const category = urlParams.get('category') || 'novel';
     
-    // 수정
     const categoryInfo: CategoryInfo = (categories[category] || categories['novel']) as CategoryInfo;
     
     const titleElement = document.getElementById('categoryTitle');
@@ -191,6 +194,8 @@ function setCategoryInfo(): void {
     }
     
     document.title = `${categoryInfo.name} - ChaekMate`;
+
+    console.log('✅ 카테고리 정보 설정 완료:', categoryInfo.name);
 }
 
 // 도서 목록 로드
@@ -206,6 +211,9 @@ function loadBooks(): void {
             bookGrid.innerHTML += createBookCard(book);
         });
         
+        // ✅ 추가: 카드 생성 후 클릭 이벤트 등록
+        attachBookCardEvents();
+        
         // TODO: 실제 API에서 데이터 가져오기
         // const category = new URLSearchParams(window.location.search).get('category');
         // fetch(`/api/books?category=${category}`)
@@ -214,8 +222,11 @@ function loadBooks(): void {
         //         books.forEach(book => {
         //             bookGrid.innerHTML += createBookCard(book);
         //         });
+        //         attachBookCardEvents();
         //     });
     }
+
+    console.log('✅ 도서 목록 로드 완료');
 }
 
 // 더보기 버튼
@@ -232,31 +243,86 @@ function initLoadMore(): void {
                 dummyBooks.forEach(book => {
                     bookGrid.innerHTML += createBookCard(book);
                 });
+                
+                // ✅ 추가: 새로 생성된 카드에도 이벤트 등록
+                attachBookCardEvents();
             }
         });
     }
+
+    console.log('✅ 더보기 버튼 초기화 완료');
 }
 
-// 도서 카드 클릭 이벤트
-function initBookCardClick(): void {
-    document.addEventListener('click', (e) => {
-        const bookCard = (e.target as HTMLElement).closest('.book-card');
+// ✅ 수정: 도서 카드에 클릭 이벤트 등록 (개선된 방식)
+function attachBookCardEvents(): void {
+    const bookCards = document.querySelectorAll('.book-card');
+    
+    bookCards.forEach(card => {
+        // 이미 이벤트가 등록되어 있는지 확인
+        if (card.getAttribute('data-event-attached') === 'true') {
+            return;
+        }
         
+        // 이벤트 등록 표시
+        card.setAttribute('data-event-attached', 'true');
+        
+        // 미리보기 버튼 클릭
+        const quickViewBtn = card.querySelector('.quick-view-btn');
+        if (quickViewBtn) {
+            quickViewBtn.addEventListener('click', (e) => {
+                e.stopPropagation(); // 카드 클릭 이벤트 전파 방지
+                const bookId = card.getAttribute('data-book-id');
+                console.log('미리보기:', bookId);
+                // TODO: 미리보기 모달 표시
+                alert('미리보기 기능은 준비 중입니다.');
+            });
+        }
+        
+        // 카드 전체 클릭 - 상세 페이지 이동
+        card.addEventListener('click', () => {
+            const bookId = card.getAttribute('data-book-id');
+            
+            if (bookId) {
+                console.log('도서 상세로 이동:', bookId);
+                window.location.href = `/book-detail.html?id=${bookId}`;
+            }
+        });
+    });
+
+    console.log('✅ 도서 카드 이벤트 등록 완료:', bookCards.length, '개');
+}
+
+// ✅ 대안: 이벤트 위임 방식 (더 효율적)
+function initBookCardClickDelegation(): void {
+    const bookGrid = document.getElementById('bookGrid');
+    
+    if (!bookGrid) return;
+    
+    bookGrid.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        
+        // 미리보기 버튼 클릭
+        if (target.classList.contains('quick-view-btn')) {
+            e.stopPropagation();
+            const bookCard = target.closest('.book-card');
+            const bookId = bookCard?.getAttribute('data-book-id');
+            console.log('미리보기:', bookId);
+            alert('미리보기 기능은 준비 중입니다.');
+            return;
+        }
+        
+        // 도서 카드 클릭
+        const bookCard = target.closest('.book-card');
         if (bookCard) {
             const bookId = bookCard.getAttribute('data-book-id');
-            
-            // 미리보기 버튼 클릭 시
-            if ((e.target as HTMLElement).classList.contains('quick-view-btn')) {
-                console.log('미리보기:', bookId);
-                return;
-            }
-            
-            // ✅ 수정: 상세 페이지로 이동
             if (bookId) {
+                console.log('도서 상세로 이동:', bookId);
                 window.location.href = `/book-detail.html?id=${bookId}`;
             }
         }
     });
+
+    console.log('✅ 도서 카드 클릭 이벤트 위임 완료');
 }
 
 // 메인 초기화 함수
@@ -278,8 +344,14 @@ function initBookList(): void {
     // 더보기 버튼 초기화
     initLoadMore();
     
-    // 도서 카드 클릭 이벤트
-    initBookCardClick();
+    // ✅ 방법 1: 각 카드에 개별 이벤트 등록 (이미 loadBooks()에서 호출됨)
+    // attachBookCardEvents();
+    
+    // ✅ 방법 2: 이벤트 위임 방식 (권장)
+    // 더 효율적이고 동적으로 추가되는 카드에도 자동 적용
+    initBookCardClickDelegation();
+    
+    console.log('✨ ChaekMate Book List 초기화 완료!');
 }
 
 // DOM 로드 완료 후 실행

@@ -1,8 +1,3 @@
-/**
- * ChaekMate Book Detail TypeScript
- * 도서 상세 페이지 기능 관리
- */
-
 console.log('📖 ChaekMate Book Detail 로드 완료!');
 
 // 도서 정보 인터페이스
@@ -23,6 +18,17 @@ interface BookData {
     description: string;
     toc: string[];
     coverImage: string;
+}
+
+// ==================== 로그인 체크 ====================
+function checkLoginStatus(): boolean {
+    // TODO: 실제 로그인 상태 확인
+    // const token = localStorage.getItem('authToken');
+    // return !!token;
+    
+    // 더미: 로그인되어 있다고 가정 (테스트용)
+    // 실제로는 false로 설정하여 로그인 페이지로 리다이렉트 테스트
+    return true;
 }
 
 // ==================== URL에서 책 ID 가져오기 ====================
@@ -178,14 +184,46 @@ function initBuyNow(): void {
 function initWriteReview(): void {
     const writeReviewBtn = document.getElementById('writeReviewBtn');
 
-    writeReviewBtn?.addEventListener('click', () => {
-        console.log('리뷰 작성');
-        alert('리뷰 작성 기능은 준비 중입니다.');
+    writeReviewBtn?.addEventListener('click', (e: Event) => {
+        e.preventDefault();
         
-        // TODO: 리뷰 작성 모달 표시
+        // ✅ 추가: 로그인 체크
+        if (!checkLoginStatus()) {
+            alert('로그인이 필요한 서비스입니다.');
+            const returnUrl = encodeURIComponent(window.location.href);
+            window.location.href = `/login.html?returnUrl=${returnUrl}`;
+            return;
+        }
+        
+        const bookId = getBookIdFromUrl() || '1';
+        console.log('리뷰 작성 페이지로 이동:', bookId);
+        
+        // ✅ 수정: 실제 페이지 이동
+        window.location.href = `/review-write.html?bookId=${bookId}`;
     });
 
     console.log('✅ 리뷰 작성 초기화 완료');
+}
+
+// ==================== 리뷰 수정 ====================
+function initReviewEdit(): void {
+    const editBtns = document.querySelectorAll('.btn-edit-review');
+
+    editBtns.forEach(btn => {
+        btn.addEventListener('click', (e: Event) => {
+            e.stopPropagation();
+            
+            const reviewId = btn.getAttribute('data-review-id');
+            const bookId = btn.getAttribute('data-book-id') || getBookIdFromUrl() || '1';
+            
+            console.log('리뷰 수정:', { bookId, reviewId });
+            
+            // ✅ 리뷰 수정 페이지로 이동
+            window.location.href = `/review-write.html?bookId=${bookId}&reviewId=${reviewId}`;
+        });
+    });
+
+    console.log('✅ 리뷰 수정 초기화 완료');
 }
 
 // ==================== 리뷰 도움됨 ====================
@@ -254,8 +292,8 @@ function initSearch(): void {
         const keyword = searchInput?.value.trim();
         if (keyword) {
             console.log('검색:', keyword);
-            alert(`"${keyword}" 검색 기능은 준비 중입니다.`);
-            // TODO: 검색 페이지로 이동
+            // ✅ 수정: 실제 페이지 이동
+            window.location.href = `/search.html?q=${encodeURIComponent(keyword)}`;
         }
     });
 
@@ -306,6 +344,7 @@ function initBookDetail(): void {
     initAddToCart();
     initBuyNow();
     initWriteReview();
+    initReviewEdit();  // ✅ 추가
     initReviewHelpful();
     initLoadMoreReviews();
     initRecommendedBooks();
