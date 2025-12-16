@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>마이페이지 - ChaekMate</title>
     <link rel="stylesheet" href="/src/styles/mypage.css">
 </head>
+
 <body>
     <!-- 상단 헤더 -->
     <header class="main-header">
@@ -108,7 +110,7 @@
                     <!-- 프로필 정보 -->
                     <section class="tab-content active" id="profileTab">
                         <h2 class="section-title">프로필 정보</h2>
-                        
+
                         <div class="profile-form">
                             <div class="form-group">
                                 <label>이름</label>
@@ -136,7 +138,7 @@
                     <!-- 주문 내역 -->
                     <section class="tab-content" id="ordersTab">
                         <h2 class="section-title">주문 내역</h2>
-                        
+
                         <div class="order-list">
                             <div class="order-item">
                                 <div class="order-header">
@@ -188,11 +190,71 @@
                     </section>
 
                     <!-- 내 리뷰 -->
+                    <!-- mypage.html의 주문 내역 및 리뷰 섹션 수정본 -->
+
+                    <!-- 주문 내역 -->
+                    <section class="tab-content" id="ordersTab">
+                        <h2 class="section-title">주문 내역</h2>
+
+                        <div class="order-list">
+                            <!-- ✅ data-book-id 속성 추가 -->
+                            <div class="order-item" data-book-id="1">
+                                <div class="order-header">
+                                    <span class="order-date">2025.11.20</span>
+                                    <span class="order-number">주문번호: 20251120-001</span>
+                                    <span class="order-status">배송완료</span>
+                                </div>
+                                <div class="order-body">
+                                    <div class="order-book">
+                                        <div class="book-image">
+                                            <img src="https://via.placeholder.com/80x120?text=Book" alt="책">
+                                        </div>
+                                        <div class="book-info">
+                                            <h3>채식주의자</h3>
+                                            <p>한강 · 창비</p>
+                                            <p class="price">12,600원</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn-outline btn-track">배송 조회</button>
+                                    <!-- ✅ data-book-id 속성 추가 -->
+                                    <button class="btn-outline btn-review-write" data-book-id="1">리뷰 작성</button>
+                                </div>
+                            </div>
+
+                            <div class="order-item" data-book-id="2">
+                                <div class="order-header">
+                                    <span class="order-date">2025.11.15</span>
+                                    <span class="order-number">주문번호: 20251115-002</span>
+                                    <span class="order-status status-shipping">배송중</span>
+                                </div>
+                                <div class="order-body">
+                                    <div class="order-book">
+                                        <div class="book-image">
+                                            <img src="https://via.placeholder.com/80x120?text=Book" alt="책">
+                                        </div>
+                                        <div class="book-info">
+                                            <h3>82년생 김지영</h3>
+                                            <p>조남주 · 민음사</p>
+                                            <p class="price">13,800원</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn-outline btn-track">배송 조회</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 내 리뷰 -->
                     <section class="tab-content" id="reviewsTab">
                         <h2 class="section-title">내 리뷰</h2>
-                        
+
                         <div class="review-list">
-                            <div class="review-item">
+                            <!-- ✅ data-book-id, data-review-id 속성 추가 -->
+                            <div class="review-item" data-book-id="1" data-review-id="101">
                                 <div class="review-header">
                                     <div class="book-title">채식주의자</div>
                                     <div class="review-rating">★★★★☆</div>
@@ -202,12 +264,13 @@
                                     강렬하고 인상 깊은 작품이었습니다. 한강 작가의 문체가 정말 아름답네요.
                                 </div>
                                 <div class="review-actions">
-                                    <button class="btn-text">수정</button>
-                                    <button class="btn-text">삭제</button>
+                                    <!-- ✅ data-book-id, data-review-id 속성 추가 -->
+                                    <button class="btn-text btn-edit" data-book-id="1" data-review-id="101">수정</button>
+                                    <button class="btn-text btn-delete" data-review-id="101">삭제</button>
                                 </div>
                             </div>
 
-                            <div class="review-item">
+                            <div class="review-item" data-book-id="3" data-review-id="102">
                                 <div class="review-header">
                                     <div class="book-title">달러구트 꿈 백화점</div>
                                     <div class="review-rating">★★★★★</div>
@@ -217,54 +280,8 @@
                                     따뜻하고 감동적인 이야기였어요. 힐링되는 느낌이 좋았습니다.
                                 </div>
                                 <div class="review-actions">
-                                    <button class="btn-text">수정</button>
-                                    <button class="btn-text">삭제</button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- 위시리스트 -->
-                    <section class="tab-content" id="wishlistTab">
-                        <h2 class="section-title">위시리스트</h2>
-                        
-                        <div class="wishlist-grid">
-                            <div class="wishlist-item">
-                                <div class="book-cover">
-                                    <img src="https://via.placeholder.com/150x220?text=Book" alt="책">
-                                    <button class="remove-btn">✕</button>
-                                </div>
-                                <div class="book-info">
-                                    <h3>미드나잇 라이브러리</h3>
-                                    <p>매트 헤이그</p>
-                                    <p class="price">15,120원</p>
-                                    <button class="btn-cart">장바구니</button>
-                                </div>
-                            </div>
-
-                            <div class="wishlist-item">
-                                <div class="book-cover">
-                                    <img src="https://via.placeholder.com/150x220?text=Book" alt="책">
-                                    <button class="remove-btn">✕</button>
-                                </div>
-                                <div class="book-info">
-                                    <h3>아몬드</h3>
-                                    <p>손원평</p>
-                                    <p class="price">12,420원</p>
-                                    <button class="btn-cart">장바구니</button>
-                                </div>
-                            </div>
-
-                            <div class="wishlist-item">
-                                <div class="book-cover">
-                                    <img src="https://via.placeholder.com/150x220?text=Book" alt="책">
-                                    <button class="remove-btn">✕</button>
-                                </div>
-                                <div class="book-info">
-                                    <h3>트렌드 코리아 2025</h3>
-                                    <p>김난도 외</p>
-                                    <p class="price">18,000원</p>
-                                    <button class="btn-cart">장바구니</button>
+                                    <button class="btn-text btn-edit" data-book-id="3" data-review-id="102">수정</button>
+                                    <button class="btn-text btn-delete" data-review-id="102">삭제</button>
                                 </div>
                             </div>
                         </div>
@@ -273,7 +290,7 @@
                     <!-- 독서 기록 -->
                     <section class="tab-content" id="readingTab">
                         <h2 class="section-title">독서 기록</h2>
-                        
+
                         <div class="reading-stats">
                             <div class="stat-card">
                                 <div class="stat-number">12</div>
@@ -328,7 +345,7 @@
                     <!-- 설정 -->
                     <section class="tab-content" id="settingsTab">
                         <h2 class="section-title">설정</h2>
-                        
+
                         <div class="settings-section">
                             <h3>알림 설정</h3>
                             <div class="setting-item">
@@ -395,4 +412,5 @@
 
     <script type="module" src="/src/scripts/mypage.ts"></script>
 </body>
+
 </html>

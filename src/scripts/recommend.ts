@@ -1,8 +1,3 @@
-/**
- * ChaekMate Recommend TypeScript
- * 도서 추천 페이지 기능 관리
- */
-
 console.log('📖 ChaekMate Recommend 로드 완료!');
 
 // ==================== 검색 기능 ====================
@@ -56,15 +51,10 @@ function initCuratorBooks(): void {
     curatorBooks.forEach(book => {
         book.addEventListener('click', () => {
             const bookTitle = book.querySelector('h4')?.textContent;
+            const bookId = book.getAttribute('data-book-id') || '1';
+            
             console.log('큐레이터 추천 도서 클릭:', bookTitle);
-
-            // TODO: 도서 상세 페이지로 이동
-            window.location.href = '/book-detail.html?id=1';
-        });
-
-        // 호버 효과
-        book.addEventListener('mouseenter', () => {
-            book.style.cursor = 'pointer';
+            window.location.href = `/book-detail.html?id=${bookId}`;
         });
     });
 
@@ -84,14 +74,12 @@ function initAgeTabs(): void {
             ageTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
 
-            // 책 목록 표시
+            // ✅ 수정: 책 목록 표시 (타입 안전)
             ageBookGroups.forEach(group => {
-                const groupAge = group.getAttribute('data-age');
-                if (groupAge === age) {
-                    (group as HTMLElement).style.display = 'grid';
-                } else {
-                    (group as HTMLElement).style.display = 'none';
-                }
+                const groupElement = group as HTMLElement;
+                const groupAge = groupElement.getAttribute('data-age');
+                
+                groupElement.style.display = (groupAge === age) ? 'grid' : 'none';
             });
 
             console.log('연령 탭 변경:', age);
@@ -123,10 +111,10 @@ function initTrendingBooks(): void {
     trendingItems.forEach(item => {
         item.addEventListener('click', () => {
             const bookTitle = item.querySelector('h4')?.textContent;
+            const bookId = item.getAttribute('data-book-id') || '1';
+            
             console.log('실시간 인기 도서 클릭:', bookTitle);
-
-            // TODO: 도서 상세 페이지로 이동
-            window.location.href = '/book-detail.html?id=1';
+            window.location.href = `/book-detail.html?id=${bookId}`;
         });
     });
 

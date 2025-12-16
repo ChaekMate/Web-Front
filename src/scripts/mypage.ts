@@ -1,8 +1,3 @@
-/**
- * ChaekMate MyPage TypeScript
- * 마이페이지 기능 관리
- */
-
 console.log('👤 ChaekMate MyPage 로드 완료!');
 
 // ==================== 탭 전환 ====================
@@ -45,7 +40,7 @@ function initSearch(): void {
         const keyword = searchInput?.value.trim();
         if (keyword) {
             console.log('검색:', keyword);
-            // TODO: 검색 페이지로 이동
+            window.location.href = `/search.html?q=${encodeURIComponent(keyword)}`;
         }
     });
 
@@ -120,30 +115,38 @@ function initOrders(): void {
     const orderItems = document.querySelectorAll('.order-item');
 
     orderItems.forEach(item => {
-        const trackBtn = item.querySelector('.btn-outline:first-child');
-        const reviewBtn = item.querySelector('.btn-outline:last-child');
-        const bookCover = item.querySelector('.book-cover'); // ✅ 추가
+        // ✅ 수정: 클래스명으로 정확히 선택
+        const trackBtn = item.querySelector('.btn-track');
+        const reviewBtn = item.querySelector('.btn-review-write');
+        const bookImage = item.querySelector('.book-image');
 
         // 배송 조회
         trackBtn?.addEventListener('click', (e) => {
-            e.stopPropagation(); // ✅ 이벤트 전파 방지
+            e.stopPropagation();
             const orderNumber = item.querySelector('.order-number')?.textContent;
             console.log('배송 조회:', orderNumber);
             alert('배송 조회 기능은 준비 중입니다.');
             // TODO: 배송 조회 페이지로 이동
         });
 
-        // 리뷰 작성
+        // ✅ 수정: 리뷰 작성 - 실제 페이지 이동
         reviewBtn?.addEventListener('click', (e) => {
-            e.stopPropagation(); // ✅ 이벤트 전파 방지
+            e.stopPropagation();
+            
+            // data 속성에서 bookId 가져오기
+            const bookId = reviewBtn.getAttribute('data-book-id') || 
+                          item.getAttribute('data-book-id') || '1';
             const bookTitle = item.querySelector('.book-info h3')?.textContent;
-            console.log('리뷰 작성:', bookTitle);
-            alert('리뷰 작성 기능은 준비 중입니다.');
-            // TODO: 리뷰 작성 페이지로 이동
+            
+            console.log('리뷰 작성:', { bookId, bookTitle });
+            
+            // 리뷰 작성 페이지로 이동
+            window.location.href = `/review-write.html?bookId=${bookId}`;
         });
 
-        // ✅ 추가: 책 표지 클릭 시 상세 페이지로 이동
-        bookCover?.addEventListener('click', () => {
+        // 책 이미지 클릭 시 상세 페이지로 이동
+        bookImage?.addEventListener('click', (e) => {
+            e.stopPropagation();
             const bookId = item.getAttribute('data-book-id') || '1';
             window.location.href = `/book-detail.html?id=${bookId}`;
         });
@@ -157,22 +160,44 @@ function initReviews(): void {
     const reviewItems = document.querySelectorAll('.review-item');
 
     reviewItems.forEach(item => {
-        const editBtn = item.querySelector('.btn-text:first-child');
-        const deleteBtn = item.querySelector('.btn-text:last-child');
+        // ✅ 수정: 클래스명으로 정확히 선택
+        const editBtn = item.querySelector('.btn-edit');
+        const deleteBtn = item.querySelector('.btn-delete');
 
+        // ✅ 수정: 리뷰 수정 - 실제 페이지 이동
         editBtn?.addEventListener('click', () => {
+            // data 속성에서 ID 가져오기
+            const bookId = editBtn.getAttribute('data-book-id') || 
+                          item.getAttribute('data-book-id') || '1';
+            const reviewId = editBtn.getAttribute('data-review-id') || 
+                            item.getAttribute('data-review-id');
             const bookTitle = item.querySelector('.book-title')?.textContent;
-            console.log('리뷰 수정:', bookTitle);
-            alert('리뷰 수정 기능은 준비 중입니다.');
-            // TODO: 리뷰 수정 모달 표시
+            
+            console.log('리뷰 수정:', { bookId, reviewId, bookTitle });
+            
+            // 리뷰 수정 페이지로 이동
+            window.location.href = `/review-write.html?bookId=${bookId}&reviewId=${reviewId}`;
         });
 
-        deleteBtn?.addEventListener('click', () => {
+        // 리뷰 삭제
+        deleteBtn?.addEventListener('click', async () => {
+            const reviewId = deleteBtn.getAttribute('data-review-id') || 
+                            item.getAttribute('data-review-id');
             const bookTitle = item.querySelector('.book-title')?.textContent;
+            
             if (confirm(`"${bookTitle}" 리뷰를 삭제하시겠습니까?`)) {
-                console.log('리뷰 삭제:', bookTitle);
-                item.remove();
-                // TODO: API 호출
+                console.log('리뷰 삭제:', reviewId);
+                
+                try {
+                    // TODO: API 호출
+                    // await deleteReview(reviewId);
+                    
+                    item.remove();
+                    alert('리뷰가 삭제되었습니다.');
+                } catch (error) {
+                    console.error('리뷰 삭제 오류:', error);
+                    alert('리뷰 삭제 중 오류가 발생했습니다.');
+                }
             }
         });
     });
@@ -186,13 +211,39 @@ function initWishlist(): void {
     
     wishlistItems.forEach(item => {
         const bookCover = item.querySelector('.book-cover');
+        const removeBtn = item.querySelector('.remove-btn');
+        const cartBtn = item.querySelector('.btn-cart');
         
+        // 책 표지 클릭 시 상세 페이지로 이동
         bookCover?.addEventListener('click', () => {
-            // ✅ 추가: 상세 페이지로 이동
             const bookId = item.getAttribute('data-book-id') || '1';
             window.location.href = `/book-detail.html?id=${bookId}`;
         });
+
+        // 위시리스트에서 제거
+        removeBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const bookTitle = item.querySelector('h3')?.textContent;
+            
+            if (confirm(`"${bookTitle}"을(를) 위시리스트에서 제거하시겠습니까?`)) {
+                item.remove();
+                console.log('위시리스트 제거:', bookTitle);
+                // TODO: API 호출
+            }
+        });
+
+        // 장바구니 담기
+        cartBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const bookTitle = item.querySelector('h3')?.textContent;
+            
+            alert(`"${bookTitle}"이(가) 장바구니에 담겼습니다.`);
+            console.log('장바구니 담기:', bookTitle);
+            // TODO: API 호출
+        });
     });
+
+    console.log('✅ 위시리스트 초기화 완료');
 }
 
 // ==================== 독서 기록 ====================
@@ -228,8 +279,8 @@ function initSettings(): void {
 
     passwordBtn?.addEventListener('click', () => {
         console.log('비밀번호 변경');
-        alert('비밀번호 변경 기능은 준비 중입니다.');
-        // TODO: 비밀번호 변경 모달 표시
+        // ✅ 수정: 비밀번호 찾기 페이지로 이동
+        window.location.href = '/find-password.html';
     });
 
     deleteAccountBtn?.addEventListener('click', () => {
