@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문장 SNS - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/sentence-sns.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="/cs.html">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="문장, 책, 작가 검색" id="searchInput">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/cart.html" class="icon-link">
+                        <span class="icon">🛒</span>
+                        <span>장바구니</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/new-books.html">신간</a></li>
+                    <li><a href="/recommend.html">추천</a></li>
+                    <li><a href="/sentence-sns.html" class="active">문장 SNS</a></li>
+                    <li><a href="/event.html">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container">
+            <!-- 페이지 헤더 -->
+            <div class="page-header">
+                <h1 class="page-title">📖 문장 SNS</h1>
+                <p class="page-desc">책 속 울림을 나누는 공간</p>
+            </div>
+
+            <!-- 상단 액션 바 -->
+            <div class="action-bar">
+                <a href="/sentence-write.html" class="btn-write-sentence">
+                    <span class="icon">✍️</span>
+                    새 문장 공유하기
+                </a>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="latest">최신순</button>
+                    <button class="filter-tab" data-filter="popular">인기순</button>
+                    <button class="filter-tab" data-filter="following">팔로잉</button>
+                </div>
+            </div>
+
+            <div class="sns-layout">
+                <!-- 메인 피드 -->
+                <div class="feed-section">
+                    <!-- 문장 카드 1 -->
+                    <article class="sentence-card" data-sentence-id="1">
+                        <div class="card-header">
+                            <div class="user-info">
+                                <div class="user-avatar">K</div>
+                                <div class="user-details">
+                                    <span class="username">@bookworm</span>
+                                    <span class="post-time">2시간 전</span>
+                                </div>
+                            </div>
+                            <button class="btn-more">⋯</button>
+                        </div>
+
+                        <div class="card-body">
+                            <blockquote class="sentence-text">
+                                "나는 나를 파괴할 권리가 있다"
+                            </blockquote>
+                            <div class="book-reference">
+                                <div class="book-mini-cover">📕</div>
+                                <div class="book-mini-info">
+                                    <h4>채식주의자</h4>
+                                    <p>한강 · 창비</p>
+                                </div>
+                            </div>
+                            <div class="sentence-tags">
+                                <span class="tag">#충격적인</span>
+                                <span class="tag">#인상깊은</span>
+                                <span class="tag">#한강</span>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button class="action-btn like-btn" data-count="45">
+                                <span class="icon">❤️</span>
+                                <span class="count">45</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-count="12">
+                                <span class="icon">💬</span>
+                                <span class="count">12</span>
+                            </button>
+                            <button class="action-btn bookmark-btn" data-count="8">
+                                <span class="icon">🔖</span>
+                                <span class="count">8</span>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <span class="icon">↗️</span>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- 문장 카드 2 -->
+                    <article class="sentence-card" data-sentence-id="2">
+                        <div class="card-header">
+                            <div class="user-info">
+                                <div class="user-avatar">L</div>
+                                <div class="user-details">
+                                    <span class="username">@reader_lee</span>
+                                    <span class="post-time">5시간 전</span>
+                                </div>
+                            </div>
+                            <button class="btn-more">⋯</button>
+                        </div>
+
+                        <div class="card-body">
+                            <blockquote class="sentence-text">
+                                "삶은 짧고 예술은 길다. 하지만 기회는 찰나이며, 실험은 위험하고, 판단은 어렵다."
+                            </blockquote>
+                            <div class="book-reference">
+                                <div class="book-mini-cover">📘</div>
+                                <div class="book-mini-info">
+                                    <h4>미드나잇 라이브러리</h4>
+                                    <p>매트 헤이그 · 인플루엔셜</p>
+                                </div>
+                            </div>
+                            <div class="sentence-tags">
+                                <span class="tag">#인생</span>
+                                <span class="tag">#위로</span>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button class="action-btn like-btn" data-count="128">
+                                <span class="icon">❤️</span>
+                                <span class="count">128</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-count="34">
+                                <span class="icon">💬</span>
+                                <span class="count">34</span>
+                            </button>
+                            <button class="action-btn bookmark-btn" data-count="23">
+                                <span class="icon">🔖</span>
+                                <span class="count">23</span>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <span class="icon">↗️</span>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- 문장 카드 3 -->
+                    <article class="sentence-card" data-sentence-id="3">
+                        <div class="card-header">
+                            <div class="user-info">
+                                <div class="user-avatar">P</div>
+                                <div class="user-details">
+                                    <span class="username">@poem_lover</span>
+                                    <span class="post-time">1일 전</span>
+                                </div>
+                            </div>
+                            <button class="btn-more">⋯</button>
+                        </div>
+
+                        <div class="card-body">
+                            <blockquote class="sentence-text">
+                                "나는 당신이 행복했으면 좋겠어요. 정말로 그래요. 당신이 우울하게 보여서 슬퍼요."
+                            </blockquote>
+                            <div class="book-reference">
+                                <div class="book-mini-cover">📗</div>
+                                <div class="book-mini-info">
+                                    <h4>달러구트 꿈 백화점</h4>
+                                    <p>이미예 · 팩토리나인</p>
+                                </div>
+                            </div>
+                            <div class="sentence-tags">
+                                <span class="tag">#따뜻한</span>
+                                <span class="tag">#힐링</span>
+                                <span class="tag">#위로</span>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button class="action-btn like-btn" data-count="89">
+                                <span class="icon">❤️</span>
+                                <span class="count">89</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-count="21">
+                                <span class="icon">💬</span>
+                                <span class="count">21</span>
+                            </button>
+                            <button class="action-btn bookmark-btn" data-count="15">
+                                <span class="icon">🔖</span>
+                                <span class="count">15</span>
+                            </button>
+                            <button class="action-btn share-btn">
+                                <span class="icon">↗️</span>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- 더보기 버튼 -->
+                    <button class="btn-load-more" id="loadMoreBtn">
+                        더 많은 문장 보기
+                    </button>
+                </div>
+
+                <!-- 사이드바 -->
+                <aside class="sidebar">
+                    <!-- 트렌딩 해시태그 -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">🔥 인기 해시태그</h3>
+                        <div class="trending-tags">
+                            <a href="#" class="trending-tag">#위로 <span>1.2K</span></a>
+                            <a href="#" class="trending-tag">#감동 <span>856</span></a>
+                            <a href="#" class="trending-tag">#인생 <span>743</span></a>
+                            <a href="#" class="trending-tag">#사랑 <span>632</span></a>
+                            <a href="#" class="trending-tag">#힐링 <span>521</span></a>
+                            <a href="#" class="trending-tag">#동기부여 <span>489</span></a>
+                        </div>
+                    </div>
+
+                    <!-- 추천 사용자 -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">✨ 추천 사용자</h3>
+                        <div class="recommend-users">
+                            <div class="user-item">
+                                <div class="user-avatar-small">B</div>
+                                <div class="user-name">@bookaholic</div>
+                                <button class="btn-follow">팔로우</button>
+                            </div>
+                            <div class="user-item">
+                                <div class="user-avatar-small">N</div>
+                                <div class="user-name">@novel_fan</div>
+                                <button class="btn-follow">팔로우</button>
+                            </div>
+                            <div class="user-item">
+                                <div class="user-avatar-small">E</div>
+                                <div class="user-name">@essay_reader</div>
+                                <button class="btn-follow">팔로우</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 이달의 베스트 문장 -->
+                    <div class="sidebar-card">
+                        <h3 class="sidebar-title">👑 이달의 베스트</h3>
+                        <div class="best-sentence">
+                            <p>"행복은 인생의 의미이자 목적이고, 인간 존재의 전부이자 목표이다"</p>
+                            <small>- 아리스토텔레스</small>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-menu">
+                    <a href="#company">회사소개</a>
+                    <a href="/terms.html">이용약관</a>
+                    <a href="/privacy.html"><strong>개인정보처리방침</strong></a>
+                    <a href="/youth-protection.html">청소년보호정책</a>
+                </div>
+            </div>
+
+            <div class="footer-info">
+                <p class="company-name">ChaekMate (주)책메이트</p>
+                <p>대표이사: 김현우 | 사업자등록번호: 123-45-67890</p>
+                <p>이메일: contact@chaekmate.com | 고객센터: 1544-0000</p>
+            </div>
+
+            <div class="footer-bottom">
+                <p>COPYRIGHT © ChaekMate Inc. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/sentence-sns.ts"></script>
+</body>
+</html>
