@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문장 상세 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/sentence-detail.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="/cs.html">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/cart.html" class="icon-link">
+                        <span class="icon">🛒</span>
+                        <span>장바구니</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/new-books.html">신간</a></li>
+                    <li><a href="/recommend.html">추천</a></li>
+                    <li><a href="/sentence-sns.html" class="active">문장 SNS</a></li>
+                    <li><a href="/event.html">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container detail-container">
+            <!-- 뒤로가기 -->
+            <a href="/sentence-sns.html" class="btn-back">← 피드로 돌아가기</a>
+
+            <!-- 문장 상세 카드 -->
+            <article class="sentence-card detail-card" data-sentence-id="1">
+                <div class="card-header">
+                    <div class="user-info">
+                        <div class="user-avatar large">K</div>
+                        <div class="user-details">
+                            <span class="username">@bookworm</span>
+                            <span class="post-time">2시간 전</span>
+                        </div>
+                    </div>
+                    <button class="btn-more">⋯</button>
+                </div>
+
+                <div class="card-body">
+                    <blockquote class="sentence-text large">
+                        "나는 나를 파괴할 권리가 있다"
+                    </blockquote>
+                    
+                    <div class="sentence-meta">
+                        <span class="page-number">📄 42페이지</span>
+                    </div>
+
+                    <div class="book-reference large">
+                        <div class="book-cover-medium">
+                            <img src="https://via.placeholder.com/120x170?text=채식주의자" alt="책 표지">
+                        </div>
+                        <div class="book-info-medium">
+                            <h3>채식주의자</h3>
+                            <p class="author">한강</p>
+                            <p class="publisher">창비 · 2007</p>
+                            <p class="rating">★★★★☆ 4.2</p>
+                            <a href="/book-detail.html?id=1" class="btn-view-book">책 보러가기 →</a>
+                        </div>
+                    </div>
+
+                    <div class="user-thoughts">
+                        <h4>💭 작성자의 감상</h4>
+                        <p>
+                            이 문장이 너무 강렬해서 한참을 멍하니 책을 보고 있었습니다. 
+                            인간의 자유 의지와 선택에 대해 깊이 생각하게 만드는 문장이었어요.
+                        </p>
+                    </div>
+
+                    <div class="sentence-tags">
+                        <span class="tag">#충격적인</span>
+                        <span class="tag">#인상깊은</span>
+                        <span class="tag">#한강</span>
+                    </div>
+                </div>
+
+                <div class="card-footer large">
+                    <button class="action-btn like-btn active" data-count="45">
+                        <span class="icon">❤️</span>
+                        <span class="count">45</span>
+                        <span class="label">좋아요</span>
+                    </button>
+                    <button class="action-btn comment-btn" data-count="12">
+                        <span class="icon">💬</span>
+                        <span class="count">12</span>
+                        <span class="label">댓글</span>
+                    </button>
+                    <button class="action-btn bookmark-btn" data-count="8">
+                        <span class="icon">🔖</span>
+                        <span class="count">8</span>
+                        <span class="label">북마크</span>
+                    </button>
+                    <button class="action-btn share-btn">
+                        <span class="icon">↗️</span>
+                        <span class="label">공유</span>
+                    </button>
+                </div>
+            </article>
+
+            <!-- 댓글 섹션 -->
+            <section class="comments-section">
+                <h3 class="comments-title">💬 댓글 <span class="count">(12)</span></h3>
+
+                <!-- 댓글 작성 -->
+                <form class="comment-form" id="commentForm">
+                    <textarea 
+                        class="comment-input" 
+                        placeholder="이 문장에 대한 생각을 나눠주세요"
+                        rows="3"
+                        id="commentText"
+                        maxlength="500"
+                    ></textarea>
+                    <div class="comment-actions">
+                        <span class="char-count"><span id="commentCount">0</span>/500</span>
+                        <button type="submit" class="btn-submit-comment">등록</button>
+                    </div>
+                </form>
+
+                <!-- 댓글 목록 -->
+                <div class="comments-list">
+                    <!-- 댓글 1 -->
+                    <div class="comment-item">
+                        <div class="comment-avatar">L</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-username">@reader_lee</span>
+                                <span class="comment-time">1시간 전</span>
+                            </div>
+                            <p class="comment-text">
+                                정말 인상 깊은 문장이네요. 저도 이 부분에서 오랫동안 멈춰 있었던 기억이 납니다.
+                            </p>
+                            <div class="comment-actions">
+                                <button class="btn-comment-like">
+                                    ❤️ <span>5</span>
+                                </button>
+                                <button class="btn-comment-reply">답글</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 댓글 2 -->
+                    <div class="comment-item">
+                        <div class="comment-avatar">P</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-username">@poem_lover</span>
+                                <span class="comment-time">30분 전</span>
+                            </div>
+                            <p class="comment-text">
+                                한강 작가님의 문장은 항상 깊은 울림을 줍니다 👍
+                            </p>
+                            <div class="comment-actions">
+                                <button class="btn-comment-like">
+                                    ❤️ <span>3</span>
+                                </button>
+                                <button class="btn-comment-reply">답글</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 댓글 3 -->
+                    <div class="comment-item">
+                        <div class="comment-avatar">B</div>
+                        <div class="comment-content">
+                            <div class="comment-header">
+                                <span class="comment-username">@bookaholic</span>
+                                <span class="comment-time">10분 전</span>
+                            </div>
+                            <p class="comment-text">
+                                이 책 꼭 읽어봐야겠어요. 추천해주셔서 감사합니다!
+                            </p>
+                            <div class="comment-actions">
+                                <button class="btn-comment-like">
+                                    ❤️ <span>2</span>
+                                </button>
+                                <button class="btn-comment-reply">답글</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-load-more-comments">댓글 더보기 (9개 남음)</button>
+            </section>
+
+            <!-- 관련 문장 추천 -->
+            <section class="related-sentences">
+                <h3 class="section-title">📚 같은 책의 다른 문장</h3>
+                <div class="related-grid">
+                    <div class="related-card">
+                        <blockquote>"꿈이라면 좋겠어. 악몽이라면 더 좋고."</blockquote>
+                        <div class="related-info">
+                            <span>@another_user</span>
+                            <span>❤️ 32</span>
+                        </div>
+                    </div>
+                    <div class="related-card">
+                        <blockquote>"그는 어둠 속을 헤매고 있었다."</blockquote>
+                        <div class="related-info">
+                            <span>@reader123</span>
+                            <span>❤️ 28</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-menu">
+                    <a href="#company">회사소개</a>
+                    <a href="/terms.html">이용약관</a>
+                    <a href="/privacy.html"><strong>개인정보처리방침</strong></a>
+                    <a href="/youth-protection.html">청소년보호정책</a>
+                </div>
+            </div>
+
+            <div class="footer-info">
+                <p class="company-name">ChaekMate (주)책메이트</p>
+                <p>대표이사: 김현우 | 사업자등록번호: 123-45-67890</p>
+                <p>이메일: contact@chaekmate.com | 고객센터: 1544-0000</p>
+            </div>
+
+            <div class="footer-bottom">
+                <p>COPYRIGHT © ChaekMate Inc. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/sentence-detail.ts"></script>
+</body>
+</html>
