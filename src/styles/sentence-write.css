@@ -1,0 +1,514 @@
+/* sentence-write.css */
+/* 문장 작성 페이지 전용 스타일 */
+
+@import url('new-books.css');
+
+/* ==================== 변수 ==================== */
+:root {
+    --sns-primary: #000;
+    --sns-bg: #fff;
+    --sns-border: #e0e0e0;
+    --sns-hover: #f5f5f5;
+    --sns-accent: #ff0066;
+    --sns-text: #333;
+    --sns-text-light: #666;
+}
+
+/* ==================== 페이지 헤더 ==================== */
+.page-header {
+    text-align: center;
+    padding: 40px 0;
+    border-bottom: 3px solid var(--sns-primary);
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 42px;
+    font-weight: 900;
+    margin-bottom: 12px;
+}
+
+.page-desc {
+    font-size: 18px;
+    color: var(--sns-text-light);
+}
+
+/* ==================== 작성 컨테이너 ==================== */
+.write-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.write-form {
+    background-color: var(--sns-bg);
+    border: 3px solid var(--sns-primary);
+    padding: 40px;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ==================== 폼 섹션 ==================== */
+.form-section {
+    margin-bottom: 32px;
+}
+
+.form-label {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--sns-primary);
+}
+
+.required {
+    color: var(--sns-accent);
+    font-weight: 900;
+}
+
+.optional {
+    color: var(--sns-text-light);
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/* ==================== 도서 검색 ==================== */
+.book-search-box {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-search-book {
+    padding: 12px 24px;
+    border: 2px solid var(--sns-primary);
+    background-color: var(--sns-primary);
+    color: var(--sns-bg);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.btn-search-book:hover {
+    background-color: var(--sns-bg);
+    color: var(--sns-primary);
+}
+
+.selected-book {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background-color: var(--sns-hover);
+    border: 2px solid var(--sns-primary);
+    margin-top: 12px;
+}
+
+.book-mini-cover {
+    width: 48px;
+    height: 48px;
+    background-color: var(--sns-primary);
+    color: var(--sns-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.book-mini-info {
+    flex: 1;
+}
+
+.book-mini-info h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.book-mini-info p {
+    font-size: 14px;
+    color: var(--sns-text-light);
+}
+
+.btn-remove {
+    margin-left: auto;
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-weight: 300;
+    cursor: pointer;
+    color: var(--sns-text-light);
+    transition: all 0.2s;
+    padding: 0 8px;
+}
+
+.btn-remove:hover {
+    color: var(--sns-accent);
+    transform: scale(1.2);
+}
+
+/* ==================== 폼 입력 요소 ==================== */
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--sns-primary);
+    font-size: 16px;
+    font-family: inherit;
+    transition: all 0.2s;
+    background-color: var(--sns-bg);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--sns-accent);
+    box-shadow: 0 0 0 3px rgba(255, 0, 102, 0.1);
+}
+
+.form-input.short {
+    max-width: 200px;
+}
+
+.form-textarea {
+    resize: vertical;
+    line-height: 1.6;
+    min-height: 100px;
+}
+
+.sentence-input {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+.char-count {
+    text-align: right;
+    font-size: 13px;
+    color: var(--sns-text-light);
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.char-count span {
+    color: var(--sns-primary);
+    font-weight: 700;
+}
+
+/* ==================== 해시태그 ==================== */
+.hashtag-input-wrapper {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-add-tag {
+    padding: 12px 24px;
+    border: 2px solid var(--sns-primary);
+    background-color: var(--sns-bg);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+
+.btn-add-tag:hover {
+    background-color: var(--sns-primary);
+    color: var(--sns-bg);
+}
+
+.hashtag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    min-height: 20px;
+}
+
+.hashtag-list .tag {
+    padding: 6px 12px;
+    background-color: var(--sns-primary);
+    color: var(--sns-bg);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.hashtag-list .tag:hover {
+    background-color: var(--sns-accent);
+}
+
+.hashtag-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.suggestion-tag {
+    padding: 6px 12px;
+    border: 2px solid var(--sns-border);
+    background-color: var(--sns-bg);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.suggestion-tag:hover {
+    border-color: var(--sns-primary);
+    background-color: var(--sns-hover);
+}
+
+/* ==================== 공개 설정 ==================== */
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.radio-label input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.radio-label:hover {
+    color: var(--sns-accent);
+}
+
+/* ==================== 미리보기 ==================== */
+.preview-section {
+    margin-bottom: 32px;
+    padding-top: 32px;
+    border-top: 2px solid var(--sns-border);
+}
+
+.preview-section h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--sns-primary);
+}
+
+.preview-card {
+    background-color: var(--sns-bg);
+    border: 3px solid var(--sns-primary);
+    padding: 24px;
+    margin-bottom: 0;
+}
+
+.preview-card:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.preview-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.preview-card .user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.preview-card .user-avatar {
+    width: 48px;
+    height: 48px;
+    background-color: var(--sns-primary);
+    color: var(--sns-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 20px;
+}
+
+.preview-card .username {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.preview-card .post-time {
+    font-size: 13px;
+    color: var(--sns-text-light);
+}
+
+.preview-card .sentence-text {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: var(--sns-hover);
+    border-left: 4px solid var(--sns-primary);
+    color: var(--sns-text);
+}
+
+.preview-card .book-reference {
+    display: flex;
+    gap: 16px;
+    padding: 16px;
+    background-color: var(--sns-hover);
+    border: 2px solid var(--sns-border);
+    margin-bottom: 16px;
+}
+
+.preview-card .sentence-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.preview-card .tag {
+    padding: 6px 12px;
+    background-color: var(--sns-primary);
+    color: var(--sns-bg);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.preview-card .card-footer {
+    display: flex;
+    gap: 12px;
+    padding-top: 20px;
+    border-top: 2px solid var(--sns-border);
+}
+
+.preview-card .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 16px;
+    border: 2px solid var(--sns-border);
+    background-color: var(--sns-bg);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ==================== 버튼 그룹 ==================== */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding-top: 32px;
+    border-top: 2px solid var(--sns-border);
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 16px 48px;
+    font-size: 16px;
+    font-weight: 700;
+    border: 3px solid var(--sns-primary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--sns-primary);
+    color: var(--sns-bg);
+}
+
+.btn-primary:hover {
+    background-color: var(--sns-bg);
+    color: var(--sns-primary);
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 var(--sns-primary);
+}
+
+.btn-secondary {
+    background-color: var(--sns-bg);
+    color: var(--sns-primary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--sns-hover);
+    transform: translateY(-2px);
+}
+
+/* ==================== 반응형 ==================== */
+@media (max-width: 768px) {
+    .page-title {
+        font-size: 32px;
+    }
+
+    .write-form {
+        padding: 24px;
+    }
+
+    .book-search-box {
+        flex-direction: column;
+    }
+
+    .btn-search-book {
+        width: 100%;
+    }
+
+    .radio-group {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-title {
+        font-size: 24px;
+    }
+
+    .write-container {
+        padding: 20px 10px;
+    }
+
+    .write-form {
+        padding: 20px;
+    }
+
+    .form-label {
+        font-size: 14px;
+    }
+
+    .form-input,
+    .form-textarea {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .sentence-input {
+        font-size: 16px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+        padding: 14px 32px;
+        font-size: 14px;
+    }
+}
