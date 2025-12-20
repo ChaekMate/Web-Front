@@ -68,18 +68,23 @@
                 <p class="update-date">시행일자: 2025년 1월 1일</p>
             </div>
 
-            <!-- 약관 네비게이션 -->
-            <nav class="terms-nav">
-                <a href="#article1" class="terms-nav-item">제1장 총칙</a>
-                <a href="#article2" class="terms-nav-item">제2장 회원가입</a>
-                <a href="#article3" class="terms-nav-item">제3장 서비스 이용</a>
-                <a href="#article4" class="terms-nav-item">제4장 구매 및 결제</a>
-                <a href="#article5" class="terms-nav-item">제5장 배송</a>
-                <a href="#article6" class="terms-nav-item">제6장 취소/환불</a>
-            </nav>
+            <!-- 약관 레이아웃 (사이드바 + 컨텐츠) -->
+            <div class="terms-layout">
+                <!-- 약관 사이드바 네비게이션 -->
+                <aside class="terms-sidebar">
+                    <nav class="terms-nav">
+                        <h3 class="nav-title">목차</h3>
+                        <a href="#article1" class="terms-nav-item active">제1장 총칙</a>
+                        <a href="#article2" class="terms-nav-item">제2장 회원가입</a>
+                        <a href="#article3" class="terms-nav-item">제3장 서비스 이용</a>
+                        <a href="#article4" class="terms-nav-item">제4장 구매 및 결제</a>
+                        <a href="#article5" class="terms-nav-item">제5장 배송</a>
+                        <a href="#article6" class="terms-nav-item">제6장 취소/환불</a>
+                    </nav>
+                </aside>
 
-            <!-- 약관 내용 -->
-            <div class="terms-content">
+                <!-- 약관 내용 -->
+                <div class="terms-content">
                 <!-- 제1장 총칙 -->
                 <section class="terms-section" id="article1">
                     <h2 class="section-title">제1장 총칙</h2>
@@ -358,7 +363,10 @@
                     <h2 class="section-title">부칙</h2>
                     <p>본 약관은 2025년 1월 1일부터 적용됩니다.</p>
                 </section>
+                </div>
+                <!-- terms-content 끝 -->
             </div>
+            <!-- terms-layout 끝 -->
 
             <!-- 하단 정보 -->
             <div class="terms-footer">
