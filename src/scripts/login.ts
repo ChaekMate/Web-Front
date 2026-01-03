@@ -1,110 +1,116 @@
-/**
- * ChaekMate Login TypeScript
- * 로그인 기능 전용
- */
-
 console.log('🔐 ChaekMate Login 로드 완료!');
 
-// ==================== 로그인 폼 처리 ====================
+const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
+
+// 로그인 API 호출
+const login = async (email: string, password: string): Promise<any> => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.detail || '로그인에 실패했습니다.');
+    }
+
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// 로그인 폼 처리
 const initLoginForm = (): void => {
-  const loginForm = document.getElementById('loginForm');
-  
-  if (!loginForm) return;
+  const loginForm = document.getElementById('loginForm') as HTMLFormElement;
+  if (!loginForm) {
+    console.error('loginForm을 찾을 수 없습니다.');
+    return;
+  }
 
-  loginForm.addEventListener('submit', (e: Event) => {
+  loginForm.addEventListener('submit', async (e: Event) => {
     e.preventDefault();
-    
-    const formData = new FormData(loginForm as HTMLFormElement);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const remember = formData.get('remember');
 
-    console.log('로그인 시도:', { email, remember: !!remember });
+    const emailInput = document.getElementById('email') as HTMLInputElement;
+    const passwordInput = document.getElementById('password') as HTMLInputElement;
 
-    // TODO: 실제 API 연동
-    alert(`로그인 기능은 준비 중입니다!\n\n입력하신 이메일: ${email}`);
-    
-    // 실제로는 API 호출 후 홈으로 이동
-    // window.location.href = '/home.html';
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    if (!email || !password) {
+      alert('이메일과 비밀번호를 입력해주세요.');
+      return;
+    }
+
+    console.log('로그인 시도:', email);
+
+    try {
+      const data = await login(email, password);
+
+      console.log('✅ 로그인 성공:', data);
+
+      // 토큰 저장
+      if (data.access_token) {
+        localStorage.setItem('access_token', data.access_token);
+      }
+      if (data.refresh_token) {
+        localStorage.setItem('refresh_token', data.refresh_token);
+      }
+
+      alert('로그인 성공!');
+
+      // 홈으로 이동
+      window.location.href = '/home.html';
+
+    } catch (error: any) {
+      console.error('❌ 로그인 실패:', error);
+      alert(error.message || '로그인 중 오류가 발생했습니다.');
+    }
   });
 
   console.log('✅ 로그인 폼 초기화 완료');
 };
 
-// ==================== 소셜 로그인 ====================
-const initLoginSocial = (): void => {
-  const socialButtons = document.querySelectorAll('.btn-social');
-  
-  socialButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const socialType = button.classList.contains('btn-google') ? 'Google' :
-                        button.classList.contains('btn-kakao') ? 'Kakao' :
-                        button.classList.contains('btn-naver') ? 'Naver' : '';
-      
-      console.log(`${socialType} 로그인 시도`);
-      
-      // TODO: 실제 소셜 로그인 연동
-      alert(`${socialType} 로그인 기능은 준비 중입니다!`);
+// 소셜 로그인 버튼 처리
+const initSocialLogin = (): void => {
+  const googleBtn = document.querySelector('.btn-google');
+  const kakaoBtn = document.querySelector('.btn-kakao');
+  const naverBtn = document.querySelector('.btn-naver');
+
+  if (googleBtn) {
+    googleBtn.addEventListener('click', () => {
+      alert('Google 로그인 기능은 준비 중입니다!');
     });
-  });
+  }
+
+  if (kakaoBtn) {
+    kakaoBtn.addEventListener('click', () => {
+      alert('Kakao 로그인 기능은 준비 중입니다!');
+    });
+  }
+
+  if (naverBtn) {
+    naverBtn.addEventListener('click', () => {
+      alert('Naver 로그인 기능은 준비 중입니다!');
+    });
+  }
 
   console.log('✅ 소셜 로그인 버튼 초기화 완료');
 };
 
-// ==================== 이메일 형식 검증 ====================
-const initLoginEmailValidation = (): void => {
-  const emailInput = document.getElementById('email') as HTMLInputElement;
-  
-  if (!emailInput) return;
-
-  emailInput.addEventListener('blur', () => {
-    const email = emailInput.value;
-    const formGroup = emailInput.closest('.form-group');
-    
-    if (email === '') {
-      formGroup?.classList.remove('error', 'success');
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
-    if (emailRegex.test(email)) {
-      formGroup?.classList.add('success');
-      formGroup?.classList.remove('error');
-    } else {
-      formGroup?.classList.add('error');
-      formGroup?.classList.remove('success');
-    }
-  });
-
-  console.log('✅ 이메일 검증 초기화 완료');
-};
-
-// ==================== 비밀번호 찾기 ====================
-const initFindPassword = (): void => {
-  const findPasswordLink = document.querySelector('a[href="#find-password"]');
-  
-  if (!findPasswordLink) return;
-
-  findPasswordLink.addEventListener('click', (e: Event) => {
-    e.preventDefault();
-    alert('비밀번호 찾기 기능은 준비 중입니다!');
-  });
-
-  console.log('✅ 비밀번호 찾기 초기화 완료');
-};
-
-// ==================== 메인 초기화 ====================
+// 메인 초기화
 const initLogin = (): void => {
-  console.log('🎬 ChaekMate Login 초기화 시작...');
-  
+  console.log('🎬 Login 초기화 시작...');
+
   initLoginForm();
-  initLoginSocial();
-  initLoginEmailValidation();
-  initFindPassword();
-  
-  console.log('✨ ChaekMate Login 초기화 완료!');
+  initSocialLogin();
+
+  console.log('✨ Login 초기화 완료!');
 };
 
-// DOMContentLoaded 이벤트에서 초기화
 document.addEventListener('DOMContentLoaded', initLogin);
