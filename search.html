@@ -64,18 +64,18 @@
             <!-- 검색 결과 헤더 -->
             <div class="search-header">
                 <h1 class="search-title">
-                    "<span id="searchKeyword">채식주의자</span>" 검색 결과
+                    "<span id="searchKeyword"></span>" 검색 결과
                 </h1>
-                <p class="search-count">총 <strong id="resultCount">24</strong>개의 결과</p>
+                <p class="search-count">총 <strong id="resultCount">0</strong>개의 결과</p>
             </div>
 
             <!-- 필터 & 정렬 -->
             <div class="filter-bar">
                 <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">전체 (24)</button>
-                    <button class="filter-tab" data-filter="book">도서 (20)</button>
-                    <button class="filter-tab" data-filter="author">저자 (3)</button>
-                    <button class="filter-tab" data-filter="publisher">출판사 (1)</button>
+                    <button class="filter-tab active" data-filter="all">전체 (<span id="filterAllCount">0</span>)</button>
+                    <button class="filter-tab" data-filter="book">도서 (<span id="filterBookCount">0</span>)</button>
+                    <button class="filter-tab" data-filter="author">저자 (0)</button>
+                    <button class="filter-tab" data-filter="publisher">출판사 (0)</button>
                 </div>
 
                 <div class="sort-area">
@@ -88,6 +88,11 @@
                         <option value="rating">평점순</option>
                     </select>
                 </div>
+            </div>
+
+            <!-- 로딩 상태 -->
+            <div class="loading-state" id="loadingState" style="display: none; text-align: center; padding: 100px 0;">
+                <p style="font-size: 24px; font-weight: 700;">검색 중...</p>
             </div>
 
             <!-- 검색 결과 없을 때 -->
@@ -106,174 +111,8 @@
                 </div>
             </div>
 
-            <!-- 검색 결과 리스트 -->
-            <div class="search-results" id="searchResults">
-                <!-- 도서 결과 1 -->
-                <div class="result-item book-item">
-                    <div class="item-image">
-                        <img src="https://via.placeholder.com/120x180?text=Book" alt="채식주의자">
-                    </div>
-                    <div class="item-content">
-                        <div class="item-badge">도서</div>
-                        <h3 class="item-title">채식주의자</h3>
-                        <p class="item-author">한강 지음 · 창비</p>
-                        <div class="item-rating">
-                            <span class="stars">★★★★☆</span>
-                            <span class="rating-score">4.2</span>
-                            <span class="review-count">(1,234)</span>
-                        </div>
-                        <p class="item-description">
-                            한강의 대표작. 평범한 여자가 어느 날 고기를 먹지 않겠다고 선언하면서 시작되는 이야기. 맨부커상 수상작.
-                        </p>
-                        <div class="item-tags">
-                            <span class="tag">#소설</span>
-                            <span class="tag">#한국문학</span>
-                            <span class="tag">#맨부커상</span>
-                        </div>
-                    </div>
-                    <div class="item-actions">
-                        <p class="item-price">12,600원</p>
-                        <button class="btn-cart">장바구니</button>
-                        <button class="btn-buy">바로구매</button>
-                    </div>
-                </div>
-
-                <!-- 도서 결과 2 -->
-                <div class="result-item book-item">
-                    <div class="item-image">
-                        <img src="https://via.placeholder.com/120x180?text=Book" alt="채식의 배신">
-                    </div>
-                    <div class="item-content">
-                        <div class="item-badge">도서</div>
-                        <h3 class="item-title">채식의 배신</h3>
-                        <p class="item-author">리어 키스 지음 · 부키</p>
-                        <div class="item-rating">
-                            <span class="stars">★★★★☆</span>
-                            <span class="rating-score">4.0</span>
-                            <span class="review-count">(456)</span>
-                        </div>
-                        <p class="item-description">
-                            20년간 완벽한 채식을 실천한 저자가 건강을 되찾기 위해 고기를 다시 먹기 시작한 이유.
-                        </p>
-                        <div class="item-tags">
-                            <span class="tag">#건강</span>
-                            <span class="tag">#식습관</span>
-                        </div>
-                    </div>
-                    <div class="item-actions">
-                        <p class="item-price">16,200원</p>
-                        <button class="btn-cart">장바구니</button>
-                        <button class="btn-buy">바로구매</button>
-                    </div>
-                </div>
-
-                <!-- 도서 결과 3 -->
-                <div class="result-item book-item">
-                    <div class="item-image">
-                        <img src="https://via.placeholder.com/120x180?text=Book" alt="채식주의자의 식탁">
-                    </div>
-                    <div class="item-content">
-                        <div class="item-badge">도서</div>
-                        <h3 class="item-title">채식주의자의 식탁</h3>
-                        <p class="item-author">김혜영 지음 · 씨앗을뿌리는사람</p>
-                        <div class="item-rating">
-                            <span class="stars">★★★★★</span>
-                            <span class="rating-score">4.5</span>
-                            <span class="review-count">(234)</span>
-                        </div>
-                        <p class="item-description">
-                            건강하고 맛있는 채식 요리 레시피 100가지. 초보자도 쉽게 따라할 수 있는 친절한 설명.
-                        </p>
-                        <div class="item-tags">
-                            <span class="tag">#요리</span>
-                            <span class="tag">#레시피</span>
-                            <span class="tag">#채식</span>
-                        </div>
-                    </div>
-                    <div class="item-actions">
-                        <p class="item-price">18,900원</p>
-                        <button class="btn-cart">장바구니</button>
-                        <button class="btn-buy">바로구매</button>
-                    </div>
-                </div>
-
-                <!-- 저자 결과 -->
-                <div class="result-item author-item">
-                    <div class="item-image author-image">
-                        <img src="https://via.placeholder.com/120x120?text=Author" alt="한강">
-                    </div>
-                    <div class="item-content">
-                        <div class="item-badge author-badge">저자</div>
-                        <h3 class="item-title">한강</h3>
-                        <p class="item-description">
-                            1970년생. 소설가. 『채식주의자』로 2016년 맨부커 인터내셔널상을 수상했다. 
-                            주요 작품으로 『소년이 온다』, 『흰』, 『작별하지 않는다』 등이 있다.
-                        </p>
-                        <div class="author-books">
-                            <p class="books-title">대표작:</p>
-                            <div class="book-tags">
-                                <span class="book-tag">채식주의자</span>
-                                <span class="book-tag">소년이 온다</span>
-                                <span class="book-tag">작별하지 않는다</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="btn-view-author">저자 페이지</button>
-                    </div>
-                </div>
-
-                <!-- 출판사 결과 -->
-                <div class="result-item publisher-item">
-                    <div class="item-image publisher-image">
-                        <img src="https://via.placeholder.com/120x120?text=Publisher" alt="창비">
-                    </div>
-                    <div class="item-content">
-                        <div class="item-badge publisher-badge">출판사</div>
-                        <h3 class="item-title">창비(창작과비평사)</h3>
-                        <p class="item-description">
-                            1966년 창간된 계간 문예지 『창작과비평』을 모태로 1980년 설립. 
-                            문학과 인문사회과학 분야의 양서를 출간하는 종합출판사.
-                        </p>
-                        <div class="publisher-stats">
-                            <span class="stat">출간 도서: 2,345권</span>
-                            <span class="stat">구독자: 12.4만</span>
-                        </div>
-                    </div>
-                    <div class="item-actions">
-                        <button class="btn-view-publisher">출판사 페이지</button>
-                    </div>
-                </div>
-
-                <!-- 도서 결과 4 -->
-                <div class="result-item book-item">
-                    <div class="item-image">
-                        <img src="https://via.placeholder.com/120x180?text=Book" alt="비건 채식">
-                    </div>
-                    <div class="item-content">
-                        <div class="item-badge">도서</div>
-                        <h3 class="item-title">비건 채식 입문</h3>
-                        <p class="item-author">이지영 지음 · 북하우스</p>
-                        <div class="item-rating">
-                            <span class="stars">★★★★☆</span>
-                            <span class="rating-score">4.3</span>
-                            <span class="review-count">(189)</span>
-                        </div>
-                        <p class="item-description">
-                            처음 시작하는 비건 라이프. 건강과 환경을 생각하는 당신을 위한 완벽 가이드.
-                        </p>
-                        <div class="item-tags">
-                            <span class="tag">#비건</span>
-                            <span class="tag">#환경</span>
-                        </div>
-                    </div>
-                    <div class="item-actions">
-                        <p class="item-price">15,300원</p>
-                        <button class="btn-cart">장바구니</button>
-                        <button class="btn-buy">바로구매</button>
-                    </div>
-                </div>
-            </div>
+            <!-- 검색 결과 리스트 (동적 생성) -->
+            <div class="search-results" id="searchResults"></div>
 
             <!-- 페이지네이션 -->
             <div class="pagination">
@@ -332,6 +171,6 @@
         </div>
     </footer>
 
-    <script type="module" src="/src/scripts/search.ts"></script>
+    <script src="/src/scripts/search.js"></script>
 </body>
 </html>

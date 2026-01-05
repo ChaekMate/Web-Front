@@ -938,3 +938,19 @@ button {
         grid-template-columns: 1fr;
     }
 }
+
+* 로딩 상태 */
+.loading-state {
+    text-align: center;
+    padding: 100px 0;
+    animation: fade-in 0.3s ease-in;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
