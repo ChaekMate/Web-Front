@@ -1,85 +1,73 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 console.log('🔍 ChaekMate Search 로드 완료!');
-
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
-
-interface Book {
-    id: number;
-    title: string;
-    author: string;
-    publisher: string;
-    cover_image: string;
-    price: number;
-    rating: number;
-    description: string;
-}
-
-interface SearchResponse {
-    success: boolean;
-    data: Book[];
-    total: number;
-}
-
-let currentKeyword: string = '';
-let currentFilter: string = 'all';
-let currentSort: string = 'relevance';
-let currentPage: number = 1;
-
+let currentKeyword = '';
+let currentFilter = 'all';
+let currentSort = 'relevance';
+let currentPage = 1;
 // URL 파라미터 파싱
-function getSearchParams(): void {
+function getSearchParams() {
     const urlParams = new URLSearchParams(window.location.search);
     currentKeyword = urlParams.get('q') || urlParams.get('keyword') || '';
-    
     if (currentKeyword) {
-        const searchInput = document.getElementById('searchInput') as HTMLInputElement;
+        const searchInput = document.getElementById('searchInput');
         const keywordElement = document.getElementById('searchKeyword');
-        
-        if (searchInput) searchInput.value = currentKeyword;
-        if (keywordElement) keywordElement.textContent = currentKeyword;
-        
+        if (searchInput)
+            searchInput.value = currentKeyword;
+        if (keywordElement)
+            keywordElement.textContent = currentKeyword;
         console.log('검색어:', currentKeyword);
         performSearch();
-    } else {
+    }
+    else {
         showNoResults();
     }
 }
-
 // 검색 API 호출
-async function performSearch(): Promise<void> {
-    console.log(`검색 실행: "${currentKeyword}"`);
-    
-    showLoadingAnimation();
-    
-    try {
-        const offset = (currentPage - 1) * 10;
-        const response = await fetch(`${API_BASE_URL}/books/search?q=${encodeURIComponent(currentKeyword)}&limit=10&offset=${offset}`);
-        const data: SearchResponse = await response.json();
-        
-        hideLoadingAnimation();
-        
-        if (data.success && data.data.length > 0) {
-            renderSearchResults(data.data, data.total);
-        } else {
+function performSearch() {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log(`검색 실행: "${currentKeyword}"`);
+        showLoadingAnimation();
+        try {
+            const offset = (currentPage - 1) * 10;
+            const response = yield fetch(`${API_BASE_URL}/books/search?q=${encodeURIComponent(currentKeyword)}&limit=10&offset=${offset}`);
+            const data = yield response.json();
+            hideLoadingAnimation();
+            if (data.success && data.data.length > 0) {
+                renderSearchResults(data.data, data.total);
+            }
+            else {
+                showNoResults();
+            }
+        }
+        catch (error) {
+            console.error('검색 에러:', error);
+            hideLoadingAnimation();
             showNoResults();
         }
-    } catch (error) {
-        console.error('검색 에러:', error);
-        hideLoadingAnimation();
-        showNoResults();
-    }
+    });
 }
-
 // 검색 결과 렌더링
-function renderSearchResults(books: Book[], total: number): void {
+function renderSearchResults(books, total) {
     const resultsSection = document.getElementById('searchResults');
     const noResultsSection = document.getElementById('noResults');
     const resultCount = document.getElementById('resultCount');
-    
-    if (noResultsSection) noResultsSection.style.display = 'none';
-    if (resultsSection) resultsSection.style.display = 'block';
-    if (resultCount) resultCount.textContent = String(total);
-    
-    if (!resultsSection) return;
-    
+    if (noResultsSection)
+        noResultsSection.style.display = 'none';
+    if (resultsSection)
+        resultsSection.style.display = 'block';
+    if (resultCount)
+        resultCount.textContent = String(total);
+    if (!resultsSection)
+        return;
     const html = books.map(book => `
         <div class="result-item book-item" data-book-id="${book.id}">
             <div class="item-image">
@@ -90,7 +78,7 @@ function renderSearchResults(books: Book[], total: number): void {
                 <h3 class="item-title">${book.title}</h3>
                 <p class="item-author">${book.author} · ${book.publisher}</p>
                 <div class="item-rating">
-                    <span class="stars">${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5-Math.floor(book.rating))}</span>
+                    <span class="stars">${'★'.repeat(Math.floor(book.rating))}${'☆'.repeat(5 - Math.floor(book.rating))}</span>
                     <span class="rating-score">${book.rating.toFixed(1)}</span>
                 </div>
                 <p class="item-description">${book.description || '도서 설명이 없습니다.'}</p>
@@ -102,170 +90,139 @@ function renderSearchResults(books: Book[], total: number): void {
             </div>
         </div>
     `).join('');
-    
     resultsSection.innerHTML = html;
-    
     // 이벤트 재등록
     initCartButtons();
     initBuyButtons();
     initResultItemClick();
     highlightKeyword();
 }
-
-function showLoadingAnimation(): void {
+function showLoadingAnimation() {
     const results = document.getElementById('searchResults');
-    if (results) results.style.opacity = '0.5';
+    if (results)
+        results.style.opacity = '0.5';
 }
-
-function hideLoadingAnimation(): void {
+function hideLoadingAnimation() {
     const results = document.getElementById('searchResults');
-    if (results) results.style.opacity = '1';
+    if (results)
+        results.style.opacity = '1';
 }
-
-function showNoResults(): void {
+function showNoResults() {
     const resultsSection = document.getElementById('searchResults');
     const noResultsSection = document.getElementById('noResults');
-    
-    if (resultsSection) resultsSection.style.display = 'none';
-    if (noResultsSection) noResultsSection.style.display = 'block';
+    if (resultsSection)
+        resultsSection.style.display = 'none';
+    if (noResultsSection)
+        noResultsSection.style.display = 'block';
 }
-
 // 검색 실행
-function initSearch(): void {
+function initSearch() {
     const searchBtn = document.getElementById('searchBtn');
-    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
-
-    const handleSearch = (): void => {
-        const keyword = searchInput?.value.trim();
+    const searchInput = document.getElementById('searchInput');
+    const handleSearch = () => {
+        const keyword = searchInput === null || searchInput === void 0 ? void 0 : searchInput.value.trim();
         if (keyword) {
             const newUrl = `${window.location.pathname}?q=${encodeURIComponent(keyword)}`;
             window.history.pushState({}, '', newUrl);
-            
             currentKeyword = keyword;
             currentPage = 1;
             performSearch();
         }
     };
-
-    searchBtn?.addEventListener('click', handleSearch);
-    searchInput?.addEventListener('keypress', (e: KeyboardEvent) => {
-        if (e.key === 'Enter') handleSearch();
+    searchBtn === null || searchBtn === void 0 ? void 0 : searchBtn.addEventListener('click', handleSearch);
+    searchInput === null || searchInput === void 0 ? void 0 : searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter')
+            handleSearch();
     });
-
     console.log('✅ 검색 기능 초기화 완료');
 }
-
 // 필터 탭
-function initFilterTabs(): void {
+function initFilterTabs() {
     const filterTabs = document.querySelectorAll('.filter-tab');
-
     filterTabs.forEach(tab => {
         tab.addEventListener('click', () => {
             filterTabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-            
             currentFilter = tab.getAttribute('data-filter') || 'all';
             currentPage = 1;
-            
             console.log('필터 변경:', currentFilter);
             performSearch();
         });
     });
-
     console.log('✅ 필터 탭 초기화 완료');
 }
-
 // 정렬
-function initSortSelect(): void {
-    const sortSelect = document.getElementById('sortSelect') as HTMLSelectElement;
-
-    sortSelect?.addEventListener('change', () => {
+function initSortSelect() {
+    const sortSelect = document.getElementById('sortSelect');
+    sortSelect === null || sortSelect === void 0 ? void 0 : sortSelect.addEventListener('change', () => {
         currentSort = sortSelect.value;
         currentPage = 1;
-        
         console.log('정렬 변경:', currentSort);
         performSearch();
     });
-
     console.log('✅ 정렬 선택 초기화 완료');
 }
-
 // 장바구니 담기
-function initCartButtons(): void {
+function initCartButtons() {
     const cartBtns = document.querySelectorAll('.btn-cart');
-
     cartBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
+            var _a;
             e.stopPropagation();
-            
             const item = btn.closest('.result-item');
-            const title = item?.querySelector('.item-title')?.textContent;
-            
+            const title = (_a = item === null || item === void 0 ? void 0 : item.querySelector('.item-title')) === null || _a === void 0 ? void 0 : _a.textContent;
             console.log('장바구니 담기:', title);
             alert(`"${title}"이(가) 장바구니에 담겼습니다.`);
         });
     });
-
     console.log('✅ 장바구니 버튼 초기화 완료');
 }
-
 // 바로구매
-function initBuyButtons(): void {
+function initBuyButtons() {
     const buyBtns = document.querySelectorAll('.btn-buy');
-
     buyBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
+            var _a;
             e.stopPropagation();
-            
             const item = btn.closest('.result-item');
-            const title = item?.querySelector('.item-title')?.textContent;
-            
+            const title = (_a = item === null || item === void 0 ? void 0 : item.querySelector('.item-title')) === null || _a === void 0 ? void 0 : _a.textContent;
             console.log('바로구매:', title);
             alert('바로구매 기능은 준비 중입니다.');
         });
     });
-
     console.log('✅ 바로구매 버튼 초기화 완료');
 }
-
 // 결과 아이템 클릭 (도서 상세로 이동)
-function initResultItemClick(): void {
+function initResultItemClick() {
     const bookItems = document.querySelectorAll('.book-item');
-
     bookItems.forEach(item => {
         item.addEventListener('click', (e) => {
-            if ((e.target as HTMLElement).tagName === 'BUTTON') return;
-            
+            if (e.target.tagName === 'BUTTON')
+                return;
             const bookId = item.getAttribute('data-book-id');
             if (bookId) {
                 window.location.href = `/book-detail.html?id=${bookId}`;
             }
         });
     });
-
     console.log('✅ 결과 아이템 클릭 초기화 완료');
 }
-
 // 페이지네이션
-function initPagination(): void {
+function initPagination() {
     const pageNums = document.querySelectorAll('.page-num');
     const prevBtn = document.querySelector('.page-btn.prev');
     const nextBtn = document.querySelector('.page-btn.next');
-
     pageNums.forEach(pageNum => {
         pageNum.addEventListener('click', () => {
             pageNums.forEach(p => p.classList.remove('active'));
             pageNum.classList.add('active');
-            
             currentPage = parseInt(pageNum.textContent || '1');
             console.log('페이지 이동:', currentPage);
-            
             performSearch();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     });
-
-    prevBtn?.addEventListener('click', () => {
+    prevBtn === null || prevBtn === void 0 ? void 0 : prevBtn.addEventListener('click', () => {
         if (currentPage > 1) {
             currentPage--;
             performSearch();
@@ -273,83 +230,67 @@ function initPagination(): void {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     });
-
-    nextBtn?.addEventListener('click', () => {
+    nextBtn === null || nextBtn === void 0 ? void 0 : nextBtn.addEventListener('click', () => {
         currentPage++;
         performSearch();
         updatePaginationUI();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-
     console.log('✅ 페이지네이션 초기화 완료');
 }
-
-function updatePaginationUI(): void {
+function updatePaginationUI() {
     const pageNums = document.querySelectorAll('.page-num');
-    const prevBtn = document.querySelector('.page-btn.prev') as HTMLButtonElement;
-    
+    const prevBtn = document.querySelector('.page-btn.prev');
     pageNums.forEach((pageNum, index) => {
         pageNum.classList.toggle('active', index + 1 === currentPage);
     });
-    
-    if (prevBtn) prevBtn.disabled = currentPage === 1;
+    if (prevBtn)
+        prevBtn.disabled = currentPage === 1;
 }
-
 // 연관 검색어 클릭
-function initRelatedTags(): void {
+function initRelatedTags() {
     const relatedTags = document.querySelectorAll('.related-tag');
     const suggestionTags = document.querySelectorAll('.suggestion-tag');
-
     Array.from(relatedTags).concat(Array.from(suggestionTags)).forEach(tag => {
         tag.addEventListener('click', (e) => {
+            var _a;
             e.preventDefault();
-            const keyword = tag.textContent?.trim();
-            
+            const keyword = (_a = tag.textContent) === null || _a === void 0 ? void 0 : _a.trim();
             if (keyword) {
-                const searchInput = document.getElementById('searchInput') as HTMLInputElement;
-                if (searchInput) searchInput.value = keyword;
-                
+                const searchInput = document.getElementById('searchInput');
+                if (searchInput)
+                    searchInput.value = keyword;
                 currentKeyword = keyword;
                 currentPage = 1;
-                
                 const newUrl = `${window.location.pathname}?q=${encodeURIComponent(keyword)}`;
                 window.history.pushState({}, '', newUrl);
-                
                 performSearch();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
     });
-
     console.log('✅ 연관 검색어 초기화 완료');
 }
-
 // 검색어 하이라이트
-function highlightKeyword(): void {
+function highlightKeyword() {
     const keyword = currentKeyword.toLowerCase();
     const titles = document.querySelectorAll('.item-title');
-    
     titles.forEach(title => {
         const text = title.textContent || '';
         const lowerText = text.toLowerCase();
-        
         if (lowerText.includes(keyword)) {
             const index = lowerText.indexOf(keyword);
             const before = text.substring(0, index);
             const match = text.substring(index, index + keyword.length);
             const after = text.substring(index + keyword.length);
-            
             title.innerHTML = `${before}<mark style="background-color: #ffeb3b; font-weight: 900;">${match}</mark>${after}`;
         }
     });
-
     console.log('✅ 검색어 하이라이트 완료');
 }
-
 // 메인 초기화
-function initSearchPage(): void {
+function initSearchPage() {
     console.log('🎬 ChaekMate Search 초기화 시작...');
-
     getSearchParams();
     initSearch();
     initFilterTabs();
@@ -359,16 +300,14 @@ function initSearchPage(): void {
     initResultItemClick();
     initPagination();
     initRelatedTags();
-    
     if (currentKeyword) {
         setTimeout(highlightKeyword, 100);
     }
-
     console.log('✨ ChaekMate Search 초기화 완료!');
 }
-
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initSearchPage);
-} else {
+}
+else {
     initSearchPage();
 }
