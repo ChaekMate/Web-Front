@@ -7,8 +7,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+
 console.log('HOME TS START');
+
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
+
 const fetchBooks = (endpoint) => __awaiter(this, void 0, void 0, function* () {
     try {
         const response = yield fetch(API_BASE_URL + endpoint);
@@ -20,7 +23,7 @@ const fetchBooks = (endpoint) => __awaiter(this, void 0, void 0, function* () {
         return [];
     }
 });
-// 기존 HTML 구조 그대로 사용
+
 const renderBooks = (books, containerSelector) => {
     const container = document.querySelector(containerSelector);
     if (!container) {
@@ -28,7 +31,7 @@ const renderBooks = (books, containerSelector) => {
         return;
     }
     const html = books.map((book, index) => `
-    <div class="book-item">
+    <div class="book-item" data-book-id="${book.id}" style="cursor: pointer;">
       <div class="book-rank">${index + 1}</div>
       <div class="book-cover">
         <img src="${book.cover_image}" alt="${book.title}">
@@ -43,17 +46,54 @@ const renderBooks = (books, containerSelector) => {
     </div>
   `).join('');
     container.innerHTML = html;
+    
+    // 책 클릭 이벤트 추가
+    const bookItems = container.querySelectorAll('.book-item');
+    bookItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const bookId = item.getAttribute('data-book-id');
+            if (bookId) {
+                window.location.href = `/book-detail.html?id=${bookId}`;
+            }
+        });
+    });
+    
     console.log('Rendered', books.length, 'books in', containerSelector);
 };
+
 const loadAllBooks = () => __awaiter(this, void 0, void 0, function* () {
     console.log('Loading all books...');
     const popular = yield fetchBooks('/books/popular?limit=10');
     console.log('Popular:', popular.length);
-    // 베스트셀러 섹션만 업데이트
     renderBooks(popular, '.bestseller-section .book-list');
 });
+
+// 검색 기능
+const initHomeSearch = () => {
+    const searchBtn = document.querySelector('.search-btn');
+    const searchInput = document.querySelector('.search-input');
+
+    const handleSearch = () => {
+        const keyword = searchInput?.value.trim();
+        if (keyword) {
+            window.location.href = `/search.html?q=${encodeURIComponent(keyword)}`;
+        }
+    };
+
+    searchBtn?.addEventListener('click', handleSearch);
+    searchInput?.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    });
+
+    console.log('✅ 검색 기능 초기화 완료');
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM READY');
     loadAllBooks();
+    initHomeSearch();
 });
+
 console.log('HOME TS END');
