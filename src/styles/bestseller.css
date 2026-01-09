@@ -24,7 +24,7 @@ button {
     font-family: inherit;
 }
 
-/* 헤더 스타일 (home.html과 동일) */
+/* 헤더 스타일 */
 .main-header {
     background-color: #fff;
     border-bottom: 3px solid #000;
@@ -75,10 +75,6 @@ button {
 
 .logo a {
     color: #000;
-}
-
-.logo a:hover {
-    opacity: 0.7;
 }
 
 .search-area {
@@ -192,19 +188,18 @@ button {
 
 /* 페이지 헤더 */
 .page-header {
+    text-align: center;
     margin-bottom: 40px;
-    padding-bottom: 30px;
-    border-bottom: 3px solid #000;
 }
 
 .page-title {
-    font-size: 42px;
+    font-size: 32px;
     font-weight: 900;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
 .page-description {
-    font-size: 18px;
+    font-size: 15px;
     color: #666;
 }
 
@@ -213,240 +208,196 @@ button {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
-    padding: 20px;
-    border: 2px solid #000;
+    margin-bottom: 30px;
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
 }
 
 .period-filter {
     display: flex;
-    gap: 0;
-    border: 2px solid #000;
+    gap: 8px;
 }
 
 .period-btn {
-    padding: 12px 24px;
-    font-weight: 700;
-    font-size: 15px;
+    padding: 8px 16px;
+    border: 1px solid #ddd;
     background-color: #fff;
-    color: #000;
-    border-right: 2px solid #000;
+    font-weight: 500;
+    font-size: 14px;
     transition: all 0.2s;
-}
-
-.period-btn:last-child {
-    border-right: none;
+    border-radius: 4px;
 }
 
 .period-btn:hover {
-    background-color: #f5f5f5;
+    background-color: #f0f0f0;
 }
 
 .period-btn.active {
     background-color: #000;
     color: #fff;
+    border-color: #000;
+}
+
+.category-filter {
+    display: flex;
+    gap: 8px;
 }
 
 .category-select {
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    border: 2px solid #000;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
     background-color: #fff;
+    font-weight: 500;
+    font-size: 14px;
     cursor: pointer;
-    min-width: 150px;
+    border-radius: 4px;
 }
 
 .category-select:focus {
     outline: none;
+    border-color: #000;
 }
 
-/* 베스트셀러 리스트 */
-.bestseller-list {
+/* 베스트셀러 리스트 - 가로 행 레이아웃 */
+.books-grid {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    margin-bottom: 60px;
 }
 
-.bestseller-item {
-    display: grid;
-    grid-template-columns: 80px 120px 1fr 200px;
-    gap: 24px;
-    padding: 24px;
-    border: 2px solid #000;
+.book-card {
+    position: relative;
+    cursor: pointer;
     transition: all 0.2s;
+    display: grid;
+    grid-template-columns: 50px 140px 1fr;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    align-items: center;
 }
 
-.bestseller-item:hover {
-    box-shadow: 8px 8px 0 #000;
-    transform: translate(-4px, -4px);
-}
-
-/* 상위 3개 강조 */
-.bestseller-item.rank-1,
-.bestseller-item.rank-2,
-.bestseller-item.rank-3 {
-    border-width: 3px;
+.book-card:hover {
+    border-color: #000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 /* 순위 배지 */
-.rank-badge {
+.book-badge {
+    width: 50px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.rank-number {
-    font-size: 42px;
+    background-color: #000;
+    color: #fff;
     font-weight: 900;
-    line-height: 1;
+    font-size: 20px;
+    border-radius: 8px;
 }
 
-.rank-1 .rank-number {
-    color: #FFD700;
-    text-shadow: 2px 2px 0 #000;
+/* 상위 3개 강조 */
+.book-card:nth-child(1) .book-badge {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: #000;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
 }
 
-.rank-2 .rank-number {
-    color: #C0C0C0;
-    text-shadow: 2px 2px 0 #000;
+.book-card:nth-child(2) .book-badge {
+    background: linear-gradient(135deg, #C0C0C0, #A8A8A8);
+    color: #000;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
 }
 
-.rank-3 .rank-number {
-    color: #CD7F32;
-    text-shadow: 2px 2px 0 #000;
+.book-card:nth-child(3) .book-badge {
+    background: linear-gradient(135deg, #CD7F32, #B8860B);
+    color: #000;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
 }
 
 /* 책 표지 */
 .book-cover {
     position: relative;
+    width: 140px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }
 
 .book-cover img {
-    width: 120px;
-    height: 180px;
-    object-fit: cover;
-    border: 2px solid #000;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-.rank-change {
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 4px 12px;
-    font-size: 12px;
-    font-weight: 700;
-    background-color: #fff;
-    border: 2px solid #000;
-}
-
-.rank-change.up {
-    color: #f00;
-}
-
-.rank-change.down {
-    color: #00f;
-}
-
-.rank-change.new {
-    background-color: #000;
-    color: #fff;
-}
-
-.rank-change.same {
-    color: #666;
+.book-card:hover .book-cover img {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 /* 책 정보 */
 .book-info {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
+.book-category {
+    font-size: 12px;
+    color: #999;
+}
+
 .book-title {
-    font-size: 22px;
-    font-weight: 900;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
     margin-bottom: 4px;
 }
 
 .book-author {
-    font-size: 16px;
+    font-size: 13px;
     color: #666;
 }
 
 .book-publisher {
-    font-size: 14px;
+    font-size: 12px;
     color: #999;
-    margin-bottom: 8px;
 }
 
 .book-rating {
     display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.stars {
-    color: #000;
-    font-size: 16px;
-}
-
-.rating-score {
-    font-weight: 700;
-    font-size: 16px;
-}
-
-.book-description {
-    font-size: 15px;
-    line-height: 1.6;
-    color: #333;
-}
-
-/* 책 액션 */
-.book-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    justify-content: center;
+    gap: 6px;
+    font-size: 13px;
 }
 
 .book-price {
-    font-size: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.price {
     font-weight: 900;
-    text-align: center;
-    margin-bottom: 8px;
-}
-
-.btn-cart,
-.btn-buy {
-    padding: 14px 24px;
-    font-weight: 700;
-    font-size: 15px;
-    transition: all 0.2s;
-}
-
-.btn-cart {
-    background-color: #fff;
+    font-size: 18px;
     color: #000;
-    border: 2px solid #000;
-}
-
-.btn-cart:hover {
-    background-color: #000;
-    color: #fff;
-}
-
-.btn-buy {
-    background-color: #000;
-    color: #fff;
-    border: 2px solid #000;
-}
-
-.btn-buy:hover {
-    opacity: 0.8;
 }
 
 /* 푸터 */
@@ -511,19 +462,9 @@ button {
 
 /* 반응형 */
 @media (max-width: 1024px) {
-    .bestseller-item {
-        grid-template-columns: 60px 100px 1fr;
-    }
-
-    .book-actions {
-        grid-column: 2 / -1;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    .book-price {
-        margin-bottom: 0;
-        margin-right: auto;
+    .books-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 25px 15px;
     }
 
     .footer-content {
@@ -533,56 +474,23 @@ button {
 
 @media (max-width: 768px) {
     .page-title {
-        font-size: 32px;
+        font-size: 28px;
     }
 
     .filter-section {
         flex-direction: column;
-        gap: 16px;
-        align-items: stretch;
+        gap: 12px;
     }
 
-    .period-filter {
+    .period-filter,
+    .category-filter {
         width: 100%;
+        justify-content: center;
     }
 
-    .period-btn {
-        flex: 1;
-    }
-
-    .category-select {
-        width: 100%;
-    }
-
-    .bestseller-item {
-        grid-template-columns: auto 80px 1fr;
-        gap: 16px;
-    }
-
-    .rank-badge {
-        align-items: flex-start;
-        padding-top: 8px;
-    }
-
-    .rank-number {
-        font-size: 32px;
-    }
-
-    .book-cover img {
-        width: 80px;
-        height: 120px;
-    }
-
-    .book-title {
-        font-size: 18px;
-    }
-
-    .book-description {
-        font-size: 14px;
-    }
-
-    .book-actions {
-        grid-column: 1 / -1;
+    .books-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px 12px;
     }
 
     .footer-content {
@@ -596,28 +504,11 @@ button {
     }
 
     .page-title {
-        font-size: 28px;
+        font-size: 24px;
     }
 
-    .bestseller-item {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .rank-badge {
-        justify-content: center;
-    }
-
-    .book-cover {
-        margin: 0 auto;
-    }
-
-    .book-actions {
-        flex-direction: column;
-    }
-
-    .book-price {
-        margin-right: 0;
-        margin-bottom: 12px;
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 10px;
     }
 }
