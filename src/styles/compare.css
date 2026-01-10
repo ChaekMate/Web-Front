@@ -1,0 +1,502 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #000;
+    background-color: #fff;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* 헤더 스타일 (home.css와 동일) */
+.main-header {
+    background-color: #fff;
+    border-bottom: 3px solid #000;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.top-bar {
+    background-color: #000;
+    color: #fff;
+    padding: 8px 0;
+    font-size: 13px;
+}
+
+.top-menu {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.top-menu a {
+    color: #fff;
+    transition: opacity 0.2s;
+}
+
+.top-menu a:hover {
+    opacity: 0.7;
+}
+
+.header-main {
+    padding: 20px 0;
+}
+
+.header-main .container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    flex-shrink: 0;
+}
+
+.logo a {
+    color: #000;
+}
+
+.search-area {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    border: 3px solid #000;
+}
+
+.search-input {
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    font-size: 14px;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.search-btn {
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.search-btn:hover {
+    opacity: 0.8;
+}
+
+.header-icons {
+    display: flex;
+    gap: 24px;
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    transition: opacity 0.2s;
+}
+
+.icon-link:hover {
+    opacity: 0.6;
+}
+
+.icon {
+    font-size: 20px;
+}
+
+.main-nav {
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+    background: #000;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    gap: 0;
+}
+
+.nav-menu li {
+    flex: 1;
+    text-align: center;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 14px;
+    color: #fff;
+    transition: background-color 0.2s;
+}
+
+.nav-menu a.active {
+    background-color: #333;
+}
+
+.nav-menu a:hover {
+    background-color: #333;
+}
+
+/* 컨테이너 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* 메인 */
+.main {
+    padding: 60px 0 80px;
+    min-height: 60vh;
+}
+
+/* 페이지 헤더 */
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-title {
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.page-description {
+    font-size: 15px;
+    color: #666;
+}
+
+/* 로딩/에러 상태 */
+.loading-state,
+.error-state {
+    text-align: center;
+    padding: 100px 20px;
+}
+
+.loading-state p,
+.error-state p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.retry-btn {
+    padding: 12px 32px;
+    background-color: #000;
+    color: #fff;
+    border: 2px solid #000;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.retry-btn:hover {
+    background-color: #fff;
+    color: #000;
+}
+
+/* 비교 요약 */
+.compare-summary {
+    background-color: #f9f9f9;
+    border: 2px solid #000;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.compare-summary h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.summary-item {
+    display: flex;
+    gap: 20px;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.summary-label {
+    font-weight: 600;
+    min-width: 100px;
+}
+
+.summary-value {
+    color: #666;
+}
+
+/* 비교 컨테이너 */
+/* 비교 컨테이너 */
+.compare-table {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* 도서 카드 */
+.book-compare-card {
+    border: 2px solid #000;
+    padding: 24px;
+    background-color: #fff;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.book-compare-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 0 #000;
+}
+
+.book-compare-card.best-price {
+    border-color: #e74c3c;
+    border-width: 3px;
+}
+
+.book-compare-card.best-rating {
+    border-color: #f39c12;
+    border-width: 3px;
+}
+
+/* 뱃지 */
+.card-badges {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    min-height: 28px;
+}
+
+.badge {
+    padding: 4px 12px;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 12px;
+    color: #fff;
+}
+
+.badge-price {
+    background-color: #e74c3c;
+}
+
+.badge-rating {
+    background-color: #f39c12;
+}
+
+/* 책 표지 */
+.card-cover {
+    text-align: center;
+    margin-bottom: 20px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-cover img {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* 책 정보 */
+.card-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.4;
+}
+
+.info-row {
+    display: flex;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+    align-items: center;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    min-width: 70px;
+    color: #666;
+    flex-shrink: 0;
+}
+
+.info-value {
+    flex: 1;
+    color: #000;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    min-width: 0;
+}
+
+.info-value.highlight {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+/* 가격 강조 */
+.card-price {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 2px solid #000;
+    text-align: center;
+}
+
+.price-label {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.price-value {
+    font-size: 28px;
+    font-weight: 900;
+    color: #000;
+}
+
+.price-value.lowest {
+    color: #e74c3c;
+}
+
+/* 평점 */
+.rating-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.stars {
+    color: #f39c12;
+    font-size: 16px;
+}
+
+.rating-number {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* 설명 */
+.card-description {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #f9f9f9;
+    border-left: 3px solid #000;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #666;
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+/* 반응형 */
+@media (max-width: 1024px) {
+    .compare-table {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .compare-table {
+        grid-template-columns: 1fr;
+    }
+    
+    .card-cover {
+        height: 240px;
+    }
+    
+    .price-value {
+        font-size: 24px;
+    }
+}
+
+/* 푸터 */
+.main-footer {
+    background-color: #000;
+    color: #fff;
+    padding: 60px 0 30px;
+    margin-top: 80px;
+    border-top: 2px solid #000;
+}
+
+.footer-top {
+    padding-bottom: 30px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 30px;
+}
+
+.footer-menu {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    font-size: 14px;
+}
+
+.footer-menu a {
+    color: #fff;
+    transition: opacity 0.2s;
+}
+
+.footer-menu a:hover {
+    opacity: 0.7;
+}
+
+.footer-info {
+    text-align: center;
+    color: #999;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+.footer-info p {
+    margin-bottom: 8px;
+}
+
+.footer-info .company-name {
+    color: #fff;
+    font-weight: 700;
+    font-s
