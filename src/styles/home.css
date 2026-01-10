@@ -65,7 +65,7 @@ body {
 }
 
 .logo a {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 900;
     letter-spacing: -1px;
     text-decoration: none;
@@ -80,18 +80,18 @@ body {
 
 .search-input {
     flex: 1;
-    padding: 12px 20px;
+    padding: 10px 16px;
     border: none;
-    font-size: 16px;
+    font-size: 14px;
     outline: none;
 }
 
 .search-btn {
-    padding: 12px 24px;
+    padding: 10px 20px;
     background: #000;
     color: #fff;
     border: none;
-    font-size: 18px;
+    font-size: 16px;
     cursor: pointer;
     transition: opacity 0.3s;
 }
@@ -116,7 +116,7 @@ body {
 }
 
 .icon-link .icon {
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 4px;
 }
 
@@ -137,9 +137,10 @@ body {
 
 .nav-menu li a {
     display: block;
-    padding: 15px 30px;
+    padding: 12px 24px;
     color: #fff;
     text-decoration: none;
+    font-size: 14px;
     font-weight: 600;
     transition: background 0.3s;
 }
@@ -152,31 +153,31 @@ body {
 .main-banner {
     background: #000;
     color: #fff;
-    padding: 80px 0;
+    padding: 60px 0;
     text-align: center;
 }
 
 .banner-content h2 {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 900;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .banner-content p {
-    font-size: 20px;
-    margin-bottom: 30px;
+    font-size: 16px;
+    margin-bottom: 24px;
     opacity: 0.9;
 }
 
 .banner-btn {
     display: inline-block;
-    padding: 15px 40px;
+    padding: 12px 32px;
     background: #fff;
     color: #000;
     text-decoration: none;
     font-weight: 700;
-    font-size: 18px;
-    border: 3px solid #fff;
+    font-size: 15px;
+    border: 2px solid #fff;
     transition: all 0.3s;
 }
 
@@ -187,7 +188,7 @@ body {
 
 /* ==================== Category Section ==================== */
 .category-section {
-    padding: 60px 0;
+    padding: 50px 0;
     border-bottom: 2px solid #000;
 }
 
@@ -201,7 +202,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 30px 20px;
+    padding: 24px 16px;
     border: 2px solid #000;
     text-decoration: none;
     color: #000;
@@ -215,13 +216,13 @@ body {
 }
 
 .category-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
+    font-size: 32px;
+    margin-bottom: 8px;
 }
 
 .category-name {
     font-weight: 600;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 /* ==================== Section Common ==================== */
@@ -229,18 +230,18 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
 
 .section-title {
-    font-size: 32px;
+    font-size: 26px;
     font-weight: 900;
 }
 
 .section-desc {
-    font-size: 16px;
+    font-size: 14px;
     opacity: 0.7;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .more-link {
@@ -262,7 +263,7 @@ body {
 
 .book-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 30px;
 }
 
@@ -271,6 +272,9 @@ body {
     border: 2px solid #000;
     padding: 20px;
     transition: all 0.3s;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-width: 0; /* 그리드 오버플로우 방지 */
 }
 
 .book-item:hover {
@@ -282,52 +286,74 @@ body {
     position: absolute;
     top: -10px;
     left: -10px;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     background: #000;
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 900;
-    font-size: 18px;
+    font-size: 16px;
+    z-index: 1;
 }
 
 .book-cover {
     margin-bottom: 15px;
     text-align: center;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .book-cover img {
-    width: 100%;
-    max-width: 150px;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
 }
 
+.book-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0; /* 오버플로우 방지 */
+}
+
 .book-title {
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
     margin-bottom: 8px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 39px;
+}
+
+.book-author {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 10px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.book-author {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 10px;
-}
-
 .book-price {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
+    margin-top: auto;
 }
 
 .discount {
-    color: #000;
+    color: #ff0000;
     font-weight: 700;
+    font-size: 14px;
 }
 
 .price {
@@ -343,16 +369,19 @@ body {
 
 .recommend-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
 }
 
 .recommend-card {
     background: #fff;
-    border: 3px solid #000;
-    padding: 30px;
+    border: 2px solid #000;
+    padding: 20px;
     position: relative;
     transition: all 0.3s;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-width: 0;
 }
 
 .recommend-card:hover {
@@ -369,28 +398,51 @@ body {
     padding: 8px 16px;
     font-size: 12px;
     font-weight: 700;
+    z-index: 1;
 }
 
 .recommend-card .book-cover {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     text-align: center;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .recommend-card .book-cover img {
-    width: 100%;
-    max-width: 180px;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.recommend-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
 }
 
 .recommend-info h3 {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 700;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 39px;
 }
 
 .recommend-reason {
-    font-size: 14px;
+    font-size: 13px;
     color: #666;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .recommend-btn {
@@ -402,9 +454,112 @@ body {
     font-weight: 700;
     cursor: pointer;
     transition: all 0.3s;
+    margin-top: auto;
 }
 
 .recommend-btn:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* ==================== Curator Recommend Section ==================== */
+.curator-section {
+    padding: 80px 0;
+    background: #fff;
+    border-bottom: 2px solid #000;
+}
+
+.curator-section .recommend-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.curator-section .recommend-card {
+    background: #fff;
+    border: 2px solid #000;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-width: 0;
+}
+
+.curator-section .recommend-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 10px 10px 0 #000;
+}
+
+.curator-section .recommend-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #000;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    z-index: 1;
+}
+
+.curator-section .book-cover {
+    margin-bottom: 15px;
+    text-align: center;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.curator-section .book-cover img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+}
+
+.curator-section .recommend-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
+}
+
+.curator-section .recommend-info h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 39px;
+}
+
+.curator-section .recommend-reason {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.curator-section .recommend-btn {
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    color: #fff;
+    border: 3px solid #000;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: auto;
+}
+
+.curator-section .recommend-btn:hover {
     background: #fff;
     color: #000;
 }
@@ -417,12 +572,12 @@ body {
 
 .event-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
 }
 
 .event-card {
-    border: 3px solid #000;
+    border: 2px solid #000;
     overflow: hidden;
     text-decoration: none;
     color: #000;
@@ -436,7 +591,7 @@ body {
 
 .event-image {
     width: 100%;
-    height: 200px;
+    height: 180px;
     overflow: hidden;
 }
 
@@ -447,13 +602,14 @@ body {
 }
 
 .event-card h3 {
-    padding: 20px;
-    font-size: 20px;
+    padding: 16px 20px;
+    font-size: 17px;
     font-weight: 700;
 }
 
 .event-card p {
-    padding: 0 20px 20px;
+    padding: 0 20px 16px;
+    font-size: 14px;
     color: #666;
 }
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>도서 비교 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/compare.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="/cs.html">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/cart.html" class="icon-link">
+                        <span class="icon">🛒</span>
+                        <span>장바구니</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/new-books.html">신간</a></li>
+                    <li><a href="/ai-recommend.html">AI 추천</a></li>
+                    <li><a href="/compare.html" class="active">도서 비교</a></li>
+                    <li><a href="#ai-discuss">AI 책토론</a></li>
+                    <li><a href="#quote-sns">문장 SNS</a></li>
+                    <li><a href="/event.html">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container">
+            <!-- 페이지 헤더 -->
+            <div class="page-header">
+                <h1 class="page-title">도서 비교</h1>
+                <p class="page-description">여러 도서를 한눈에 비교해보세요</p>
+            </div>
+
+            <!-- 로딩 상태 -->
+            <div class="loading-state" id="loadingState">
+                <p>도서 정보를 불러오는 중...</p>
+            </div>
+
+            <!-- 에러 상태 -->
+            <div class="error-state" id="errorState" style="display: none;">
+                <p>도서 정보를 불러오는데 실패했습니다.</p>
+                <button class="retry-btn" onclick="window.location.reload()">다시 시도</button>
+            </div>
+
+            <!-- 비교 테이블 -->
+            <div class="compare-container" id="compareContainer" style="display: none;">
+                <!-- 비교 요약 -->
+                <div class="compare-summary" id="compareSummary"></div>
+
+                <!-- 비교 테이블 -->
+                <div class="compare-table" id="compareTable"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-menu">
+                    <a href="#company">회사소개</a>
+                    <a href="/terms.html">이용약관</a>
+                    <a href="/privacy.html"><strong>개인정보처리방침</strong></a>
+                    <a href="/youth-protection.html">청소년보호정책</a>
+                </div>
+            </div>
+            <div class="footer-info">
+                <p class="company-name">ChaekMate (주)책메이트</p>
+                <p>대표이사: 김현우 | 사업자등록번호: 123-45-67890</p>
+                <p>주소: 서울특별시 강남구 테헤란로 123</p>
+                <p>통신판매업신고: 2025-서울강남-00000</p>
+                <p>이메일: contact@chaekmate.com | 고객센터: 1544-0000</p>
+            </div>
+            <div class="footer-bottom">
+                <p>COPYRIGHT © ChaekMate Inc. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/src/scripts/compare.js"></script>
+</body>
+</html>
