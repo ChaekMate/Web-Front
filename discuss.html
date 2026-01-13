@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 책토론 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/discuss.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="/cs.html">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/cart.html" class="icon-link">
+                        <span class="icon">🛒</span>
+                        <span>장바구니</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/new-books.html">신간</a></li>
+                    <li><a href="/ai-recommend.html">AI 추천</a></li>
+                    <li><a href="/compare.html">도서 비교</a></li>
+                    <li><a href="/discuss.html" class="active">AI 책토론</a></li>
+                    <li><a href="#quote-sns">문장 SNS</a></li>
+                    <li><a href="/event.html">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container-fluid">
+            <div class="discuss-container">
+                <!-- 좌측: 도서 정보 -->
+                <aside class="book-sidebar">
+                    <div class="book-info-card">
+                        <div class="book-cover">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='280'%3E%3Crect fill='%23ddd' width='200' height='280'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='14'%3E책 표지%3C/text%3E%3C/svg%3E" alt="책 표지" id="bookCover">
+                        </div>
+                        
+                        <div class="book-details">
+                            <h2 class="book-title" id="bookTitle">트렌드 코리아 2026</h2>
+                            <p class="book-author" id="bookAuthor">김난도 외 9명</p>
+                            <p class="book-publisher" id="bookPublisher">미래의창</p>
+                            
+                            <div class="book-meta">
+                                <div class="meta-item">
+                                    <span class="meta-label">가격</span>
+                                    <span class="meta-value" id="bookPrice">18,000원</span>
+                                </div>
+                                <div class="meta-item">
+                                    <span class="meta-label">평점</span>
+                                    <span class="meta-value">
+                                        <span class="stars">★★★★☆</span>
+                                        <span id="bookRating">4.5</span>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="book-description" id="bookDescription">
+                                2026년 대한민국을 이끌어갈 10가지 소비트렌드를 전망하는 책입니다.
+                            </div>
+                            
+                            <div class="book-actions">
+                                <button class="action-btn primary">상세보기</button>
+                                <button class="action-btn secondary">장바구니</button>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- 우측: 채팅 인터페이스 -->
+                <section class="chat-section">
+                    <div class="chat-header">
+                        <h1 class="chat-title">💬 AI와 책 토론하기</h1>
+                        <p class="chat-subtitle">이 책에 대해 궁금한 점을 물어보세요</p>
+                    </div>
+
+                    <div class="chat-messages" id="chatMessages">
+                        <!-- 초기 메시지 -->
+                        <div class="message ai-message">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <div class="message-text">
+                                    안녕하세요! 이 책에 대해 무엇이든 물어보세요. 
+                                    책의 내용, 저자의 의도, 핵심 메시지 등 다양한 주제로 토론할 수 있습니다.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 추천 질문 -->
+                        <div class="suggested-questions">
+                            <p class="suggested-title">💡 이런 질문은 어때요?</p>
+                            <button class="question-btn">이 책의 핵심 메시지는 무엇인가요?</button>
+                            <button class="question-btn">저자가 가장 강조하는 트렌드는?</button>
+                            <button class="question-btn">2026년 소비 트렌드 요약해주세요</button>
+                            <button class="question-btn">이 책을 누구에게 추천하나요?</button>
+                        </div>
+                    </div>
+
+                    <div class="chat-input-container">
+                        <div class="chat-input-wrapper">
+                            <textarea 
+                                class="chat-input" 
+                                id="chatInput" 
+                                placeholder="메시지를 입력하세요..."
+                                rows="1"></textarea>
+                            <button class="send-btn" id="sendBtn">
+                                <span class="send-icon">➤</span>
+                            </button>
+                        </div>
+                        <p class="chat-notice">AI가 생성한 답변이므로 부정확할 수 있습니다</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-menu">
+                    <a href="#company">회사소개</a>
+                    <a href="/terms.html">이용약관</a>
+                    <a href="/privacy.html"><strong>개인정보처리방침</strong></a>
+                    <a href="/youth-protection.html">청소년보호정책</a>
+                </div>
+            </div>
+
+            <div class="footer-info">
+                <p class="company-name">ChaekMate (주)책메이트</p>
+                <p>대표이사: 김현우 | 사업자등록번호: 123-45-67890</p>
+                <p>주소: 서울특별시 강남구 테헤란로 123</p>
+                <p>통신판매업신고: 2025-서울강남-00000</p>
+                <p>이메일: contact@chaekmate.com | 고객센터: 1544-0000</p>
+            </div>
+
+            <div class="footer-bottom">
+                <p>COPYRIGHT © ChaekMate Inc. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/src/scripts/discuss.js"></script>
+</body>
+</html>
