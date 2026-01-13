@@ -1,26 +1,16 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 console.log('🎨 ChaekMate Theme Recommend 로드 완료!');
-
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
-
-interface Book {
-    id: number;
-    title: string;
-    author: string;
-    publisher: string;
-    cover_image: string;
-    price: number;
-    rating: number;
-    theme: string;
-}
-
-interface ApiResponse {
-    success: boolean;
-    data: Book[];
-    total?: number;
-}
-
 // 테마 데이터
-const themes: Record<string, { icon: string; title: string; description: string }> = {
+const themes = {
     work: {
         icon: '💼',
         title: '일과 성장',
@@ -42,102 +32,93 @@ const themes: Record<string, { icon: string; title: string; description: string 
         description: '습관 형성, 동기부여, 목표 설정에 관한 실용적인 가이드입니다. 새로운 시작을 준비하고 계획을 실행하는 데 도움이 되는 책들입니다.'
     }
 };
-
 let currentTheme = 'work';
-
 // ==================== 검색 기능 ====================
-function initSearch(): void {
+function initSearch() {
     const searchBtn = document.getElementById('searchBtn');
-    const searchInput = document.getElementById('searchInput') as HTMLInputElement;
-
-    const handleSearch = (): void => {
-        const keyword = searchInput?.value.trim();
+    const searchInput = document.getElementById('searchInput');
+    const handleSearch = () => {
+        const keyword = searchInput === null || searchInput === void 0 ? void 0 : searchInput.value.trim();
         if (keyword) {
             window.location.href = `/search.html?q=${encodeURIComponent(keyword)}`;
         }
     };
-
-    searchBtn?.addEventListener('click', handleSearch);
-
-    searchInput?.addEventListener('keypress', (e: KeyboardEvent) => {
+    searchBtn === null || searchBtn === void 0 ? void 0 : searchBtn.addEventListener('click', handleSearch);
+    searchInput === null || searchInput === void 0 ? void 0 : searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             handleSearch();
         }
     });
-
     console.log('✅ 검색 기능 초기화 완료');
 }
-
 // ==================== URL 파라미터로 테마 로드 ====================
-function getThemeFromUrl(): string {
+function getThemeFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     const theme = urlParams.get('theme') || 'work';
-    
     // 허용된 테마만 반환
     if (['work', 'healing', 'growth', 'goals'].includes(theme)) {
         return theme;
     }
     return 'work';
 }
-
 // ==================== 테마 정보 업데이트 ====================
-function updateThemeInfo(theme: string): void {
+function updateThemeInfo(theme) {
     const themeData = themes[theme] || themes.work;
-
     const themeIcon = document.getElementById('themeIcon');
     const themeTitle = document.getElementById('themeTitle');
     const themeDescription = document.getElementById('themeDescription');
     const breadcrumbTheme = document.getElementById('breadcrumbTheme');
-
-    if (themeIcon) themeIcon.textContent = themeData.icon;
-    if (themeTitle) themeTitle.textContent = themeData.title;
-    if (themeDescription) themeDescription.textContent = themeData.description;
-    if (breadcrumbTheme) breadcrumbTheme.textContent = themeData.title;
-
+    if (themeIcon)
+        themeIcon.textContent = themeData.icon;
+    if (themeTitle)
+        themeTitle.textContent = themeData.title;
+    if (themeDescription)
+        themeDescription.textContent = themeData.description;
+    if (breadcrumbTheme)
+        breadcrumbTheme.textContent = themeData.title;
     // 네비게이션 활성화
     const navItems = document.querySelectorAll('.theme-nav-item');
     navItems.forEach(item => {
         const itemTheme = item.getAttribute('data-theme');
         if (itemTheme === theme) {
             item.classList.add('active');
-        } else {
+        }
+        else {
             item.classList.remove('active');
         }
     });
-
     console.log('✅ 테마 정보 업데이트:', theme);
 }
-
 // ==================== 테마별 도서 API 호출 ====================
-async function loadThemeBooks(theme: string): Promise<void> {
-    console.log('테마별 도서 로딩:', theme);
-    
-    try {
-        const response = await fetch(`${API_BASE_URL}/books/theme/${theme}?limit=20`);
-        const data: ApiResponse = await response.json();
-        
-        if (data.success && data.data) {
-            renderBooks(data.data);
-            updateBookCount(data.data.length);
-        } else {
+function loadThemeBooks(theme) {
+    return __awaiter(this, void 0, void 0, function* () {
+        console.log('테마별 도서 로딩:', theme);
+        try {
+            const response = yield fetch(`${API_BASE_URL}/books/theme/${theme}?limit=20`);
+            const data = yield response.json();
+            if (data.success && data.data) {
+                renderBooks(data.data);
+                updateBookCount(data.data.length);
+            }
+            else {
+                showEmptyState();
+            }
+        }
+        catch (error) {
+            console.error('테마별 도서 로드 에러:', error);
             showEmptyState();
         }
-    } catch (error) {
-        console.error('테마별 도서 로드 에러:', error);
-        showEmptyState();
-    }
+    });
 }
-
 // ==================== 도서 렌더링 ====================
-function renderBooks(books: Book[]): void {
+function renderBooks(books) {
     const booksGrid = document.getElementById('booksGrid');
-    if (!booksGrid) return;
-
+    if (!booksGrid)
+        return;
     if (books.length === 0) {
         showEmptyState();
         return;
     }
-
     const html = books.map(book => `
         <div class="book-card" data-book-id="${book.id}">
             <div class="book-cover">
@@ -153,39 +134,32 @@ function renderBooks(books: Book[]): void {
             </div>
         </div>
     `).join('');
-
     booksGrid.innerHTML = html;
     initBookClick();
-
     console.log('✅ 도서 렌더링 완료:', books.length);
 }
-
 // ==================== 빈 상태 표시 ====================
-function showEmptyState(): void {
+function showEmptyState() {
     const booksGrid = document.getElementById('booksGrid');
-    if (!booksGrid) return;
-
+    if (!booksGrid)
+        return;
     booksGrid.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 100px 20px;">
             <p style="font-size: 18px; color: #666;">해당 테마의 도서가 없습니다.</p>
         </div>
     `;
-
     updateBookCount(0);
 }
-
 // ==================== 도서 수 업데이트 ====================
-function updateBookCount(count: number): void {
+function updateBookCount(count) {
     const bookCountElement = document.getElementById('bookCount');
     if (bookCountElement) {
         bookCountElement.textContent = count.toString();
     }
 }
-
 // ==================== 책 클릭 이벤트 ====================
-function initBookClick(): void {
+function initBookClick() {
     const bookCards = document.querySelectorAll('.book-card');
-
     bookCards.forEach(card => {
         card.addEventListener('click', () => {
             const bookId = card.getAttribute('data-book-id');
@@ -194,62 +168,48 @@ function initBookClick(): void {
             }
         });
     });
-
     console.log('✅ 책 클릭 이벤트 초기화 완료');
 }
-
 // ==================== 테마 네비게이션 ====================
-function initThemeNav(): void {
+function initThemeNav() {
     const navItems = document.querySelectorAll('.theme-nav-item');
-
     navItems.forEach(item => {
-        item.addEventListener('click', (e: Event) => {
+        item.addEventListener('click', (e) => {
             e.preventDefault();
-
             const theme = item.getAttribute('data-theme');
             if (theme && ['work', 'healing', 'growth', 'goals'].includes(theme)) {
                 window.location.href = `?theme=${theme}`;
             }
         });
     });
-
     console.log('✅ 테마 네비게이션 초기화 완료');
 }
-
 // ==================== 정렬 기능 (미구현) ====================
-function initSort(): void {
-    const sortSelect = document.getElementById('sortSelect') as HTMLSelectElement;
-
-    sortSelect?.addEventListener('change', () => {
+function initSort() {
+    const sortSelect = document.getElementById('sortSelect');
+    sortSelect === null || sortSelect === void 0 ? void 0 : sortSelect.addEventListener('change', () => {
         const sortValue = sortSelect.value;
         console.log('정렬:', sortValue);
-
         // TODO: 정렬 기능 구현 (추후)
     });
-
     console.log('✅ 정렬 기능 초기화 완료');
 }
-
 // ==================== 메인 초기화 ====================
-function initThemeRecommend(): void {
+function initThemeRecommend() {
     console.log('🎬 ChaekMate Theme Recommend 초기화 시작...');
-
     currentTheme = getThemeFromUrl();
-    
     initSearch();
     updateThemeInfo(currentTheme);
     initThemeNav();
     initSort();
     loadThemeBooks(currentTheme);
-
     console.log('✨ ChaekMate Theme Recommend 초기화 완료!');
 }
-
 // DOMContentLoaded 이벤트에서 초기화
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initThemeRecommend);
-} else {
+}
+else {
     initThemeRecommend();
 }
-
 export { initThemeRecommend };
