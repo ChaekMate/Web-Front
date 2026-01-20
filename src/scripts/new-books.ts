@@ -1,4 +1,4 @@
-export {};
+export { };
 console.log('📚 ChaekMate New Books 로드 완료!');
 
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
@@ -12,6 +12,8 @@ interface Book {
     cover_image: string;
     rating: number;
     category: string;
+    published_date?: string;
+    page_count?: number;
 }
 
 interface NewBooksResponse {
@@ -26,16 +28,16 @@ const ITEMS_PER_PAGE = 20;
 // API 호출: 신간 도서 조회
 async function loadNewBooks(): Promise<void> {
     console.log(`신간 도서 로드: 페이지 ${currentPage}`);
-    
+
     showLoading();
-    
+
     try {
         const offset = (currentPage - 1) * ITEMS_PER_PAGE;
         const response = await fetch(`${API_BASE_URL}/books/new?limit=${ITEMS_PER_PAGE}&offset=${offset}`);
         const data: NewBooksResponse = await response.json();
-        
+
         hideLoading();
-        
+
         if (data.success && data.data.length > 0) {
             renderBooks(data.data);
             renderPagination(data.total);
@@ -53,7 +55,7 @@ async function loadNewBooks(): Promise<void> {
 function renderBooks(books: Book[]): void {
     const booksGrid = document.getElementById('booksGrid');
     if (!booksGrid) return;
-    
+
     const html = books.map(book => `
         <div class="book-card" data-book-id="${book.id}">
             <div class="book-badge new">NEW</div>
@@ -77,12 +79,12 @@ function renderBooks(books: Book[]): void {
             </div>
         </div>
     `).join('');
-    
+
     booksGrid.innerHTML = html;
-    
+
     // 책 클릭 이벤트 다시 등록
     initBookClick();
-    
+
     console.log('✅ 신간 도서 렌더링 완료:', books.length);
 }
 
@@ -98,24 +100,24 @@ function renderPagination(total: number): void {
     const totalPages = Math.ceil(total / ITEMS_PER_PAGE);
     const pagination = document.querySelector('.pagination');
     if (!pagination) return;
-    
+
     let html = `<button class="page-btn prev" ${currentPage === 1 ? 'disabled' : ''}>이전</button>`;
-    
+
     // 페이지 번호 (최대 5개)
     const startPage = Math.max(1, currentPage - 2);
     const endPage = Math.min(totalPages, startPage + 4);
-    
+
     for (let i = startPage; i <= endPage; i++) {
         html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
     }
-    
+
     html += `<button class="page-btn next" ${currentPage === totalPages ? 'disabled' : ''}>다음</button>`;
-    
+
     pagination.innerHTML = html;
-    
+
     // 페이지네이션 이벤트 다시 등록
     initPagination();
-    
+
     console.log('✅ 페이지네이션 렌더링 완료');
 }
 
@@ -163,7 +165,7 @@ function initSearch(): void {
 // 필터 기능 (현재는 동작 안 함 - 백엔드 API 필요)
 function initFilters(): void {
     const filterBtns = document.querySelectorAll('.filter-btn');
-    
+
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
@@ -178,7 +180,7 @@ function initFilters(): void {
 // 책 클릭 이벤트
 function initBookClick(): void {
     const bookCards = document.querySelectorAll('.book-card');
-    
+
     bookCards.forEach(card => {
         card.addEventListener('click', () => {
             const bookId = card.getAttribute('data-book-id');
@@ -194,7 +196,7 @@ function initBookClick(): void {
 // 페이지네이션
 function initPagination(): void {
     const pageBtns = document.querySelectorAll('.page-btn');
-    
+
     pageBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             if (btn.classList.contains('prev')) {
@@ -224,11 +226,11 @@ function initPagination(): void {
 // 메인 초기화
 function initNewBooks(): void {
     console.log('🎬 ChaekMate New Books 초기화 시작...');
-    
+
     initSearch();
     initFilters();
     loadNewBooks();
-    
+
     console.log('✨ ChaekMate New Books 초기화 완료!');
 }
 

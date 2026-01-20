@@ -1,41 +1,29 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-// export {};
 console.log('📚 ChaekMate New Books 로드 완료!');
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
 let currentPage = 1;
 const ITEMS_PER_PAGE = 20;
 // API 호출: 신간 도서 조회
-function loadNewBooks() {
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log(`신간 도서 로드: 페이지 ${currentPage}`);
-        showLoading();
-        try {
-            const offset = (currentPage - 1) * ITEMS_PER_PAGE;
-            const response = yield fetch(`${API_BASE_URL}/books/new?limit=${ITEMS_PER_PAGE}&offset=${offset}`);
-            const data = yield response.json();
-            hideLoading();
-            if (data.success && data.data.length > 0) {
-                renderBooks(data.data);
-                renderPagination(data.total);
-            }
-            else {
-                showEmptyState();
-            }
+async function loadNewBooks() {
+    console.log(`신간 도서 로드: 페이지 ${currentPage}`);
+    showLoading();
+    try {
+        const offset = (currentPage - 1) * ITEMS_PER_PAGE;
+        const response = await fetch(`${API_BASE_URL}/books/new?limit=${ITEMS_PER_PAGE}&offset=${offset}`);
+        const data = await response.json();
+        hideLoading();
+        if (data.success && data.data.length > 0) {
+            renderBooks(data.data);
+            renderPagination(data.total);
         }
-        catch (error) {
-            console.error('신간 도서 로드 에러:', error);
-            hideLoading();
+        else {
             showEmptyState();
         }
-    });
+    }
+    catch (error) {
+        console.error('신간 도서 로드 에러:', error);
+        hideLoading();
+        showEmptyState();
+    }
 }
 // 도서 렌더링
 function renderBooks(books) {
@@ -46,7 +34,9 @@ function renderBooks(books) {
         <div class="book-card" data-book-id="${book.id}">
             <div class="book-badge new">NEW</div>
             <div class="book-cover">
-                <img src="${book.cover_image}" alt="${book.title}">
+                <img src="${book.cover_image}" 
+                     alt="${book.title}"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'200\\' height=\\'280\\'%3E%3Crect fill=\\'%23ddd\\' width=\\'200\\' height=\\'280\\'/%3E%3Ctext x=\\'50%25\\' y=\\'50%25\\' text-anchor=\\'middle\\' dy=\\'.3em\\' fill=\\'%23999\\' font-size=\\'16\\'%3E이미지 없음%3C/text%3E%3C/svg%3E'">
             </div>
             <div class="book-info">
                 <p class="book-category">${book.category || '도서'}</p>
@@ -196,3 +186,4 @@ if (document.readyState === 'loading') {
 else {
     initNewBooks();
 }
+export {};

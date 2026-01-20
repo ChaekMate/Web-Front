@@ -1,38 +1,27 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 console.log('📚 ChaekMate Bestseller 로드 완료!');
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
 let currentPage = 1;
 const ITEMS_PER_PAGE = 20;
 // API 호출: 베스트셀러 조회
-function loadBestsellers() {
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log(`베스트셀러 로드: 페이지 ${currentPage}`);
-        showLoading();
-        try {
-            const response = yield fetch(`${API_BASE_URL}/books/popular?limit=${ITEMS_PER_PAGE}`);
-            const data = yield response.json();
-            hideLoading();
-            if (data.success && data.data.length > 0) {
-                renderBooks(data.data);
-            }
-            else {
-                showEmptyState();
-            }
+async function loadBestsellers() {
+    console.log(`베스트셀러 로드: 페이지 ${currentPage}`);
+    showLoading();
+    try {
+        const response = await fetch(`${API_BASE_URL}/books/popular?limit=${ITEMS_PER_PAGE}`);
+        const data = await response.json();
+        hideLoading();
+        if (data.success && data.data.length > 0) {
+            renderBooks(data.data);
         }
-        catch (error) {
-            console.error('베스트셀러 로드 에러:', error);
-            hideLoading();
+        else {
             showEmptyState();
         }
-    });
+    }
+    catch (error) {
+        console.error('베스트셀러 로드 에러:', error);
+        hideLoading();
+        showEmptyState();
+    }
 }
 // 도서 렌더링
 function renderBooks(books) {
@@ -145,3 +134,4 @@ if (document.readyState === 'loading') {
 else {
     initBestseller();
 }
+export {};

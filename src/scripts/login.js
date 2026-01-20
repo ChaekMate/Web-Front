@@ -1,25 +1,16 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 console.log('🔐 ChaekMate Login 로드 완료!');
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
 // 로그인 API 호출
-const login = (email, password) => __awaiter(this, void 0, void 0, function* () {
+const login = async (email, password) => {
     try {
-        const response = yield fetch(`${API_BASE_URL}/auth/login`, {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ email, password })
         });
-        const data = yield response.json();
+        const data = await response.json();
         if (!response.ok) {
             throw new Error(data.detail || '로그인에 실패했습니다.');
         }
@@ -28,7 +19,7 @@ const login = (email, password) => __awaiter(this, void 0, void 0, function* () 
     catch (error) {
         throw error;
     }
-});
+};
 // 로그인 폼 처리
 const initLoginForm = () => {
     const loginForm = document.getElementById('loginForm');
@@ -36,7 +27,7 @@ const initLoginForm = () => {
         console.error('loginForm을 찾을 수 없습니다.');
         return;
     }
-    loginForm.addEventListener('submit', (e) => __awaiter(this, void 0, void 0, function* () {
+    loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const emailInput = document.getElementById('email');
         const passwordInput = document.getElementById('password');
@@ -48,7 +39,7 @@ const initLoginForm = () => {
         }
         console.log('로그인 시도:', email);
         try {
-            const data = yield login(email, password);
+            const data = await login(email, password);
             console.log('✅ 로그인 성공:', data);
             // 토큰 저장
             if (data.access_token) {
@@ -65,7 +56,7 @@ const initLoginForm = () => {
             console.error('❌ 로그인 실패:', error);
             alert(error.message || '로그인 중 오류가 발생했습니다.');
         }
-    }));
+    });
     console.log('✅ 로그인 폼 초기화 완료');
 };
 // 소셜 로그인 버튼 처리

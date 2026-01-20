@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 console.log('🎨 ChaekMate Theme Recommend 로드 완료!');
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
 // 테마 데이터
@@ -90,25 +81,23 @@ function updateThemeInfo(theme) {
     console.log('✅ 테마 정보 업데이트:', theme);
 }
 // ==================== 테마별 도서 API 호출 ====================
-function loadThemeBooks(theme) {
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log('테마별 도서 로딩:', theme);
-        try {
-            const response = yield fetch(`${API_BASE_URL}/books/theme/${theme}?limit=20`);
-            const data = yield response.json();
-            if (data.success && data.data) {
-                renderBooks(data.data);
-                updateBookCount(data.data.length);
-            }
-            else {
-                showEmptyState();
-            }
+async function loadThemeBooks(theme) {
+    console.log('테마별 도서 로딩:', theme);
+    try {
+        const response = await fetch(`${API_BASE_URL}/books/theme/${theme}?limit=20`);
+        const data = await response.json();
+        if (data.success && data.data) {
+            renderBooks(data.data);
+            updateBookCount(data.data.length);
         }
-        catch (error) {
-            console.error('테마별 도서 로드 에러:', error);
+        else {
             showEmptyState();
         }
-    });
+    }
+    catch (error) {
+        console.error('테마별 도서 로드 에러:', error);
+        showEmptyState();
+    }
 }
 // ==================== 도서 렌더링 ====================
 function renderBooks(books) {

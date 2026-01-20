@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 console.log('🔍 ChaekMate Search 로드 완료!');
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
 let currentKeyword = '';
@@ -32,28 +23,26 @@ function getSearchParams() {
     }
 }
 // 검색 API 호출
-function performSearch() {
-    return __awaiter(this, void 0, void 0, function* () {
-        console.log(`검색 실행: "${currentKeyword}"`);
-        showLoadingAnimation();
-        try {
-            const offset = (currentPage - 1) * 10;
-            const response = yield fetch(`${API_BASE_URL}/books/search?q=${encodeURIComponent(currentKeyword)}&limit=10&offset=${offset}`);
-            const data = yield response.json();
-            hideLoadingAnimation();
-            if (data.success && data.data.length > 0) {
-                renderSearchResults(data.data, data.total);
-            }
-            else {
-                showNoResults();
-            }
+async function performSearch() {
+    console.log(`검색 실행: "${currentKeyword}"`);
+    showLoadingAnimation();
+    try {
+        const offset = (currentPage - 1) * 10;
+        const response = await fetch(`${API_BASE_URL}/books/search?q=${encodeURIComponent(currentKeyword)}&limit=10&offset=${offset}`);
+        const data = await response.json();
+        hideLoadingAnimation();
+        if (data.success && data.data.length > 0) {
+            renderSearchResults(data.data, data.total);
         }
-        catch (error) {
-            console.error('검색 에러:', error);
-            hideLoadingAnimation();
+        else {
             showNoResults();
         }
-    });
+    }
+    catch (error) {
+        console.error('검색 에러:', error);
+        hideLoadingAnimation();
+        showNoResults();
+    }
 }
 // 검색 결과 렌더링
 function renderSearchResults(books, total) {

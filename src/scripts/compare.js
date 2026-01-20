@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 console.log('📊 ChaekMate Compare 로드 완료!');
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
 // URL 파라미터에서 도서 ID 추출
@@ -19,56 +10,54 @@ function getBookIdsFromUrl() {
     return idsParam.split(',').map(id => parseInt(id.trim())).filter(id => !isNaN(id));
 }
 // 도서 비교 API 호출
-function compareBooks(bookIds) {
-    return __awaiter(this, void 0, void 0, function* () {
-        var _a, _b;
-        const loadingState = document.getElementById('loadingState');
-        const errorState = document.getElementById('errorState');
-        const compareContainer = document.getElementById('compareContainer');
-        if (!loadingState || !errorState || !compareContainer)
-            return;
-        // 검증
-        if (bookIds.length < 2) {
-            showError('최소 2권 이상의 도서가 필요합니다.');
-            return;
+async function compareBooks(bookIds) {
+    var _a, _b;
+    const loadingState = document.getElementById('loadingState');
+    const errorState = document.getElementById('errorState');
+    const compareContainer = document.getElementById('compareContainer');
+    if (!loadingState || !errorState || !compareContainer)
+        return;
+    // 검증
+    if (bookIds.length < 2) {
+        showError('최소 2권 이상의 도서가 필요합니다.');
+        return;
+    }
+    if (bookIds.length > 3) {
+        showError('최대 3권까지 비교할 수 있습니다.');
+        return;
+    }
+    try {
+        loadingState.style.display = 'block';
+        errorState.style.display = 'none';
+        compareContainer.style.display = 'none';
+        const response = await fetch(`${API_BASE_URL}/books/compare`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                book_ids: bookIds
+            })
+        });
+        const data = await response.json();
+        console.log('API 응답:', data); // 디버깅용
+        if (!response.ok) {
+            throw new Error('도서 비교에 실패했습니다.');
         }
-        if (bookIds.length > 3) {
-            showError('최대 3권까지 비교할 수 있습니다.');
-            return;
+        // 응답 구조 확인
+        const books = ((_a = data.data) === null || _a === void 0 ? void 0 : _a.books) || data.books;
+        const summary = ((_b = data.data) === null || _b === void 0 ? void 0 : _b.comparison_summary) || data.comparison_summary;
+        if (!books || !summary) {
+            throw new Error('응답 데이터가 올바르지 않습니다.');
         }
-        try {
-            loadingState.style.display = 'block';
-            errorState.style.display = 'none';
-            compareContainer.style.display = 'none';
-            const response = yield fetch(`${API_BASE_URL}/books/compare`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    book_ids: bookIds
-                })
-            });
-            const data = yield response.json();
-            console.log('API 응답:', data); // 디버깅용
-            if (!response.ok) {
-                throw new Error('도서 비교에 실패했습니다.');
-            }
-            // 응답 구조 확인
-            const books = ((_a = data.data) === null || _a === void 0 ? void 0 : _a.books) || data.books;
-            const summary = ((_b = data.data) === null || _b === void 0 ? void 0 : _b.comparison_summary) || data.comparison_summary;
-            if (!books || !summary) {
-                throw new Error('응답 데이터가 올바르지 않습니다.');
-            }
-            loadingState.style.display = 'none';
-            compareContainer.style.display = 'block';
-            renderComparison(books, summary);
-        }
-        catch (error) {
-            console.error('도서 비교 에러:', error);
-            showError('도서 정보를 불러오는데 실패했습니다.');
-        }
-    });
+        loadingState.style.display = 'none';
+        compareContainer.style.display = 'block';
+        renderComparison(books, summary);
+    }
+    catch (error) {
+        console.error('도서 비교 에러:', error);
+        showError('도서 정보를 불러오는데 실패했습니다.');
+    }
 }
 // 에러 표시
 function showError(message) {
