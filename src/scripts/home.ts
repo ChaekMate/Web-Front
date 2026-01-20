@@ -28,8 +28,8 @@ const fetchBooks = async (endpoint: string): Promise<Book[]> => {
   }
 };
 
-// 기존 HTML 구조 그대로 사용
-const renderBooks = (books: Book[], containerSelector: string): void => {
+// 베스트셀러용 렌더링
+const renderBestsellers = (books: Book[], containerSelector: string): void => {
   const container = document.querySelector(containerSelector);
   if (!container) {
     console.log('Container not found:', containerSelector);
@@ -37,7 +37,7 @@ const renderBooks = (books: Book[], containerSelector: string): void => {
   }
 
   const html = books.map((book, index) => `
-    <div class="book-item">
+    <div class="book-item" onclick="location.href='/book-detail.html?id=${book.id}'" style="cursor: pointer;">
       <div class="book-rank">${index + 1}</div>
       <div class="book-cover">
         <img src="${book.cover_image}" alt="${book.title}">
@@ -53,18 +53,49 @@ const renderBooks = (books: Book[], containerSelector: string): void => {
   `).join('');
 
   container.innerHTML = html;
-  console.log('Rendered', books.length, 'books in', containerSelector);
+  console.log('Rendered', books.length, 'bestsellers');
+};
+
+// 큐레이터 추천용 렌더링
+const renderCuratorPicks = (books: Book[], containerSelector: string): void => {
+  const container = document.querySelector(containerSelector);
+  if (!container) {
+    console.log('Container not found:', containerSelector);
+    return;
+  }
+
+  const html = books.map(book => `
+    <div class="recommend-card" data-book-id="${book.id}" onclick="location.href='/book-detail.html?id=${book.id}'" style="cursor: pointer;">
+      <div class="book-cover">
+        <img src="${book.cover_image}" alt="${book.title}">
+      </div>
+      <div class="recommend-info">
+        <h3>${book.title}</h3>
+        <p class="recommend-author">${book.author}</p>
+        <p class="recommend-price">${book.price.toLocaleString()}원</p>
+      </div>
+    </div>
+  `).join('');
+
+  container.innerHTML = html;
+  console.log('Rendered', books.length, 'curator picks');
 };
 
 const loadAllBooks = async (): Promise<void> => {
   console.log('Loading all books...');
 
-  const popular = await fetchBooks('/books/popular?limit=10');
+  // 베스트셀러 5권, 큐레이터 추천 5권
+  const popular = await fetchBooks('/books/popular?limit=5');
+  const curatorPicks = await fetchBooks('/books/curator-picks?limit=5');
 
   console.log('Popular:', popular.length);
+  console.log('Curator Picks:', curatorPicks.length);
 
-  // 베스트셀러 섹션만 업데이트
-  renderBooks(popular, '.bestseller-section .book-list');
+  // 베스트셀러 섹션 업데이트
+  renderBestsellers(popular, '.bestseller-section .book-list');
+
+  // 큐레이터 추천 섹션 업데이트
+  renderCuratorPicks(curatorPicks, '.curator-section .recommend-grid');
 };
 
 document.addEventListener('DOMContentLoaded', () => {

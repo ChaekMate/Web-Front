@@ -9,6 +9,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 console.log('📖 ChaekMate Book Detail 로드 완료!');
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
+// ✨ 전역 변수로 현재 도서 정보 저장
+let currentBook = null;
 // URL에서 책 ID 가져오기
 function getBookIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
@@ -44,6 +46,7 @@ function loadBookData() {
 }
 // 책 데이터 렌더링
 function renderBookData(book) {
+    currentBook = book;
     // 로딩 숨기기, 메인 섹션 표시
     const loadingState = document.getElementById('loadingState');
     const bookMainSection = document.getElementById('bookMainSection');
@@ -72,10 +75,7 @@ function renderBookData(book) {
         publisher.textContent = book.publisher;
     const publishDate = document.getElementById('publishDate');
     if (publishDate)
-        publishDate.textContent = book.publish_date;
-    const pageCount = document.getElementById('pageCount');
-    if (pageCount)
-        pageCount.textContent = `${book.page_count}쪽`;
+        publishDate.textContent = book.published_date;
     const isbn = document.getElementById('isbn');
     if (isbn)
         isbn.textContent = book.isbn;
@@ -89,18 +89,16 @@ function renderBookData(book) {
         const emptyStars = 5 - fullStars;
         ratingStars.textContent = '★'.repeat(fullStars) + '☆'.repeat(emptyStars);
     }
-    // 가격
+    // 가격 (정가만 표시)
     const finalPrice = document.getElementById('finalPrice');
     if (finalPrice)
         finalPrice.textContent = `${book.price.toLocaleString()}원`;
-    const originalPrice = document.getElementById('originalPrice');
-    if (originalPrice)
-        originalPrice.textContent = `${book.price.toLocaleString()}원`;
     // 설명
     const bookDescription = document.getElementById('bookDescription');
     if (bookDescription) {
-        bookDescription.innerHTML = book.description
-            ? `<p>${book.description}</p>`
+        const description = book.description || '';
+        bookDescription.innerHTML = description
+            ? `<p>${description}</p>`
             : '<p>도서 설명이 없습니다.</p>';
     }
     // 페이지 타이틀
@@ -150,53 +148,158 @@ function initWishlist() {
     });
     console.log('✅ 위시리스트 초기화 완료');
 }
-// 수량 조절
-function initQuantity() {
-    const minusBtn = document.querySelector('.qty-btn.minus');
-    const plusBtn = document.querySelector('.qty-btn.plus');
-    const qtyInput = document.getElementById('quantity');
-    minusBtn === null || minusBtn === void 0 ? void 0 : minusBtn.addEventListener('click', () => {
-        const currentValue = parseInt(qtyInput.value);
-        if (currentValue > 1) {
-            qtyInput.value = (currentValue - 1).toString();
-        }
-    });
-    plusBtn === null || plusBtn === void 0 ? void 0 : plusBtn.addEventListener('click', () => {
-        const currentValue = parseInt(qtyInput.value);
-        if (currentValue < 99) {
-            qtyInput.value = (currentValue + 1).toString();
-        }
-    });
-    qtyInput === null || qtyInput === void 0 ? void 0 : qtyInput.addEventListener('change', () => {
-        let value = parseInt(qtyInput.value);
-        if (isNaN(value) || value < 1)
-            value = 1;
-        else if (value > 99)
-            value = 99;
-        qtyInput.value = value.toString();
-    });
-    console.log('✅ 수량 조절 초기화 완료');
-}
-// 장바구니 담기
-function initAddToCart() {
-    const addToCartBtn = document.getElementById('addToCartBtn');
-    const qtyInput = document.getElementById('quantity');
-    addToCartBtn === null || addToCartBtn === void 0 ? void 0 : addToCartBtn.addEventListener('click', () => {
+// ✨ 위시리스트 버튼 초기화
+function initWishlistButton() {
+    const wishlistBtn = document.getElementById('addWishlistBtn');
+    wishlistBtn === null || wishlistBtn === void 0 ? void 0 : wishlistBtn.addEventListener('click', () => {
         var _a;
-        const bookTitle = (_a = document.getElementById('bookTitle')) === null || _a === void 0 ? void 0 : _a.textContent;
-        const quantity = qtyInput.value;
-        console.log('장바구니 담기:', bookTitle, '수량:', quantity);
-        alert(`"${bookTitle}"이(가) 장바구니에 담겼습니다.`);
+        if (!currentBook)
+            return;
+        // 아이콘 토글
+        if ((_a = wishlistBtn.textContent) === null || _a === void 0 ? void 0 : _a.includes('♡')) {
+            wishlistBtn.textContent = '♥ 위시리스트';
+            console.log('위시리스트 추가:', currentBook.title);
+            alert(`"${currentBook.title}"이(가) 위시리스트에 추가되었습니다.`);
+        }
+        else {
+            wishlistBtn.textContent = '♡ 위시리스트';
+            console.log('위시리스트 제거:', currentBook.title);
+        }
     });
-    console.log('✅ 장바구니 초기화 완료');
+    console.log('✅ 위시리스트 버튼 초기화 완료');
 }
-// 바로구매
-function initBuyNow() {
-    const buyNowBtn = document.getElementById('buyNowBtn');
-    buyNowBtn === null || buyNowBtn === void 0 ? void 0 : buyNowBtn.addEventListener('click', () => {
-        alert('바로구매 기능은 준비 중입니다.');
+/// ✨ 구매 모달 초기화
+function initPurchaseModal() {
+    const purchaseBtn = document.getElementById('purchaseBtn');
+    const modal = document.getElementById('purchaseModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalCloseBtn = document.getElementById('modalCloseBtn');
+    const storeItems = document.querySelectorAll('.store-item');
+    // 모달 열기
+    purchaseBtn === null || purchaseBtn === void 0 ? void 0 : purchaseBtn.addEventListener('click', () => {
+        if (!currentBook) {
+            alert('도서 정보를 불러오는 중입니다.');
+            return;
+        }
+        modal === null || modal === void 0 ? void 0 : modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // 스크롤 방지
     });
-    console.log('✅ 바로구매 초기화 완료');
+    // 모달 닫기
+    const closeModal = () => {
+        modal === null || modal === void 0 ? void 0 : modal.classList.remove('active');
+        document.body.style.overflow = ''; // 스크롤 복원
+    };
+    modalOverlay === null || modalOverlay === void 0 ? void 0 : modalOverlay.addEventListener('click', closeModal);
+    modalCloseBtn === null || modalCloseBtn === void 0 ? void 0 : modalCloseBtn.addEventListener('click', closeModal);
+    // ESC 키로 모달 닫기
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && (modal === null || modal === void 0 ? void 0 : modal.classList.contains('active'))) {
+            closeModal();
+        }
+    });
+    // 서점 선택
+    storeItems.forEach(item => {
+        item.addEventListener('click', () => __awaiter(this, void 0, void 0, function* () {
+            var _a;
+            const store = item.getAttribute('data-store');
+            if (!store || !currentBook)
+                return;
+            const storeName = ((_a = item.querySelector('.store-name')) === null || _a === void 0 ? void 0 : _a.textContent) || store;
+            // ✨ 클릭 추적 API 호출
+            try {
+                yield fetch(`${API_BASE_URL}/books/${currentBook.id}/track-click`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ platform: store })
+                });
+                console.log(`✅ ${storeName} 클릭 추적 완료`);
+            }
+            catch (error) {
+                console.error('클릭 추적 실패:', error);
+            }
+            // ✨ 제휴 링크로 이동
+            const purchaseLinks = currentBook.purchase_links;
+            let targetUrl;
+            switch (store) {
+                case 'coupang':
+                    targetUrl = purchaseLinks === null || purchaseLinks === void 0 ? void 0 : purchaseLinks.coupang;
+                    break;
+                case 'aladin':
+                    targetUrl = purchaseLinks === null || purchaseLinks === void 0 ? void 0 : purchaseLinks.aladin;
+                    break;
+                case 'yes24':
+                    targetUrl = purchaseLinks === null || purchaseLinks === void 0 ? void 0 : purchaseLinks.yes24;
+                    break;
+                case 'kyobo':
+                    targetUrl = purchaseLinks === null || purchaseLinks === void 0 ? void 0 : purchaseLinks.kyobo;
+                    break;
+            }
+            if (targetUrl) {
+                console.log(`🛒 ${storeName}로 이동:`, targetUrl);
+                window.open(targetUrl, '_blank');
+                closeModal();
+            }
+            else {
+                alert(`${storeName} 링크를 준비 중입니다.`);
+            }
+        }));
+    });
+    console.log('✅ 구매 모달 초기화 완료');
+}
+// ✨ AI 기능 드롭다운 초기화
+function initAIDropdown() {
+    const aiDropdownBtn = document.getElementById('aiDropdownBtn');
+    const aiDropdownMenu = document.getElementById('aiDropdownMenu');
+    const compareBtn = document.getElementById('compareBtn');
+    const discussBtn = document.getElementById('discussBtn');
+    // 드롭다운 토글
+    aiDropdownBtn === null || aiDropdownBtn === void 0 ? void 0 : aiDropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        aiDropdownMenu === null || aiDropdownMenu === void 0 ? void 0 : aiDropdownMenu.classList.toggle('active');
+        aiDropdownBtn.classList.toggle('active');
+    });
+    // 외부 클릭 시 드롭다운 닫기
+    document.addEventListener('click', (e) => {
+        const target = e.target;
+        if (!target.closest('.ai-dropdown')) {
+            aiDropdownMenu === null || aiDropdownMenu === void 0 ? void 0 : aiDropdownMenu.classList.remove('active');
+            aiDropdownBtn === null || aiDropdownBtn === void 0 ? void 0 : aiDropdownBtn.classList.remove('active');
+        }
+    });
+    // 도서 비교 버튼
+    compareBtn === null || compareBtn === void 0 ? void 0 : compareBtn.addEventListener('click', () => {
+        if (!currentBook) {
+            alert('도서 정보를 불러오는 중입니다.');
+            return;
+        }
+        const bookData = encodeURIComponent(JSON.stringify({
+            id: currentBook.id,
+            title: currentBook.title,
+            author: currentBook.author,
+            cover_image: currentBook.cover_image,
+            price: currentBook.price,
+            rating: currentBook.rating
+        }));
+        window.location.href = `/compare.html?book=${bookData}`;
+    });
+    // AI 책토론 버튼
+    discussBtn === null || discussBtn === void 0 ? void 0 : discussBtn.addEventListener('click', () => {
+        if (!currentBook) {
+            alert('도서 정보를 불러오는 중입니다.');
+            return;
+        }
+        const bookData = encodeURIComponent(JSON.stringify({
+            id: currentBook.id,
+            title: currentBook.title,
+            author: currentBook.author,
+            cover_image: currentBook.cover_image,
+            isbn: currentBook.isbn
+        }));
+        window.location.href = `/discuss.html?book=${bookData}`;
+    });
+    console.log('✅ AI 드롭다운 초기화 완료');
 }
 // 리뷰 작성
 function initWriteReview() {
@@ -246,15 +349,58 @@ function initReviewHelpful() {
     });
     console.log('✅ 리뷰 도움됨 초기화 완료');
 }
-// 추천 도서 클릭
+// 추천 도서 로드 및 클릭
 function initRecommendedBooks() {
-    const bookCards = document.querySelectorAll('.recommended-grid .book-card');
+    return __awaiter(this, void 0, void 0, function* () {
+        const bookId = getBookIdFromUrl();
+        if (!bookId)
+            return;
+        try {
+            // API 호출하여 관련 도서 가져오기
+            const response = yield fetch(`${API_BASE_URL}/books/${bookId}/related?limit=4`);
+            const data = yield response.json();
+            if (data.success && data.data && data.data.length > 0) {
+                renderRecommendedBooks(data.data);
+            }
+            else {
+                console.log('관련 도서가 없습니다.');
+            }
+        }
+        catch (error) {
+            console.error('관련 도서 로드 실패:', error);
+        }
+        console.log('✅ 추천 도서 초기화 완료');
+    });
+}
+// 추천 도서 렌더링
+function renderRecommendedBooks(books) {
+    const recommendedGrid = document.querySelector('.recommended-grid');
+    if (!recommendedGrid)
+        return;
+    recommendedGrid.innerHTML = books.map(book => `
+        <div class="book-card" data-book-id="${book.id}">
+            <div class="book-cover">
+                <img src="${book.cover_image}" 
+                     alt="${book.title}"
+                     onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\\'http://www.w3.org/2000/svg\\' width=\\'150\\' height=\\'220\\'%3E%3Crect fill=\\'%23ddd\\' width=\\'150\\' height=\\'220\\'/%3E%3Ctext x=\\'50%25\\' y=\\'50%25\\' text-anchor=\\'middle\\' dy=\\'.3em\\' fill=\\'%23999\\'%3E이미지 없음%3C/text%3E%3C/svg%3E'">
+            </div>
+            <div class="book-info">
+                <h3>${book.title}</h3>
+                <p>${book.author}</p>
+                <p class="price">${book.price.toLocaleString()}원</p>
+            </div>
+        </div>
+    `).join('');
+    // 클릭 이벤트 추가
+    const bookCards = recommendedGrid.querySelectorAll('.book-card');
     bookCards.forEach(card => {
         card.addEventListener('click', () => {
-            alert('추천 도서 기능은 준비 중입니다.');
+            const bookId = card.getAttribute('data-book-id');
+            if (bookId) {
+                window.location.href = `/book-detail.html?id=${bookId}`;
+            }
         });
     });
-    console.log('✅ 추천 도서 초기화 완료');
 }
 // 메인 초기화
 function initBookDetail() {
@@ -262,9 +408,9 @@ function initBookDetail() {
     loadBookData();
     initTabs();
     initWishlist();
-    initQuantity();
-    initAddToCart();
-    initBuyNow();
+    initPurchaseModal();
+    initWishlistButton();
+    initAIDropdown();
     initWriteReview();
     initReviewHelpful();
     initRecommendedBooks();

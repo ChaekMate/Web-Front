@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 console.log('📖 ChaekMate Recommend 로드 완료!');
 // ==================== API 설정 ====================
 const API_BASE_URL = 'http://localhost:8000/api/v1';
@@ -50,23 +41,21 @@ function initSearch() {
     console.log('✅ 검색 기능 초기화 완료');
 }
 // ==================== 큐레이터 추천 로드 ====================
-function loadCuratorPicks() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch(`${API_BASE_URL}/books/curator-picks?limit=3`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch curator picks');
-            }
-            const result = yield response.json();
-            if (result.success && result.data.length > 0) {
-                renderCuratorPicks(result.data);
-            }
-            console.log('✅ 큐레이터 추천 로드 완료:', result.data.length);
+async function loadCuratorPicks() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/books/curator-picks?limit=3`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch curator picks');
         }
-        catch (error) {
-            console.error('❌ 큐레이터 추천 로드 실패:', error);
+        const result = await response.json();
+        if (result.success && result.data.length > 0) {
+            renderCuratorPicks(result.data);
         }
-    });
+        console.log('✅ 큐레이터 추천 로드 완료:', result.data.length);
+    }
+    catch (error) {
+        console.error('❌ 큐레이터 추천 로드 실패:', error);
+    }
 }
 // ==================== 큐레이터 추천 렌더링 ====================
 function renderCuratorPicks(books) {
@@ -133,23 +122,21 @@ function initCuratorBooks() {
     console.log('✅ 큐레이터 추천 초기화 완료');
 }
 // ==================== 연령별 추천 로드 ====================
-function loadAgeBooks(age) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch(`${API_BASE_URL}/books/by-age?age=${age}&limit=4`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch age books');
-            }
-            const result = yield response.json();
-            if (result.success && result.data.length > 0) {
-                renderAgeBooks(result.data, age);
-            }
-            console.log(`✅ ${age} 연령별 추천 로드 완료:`, result.data.length);
+async function loadAgeBooks(age) {
+    try {
+        const response = await fetch(`${API_BASE_URL}/books/by-age?age=${age}&limit=4`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch age books');
         }
-        catch (error) {
-            console.error(`❌ ${age} 연령별 추천 로드 실패:`, error);
+        const result = await response.json();
+        if (result.success && result.data.length > 0) {
+            renderAgeBooks(result.data, age);
         }
-    });
+        console.log(`✅ ${age} 연령별 추천 로드 완료:`, result.data.length);
+    }
+    catch (error) {
+        console.error(`❌ ${age} 연령별 추천 로드 실패:`, error);
+    }
 }
 // ==================== 연령별 추천 렌더링 ====================
 function renderAgeBooks(books, age) {
@@ -204,23 +191,21 @@ function initAgeTabs() {
     console.log('✅ 연령별 탭 초기화 완료');
 }
 // ==================== 실시간 인기 도서 로드 ====================
-function loadTrendingBooks() {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const response = yield fetch(`${API_BASE_URL}/books/popular?limit=5`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch trending books');
-            }
-            const result = yield response.json();
-            if (result.success && result.data.length > 0) {
-                renderTrendingBooks(result.data);
-            }
-            console.log('✅ 실시간 인기 도서 로드 완료:', result.data.length);
+async function loadTrendingBooks() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/books/popular?limit=5`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch trending books');
         }
-        catch (error) {
-            console.error('❌ 실시간 인기 도서 로드 실패:', error);
+        const result = await response.json();
+        if (result.success && result.data.length > 0) {
+            renderTrendingBooks(result.data);
         }
-    });
+        console.log('✅ 실시간 인기 도서 로드 완료:', result.data.length);
+    }
+    catch (error) {
+        console.error('❌ 실시간 인기 도서 로드 실패:', error);
+    }
 }
 // ==================== 실시간 인기 도서 렌더링 ====================
 function renderTrendingBooks(books) {

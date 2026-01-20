@@ -71,7 +71,8 @@
             <!-- 책 기본 정보 (초기 숨김) -->
             <section class="book-main" id="bookMainSection" style="display: none;">
                 <div class="book-image">
-                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='500'%3E%3Crect fill='%23ddd' width='350' height='500'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='20'%3E책 표지%3C/text%3E%3C/svg%3E" alt="책 표지" id="bookCover">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='350' height='500'%3E%3Crect fill='%23ddd' width='350' height='500'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999' font-size='20'%3E책 표지%3C/text%3E%3C/svg%3E"
+                        alt="책 표지" id="bookCover">
                     <button class="wishlist-btn" id="wishlistBtn">
                         <span class="heart">♡</span>
                     </button>
@@ -98,50 +99,36 @@
                             <span class="meta-value" id="publishDate"></span>
                         </div>
                         <div class="meta-row">
-                            <span class="meta-label">쪽수</span>
-                            <span class="meta-value" id="pageCount"></span>
-                        </div>
-                        <div class="meta-row">
                             <span class="meta-label">ISBN</span>
                             <span class="meta-value" id="isbn"></span>
                         </div>
                     </div>
 
                     <div class="book-price-section">
-                        <div class="price-original">정가 <span id="originalPrice"></span></div>
-                        <div class="price-discount">
-                            <span class="discount-rate" id="discountRate" style="display:none;"></span>
-                            <span class="price-final" id="finalPrice"></span>
-                        </div>
-                        <div class="price-point">
-                            <span>적립</span>
-                            <span id="point">0P</span>
-                        </div>
-                    </div>
-
-                    <div class="book-delivery">
-                        <div class="delivery-info">
-                            <span class="delivery-label">배송</span>
-                            <span class="delivery-text">무료배송 (30,000원 이상)</span>
-                        </div>
-                        <div class="delivery-date">
-                            <span class="delivery-label">도착</span>
-                            <span class="delivery-text">내일 도착 예정</span>
-                        </div>
-                    </div>
-
-                    <div class="book-quantity">
-                        <label>수량</label>
-                        <div class="quantity-control">
-                            <button class="qty-btn minus">−</button>
-                            <input type="number" class="qty-input" value="1" min="1" max="99" id="quantity">
-                            <button class="qty-btn plus">+</button>
-                        </div>
+                        <div class="price-label">정가</div>
+                        <div class="price-amount" id="finalPrice"></div>
                     </div>
 
                     <div class="book-actions">
-                        <button class="btn-cart" id="addToCartBtn">장바구니</button>
-                        <button class="btn-buy" id="buyNowBtn">바로구매</button>
+                        <button class="btn-purchase" id="purchaseBtn">
+                            🛒 구매하기
+                        </button>
+                        <button class="btn-wishlist-add" id="addWishlistBtn">
+                            ♡ 위시리스트
+                        </button>
+                        <div class="ai-dropdown">
+                            <button class="btn-ai-features" id="aiDropdownBtn">
+                                🤖 AI 기능
+                            </button>
+                            <div class="ai-dropdown-menu" id="aiDropdownMenu">
+                                <button class="ai-dropdown-item" id="compareBtn">
+                                    📊 도서 비교
+                                </button>
+                                <button class="ai-dropdown-item" id="discussBtn">
+                                    💬 AI 책토론
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -176,7 +163,8 @@
                     <div class="author-info">
                         <div class="author-profile">
                             <div class="author-image">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%23ddd' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999'%3E저자%3C/text%3E%3C/svg%3E" alt="저자" id="authorImage">
+                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Crect fill='%23ddd' width='120' height='120'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999'%3E저자%3C/text%3E%3C/svg%3E"
+                                    alt="저자" id="authorImage">
                             </div>
                             <div class="author-details">
                                 <h3 class="author-name" id="authorName"></h3>
@@ -247,54 +235,92 @@
                 <section class="recommended-books">
                     <h2 class="section-title">이 책과 함께 본 책</h2>
                     <div class="recommended-grid">
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='220'%3E%3Crect fill='%23ddd' width='150' height='220'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999'%3E책 표지%3C/text%3E%3C/svg%3E" alt="추천 도서">
-                            </div>
-                            <div class="book-info">
-                                <h3>추천 도서</h3>
-                                <p>저자명</p>
-                                <p class="price">0원</p>
-                            </div>
-                        </div>
-
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='220'%3E%3Crect fill='%23ddd' width='150' height='220'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999'%3E책 표지%3C/text%3E%3C/svg%3E" alt="추천 도서">
-                            </div>
-                            <div class="book-info">
-                                <h3>추천 도서</h3>
-                                <p>저자명</p>
-                                <p class="price">0원</p>
-                            </div>
-                        </div>
-
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='220'%3E%3Crect fill='%23ddd' width='150' height='220'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999'%3E책 표지%3C/text%3E%3C/svg%3E" alt="추천 도서">
-                            </div>
-                            <div class="book-info">
-                                <h3>추천 도서</h3>
-                                <p>저자명</p>
-                                <p class="price">0원</p>
-                            </div>
-                        </div>
-
-                        <div class="book-card">
-                            <div class="book-cover">
-                                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='220'%3E%3Crect fill='%23ddd' width='150' height='220'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23999'%3E책 표지%3C/text%3E%3C/svg%3E" alt="추천 도서">
-                            </div>
-                            <div class="book-info">
-                                <h3>추천 도서</h3>
-                                <p>저자명</p>
-                                <p class="price">0원</p>
-                            </div>
-                        </div>
+                        <!-- 동적 생성 -->
                     </div>
-                </section>
             </div>
+            </section>
+        </div>
         </div>
     </main>
+
+    <!-- ✨ 구매 선택 모달 -->
+    <div class="purchase-modal" id="purchaseModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>구매처 선택</h2>
+                <button class="modal-close" id="modalCloseBtn">✕</button>
+            </div>
+
+            <div class="modal-body">
+                <p class="modal-description">
+                    원하시는 서점에서 도서를 구매하실 수 있습니다.<br>
+                    아래 버튼을 클릭하면 해당 서점 페이지로 이동합니다.
+                </p>
+
+                <div class="store-list">
+                    <!-- 쿠팡 -->
+                    <button class="store-item" data-store="coupang">
+                        <div class="store-logo">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%23FF5A5F' width='80' height='80' rx='8'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='24' font-weight='bold'%3E쿠팡%3C/text%3E%3C/svg%3E"
+                                alt="쿠팡">
+                        </div>
+                        <div class="store-info">
+                            <h3 class="store-name">쿠팡</h3>
+                            <p class="store-desc">빠른 배송 · 로켓배송</p>
+                        </div>
+                        <div class="store-arrow">→</div>
+                    </button>
+
+                    <!-- 알라딘 -->
+                    <button class="store-item" data-store="aladin">
+                        <div class="store-logo">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%234A90E2' width='80' height='80' rx='8'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20' font-weight='bold'%3E알라딘%3C/text%3E%3C/svg%3E"
+                                alt="알라딘">
+                        </div>
+                        <div class="store-info">
+                            <h3 class="store-name">알라딘</h3>
+                            <p class="store-desc">중고도서 · 다양한 혜택</p>
+                        </div>
+                        <div class="store-arrow">→</div>
+                    </button>
+
+                    <!-- 예스24 -->
+                    <button class="store-item" data-store="yes24">
+                        <div class="store-logo">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%23FFB800' width='80' height='80' rx='8'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20' font-weight='bold'%3E예스24%3C/text%3E%3C/svg%3E"
+                                alt="예스24">
+                        </div>
+                        <div class="store-info">
+                            <h3 class="store-name">예스24</h3>
+                            <p class="store-desc">포인트 적립 · 리뷰 이벤트</p>
+                        </div>
+                        <div class="store-arrow">→</div>
+                    </button>
+
+                    <!-- 교보문고 -->
+                    <button class="store-item" data-store="kyobo">
+                        <div class="store-logo">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%2300A651' width='80' height='80' rx='8'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='16' font-weight='bold'%3E교보문고%3C/text%3E%3C/svg%3E"
+                                alt="교보문고">
+                        </div>
+                        <div class="store-info">
+                            <h3 class="store-name">교보문고</h3>
+                            <p class="store-desc">매장 픽업 · 바로드림</p>
+                        </div>
+                        <div class="store-arrow">→</div>
+                    </button>
+                </div>
+
+                <div class="modal-notice">
+                    <p>
+                        💡 각 서점으로 이동하며, ChaekMate는 중개 수수료를 받습니다.<br>
+                        가격과 혜택은 서점마다 다를 수 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 푸터 -->
     <footer class="footer">

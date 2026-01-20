@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 console.log('💬 ChaekMate Discuss 로드 완료!');
 const messages = [];
 // ==================== 검색 기능 ====================
@@ -140,42 +131,38 @@ function hideTypingIndicator() {
     }
 }
 // ==================== AI 응답 생성 (더미) ====================
-function getAIResponse(userMessage) {
-    return __awaiter(this, void 0, void 0, function* () {
-        // TODO: API 연동 시 실제 AI 응답 받기
-        // 현재는 더미 응답 반환
-        yield new Promise(resolve => setTimeout(resolve, 1500)); // 1.5초 대기
-        const responses = [
-            '좋은 질문이네요! 이 책에서는 2026년의 주요 트렌드를 다양한 관점에서 분석하고 있습니다.',
-            '저자는 AI 기술의 발전이 소비 패턴에 미치는 영향을 특히 강조하고 있습니다.',
-            '이 주제는 책의 3장에서 자세히 다루어지고 있는데, 매우 흥미로운 관점을 제시합니다.',
-            '네, 맞습니다. 책에서는 이러한 변화가 우리 일상에 어떤 영향을 미칠지 구체적인 사례와 함께 설명하고 있습니다.'
-        ];
-        return responses[Math.floor(Math.random() * responses.length)];
-    });
+async function getAIResponse(userMessage) {
+    // TODO: API 연동 시 실제 AI 응답 받기
+    // 현재는 더미 응답 반환
+    await new Promise(resolve => setTimeout(resolve, 1500)); // 1.5초 대기
+    const responses = [
+        '좋은 질문이네요! 이 책에서는 2026년의 주요 트렌드를 다양한 관점에서 분석하고 있습니다.',
+        '저자는 AI 기술의 발전이 소비 패턴에 미치는 영향을 특히 강조하고 있습니다.',
+        '이 주제는 책의 3장에서 자세히 다루어지고 있는데, 매우 흥미로운 관점을 제시합니다.',
+        '네, 맞습니다. 책에서는 이러한 변화가 우리 일상에 어떤 영향을 미칠지 구체적인 사례와 함께 설명하고 있습니다.'
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
 }
 // ==================== 메시지 전송 ====================
-function sendMessage(text) {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (!text.trim())
-            return;
-        // 사용자 메시지 추가
-        addMessage('user', text);
-        // 입력창 초기화
-        const chatInput = document.getElementById('chatInput');
-        if (chatInput) {
-            chatInput.value = '';
-            chatInput.style.height = 'auto';
-        }
-        // 타이핑 인디케이터 표시
-        showTypingIndicator();
-        // AI 응답 받기 (더미)
-        const aiResponse = yield getAIResponse(text);
-        // 타이핑 인디케이터 제거
-        hideTypingIndicator();
-        // AI 응답 추가
-        addMessage('ai', aiResponse);
-    });
+async function sendMessage(text) {
+    if (!text.trim())
+        return;
+    // 사용자 메시지 추가
+    addMessage('user', text);
+    // 입력창 초기화
+    const chatInput = document.getElementById('chatInput');
+    if (chatInput) {
+        chatInput.value = '';
+        chatInput.style.height = 'auto';
+    }
+    // 타이핑 인디케이터 표시
+    showTypingIndicator();
+    // AI 응답 받기 (더미)
+    const aiResponse = await getAIResponse(text);
+    // 타이핑 인디케이터 제거
+    hideTypingIndicator();
+    // AI 응답 추가
+    addMessage('ai', aiResponse);
 }
 // ==================== 입력 이벤트 ====================
 function initChatInput() {

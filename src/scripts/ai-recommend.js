@@ -1,12 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 console.log('AI Recommend Start');
 const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
 // 메시지 추가 함수
@@ -84,7 +75,7 @@ const addLoadingMessage = () => {
     return loadingDiv;
 };
 // AI 추천 API 호출
-const getRecommendation = (message) => __awaiter(this, void 0, void 0, function* () {
+const getRecommendation = async (message) => {
     try {
         const token = localStorage.getItem('access_token');
         const headers = {
@@ -93,7 +84,7 @@ const getRecommendation = (message) => __awaiter(this, void 0, void 0, function*
         if (token) {
             headers['Authorization'] = `Bearer ${token}`;
         }
-        const response = yield fetch(`${API_BASE_URL}/recommendations/chat`, {
+        const response = await fetch(`${API_BASE_URL}/recommendations/chat`, {
             method: 'POST',
             headers: headers,
             body: JSON.stringify({ message })
@@ -101,16 +92,16 @@ const getRecommendation = (message) => __awaiter(this, void 0, void 0, function*
         if (!response.ok) {
             throw new Error('API 호출 실패');
         }
-        const data = yield response.json();
+        const data = await response.json();
         return data;
     }
     catch (error) {
         console.error('Error:', error);
         return null;
     }
-});
+};
 // 메시지 전송 처리
-const handleSendMessage = (message) => __awaiter(this, void 0, void 0, function* () {
+const handleSendMessage = async (message) => {
     if (!message.trim())
         return;
     // 사용자 메시지 추가
@@ -123,7 +114,7 @@ const handleSendMessage = (message) => __awaiter(this, void 0, void 0, function*
     // 로딩 메시지 표시
     const loadingMessage = addLoadingMessage();
     // AI 추천 받기
-    const result = yield getRecommendation(message);
+    const result = await getRecommendation(message);
     // 로딩 메시지 제거
     loadingMessage.remove();
     if (result && result.success) {
@@ -134,7 +125,7 @@ const handleSendMessage = (message) => __awaiter(this, void 0, void 0, function*
         // 에러 메시지
         addMessage('ai', '죄송합니다. 추천을 가져오는 중 문제가 발생했습니다. 다시 시도해주세요.');
     }
-});
+};
 // 폼 제출 이벤트
 const initChatForm = () => {
     const chatForm = document.getElementById('chatForm');
