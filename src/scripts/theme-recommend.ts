@@ -11,12 +11,25 @@ interface Book {
     price: number;
     rating: number;
     theme: string;
+    category?: string;
+}
+
+interface Pagination {
+    total: number;
+    page: number;
+    limit: number;
+    total_pages: number;
 }
 
 interface ApiResponse {
     success: boolean;
     data: Book[];
-    total?: number;
+    pagination?: Pagination;
+    filters?: {
+        theme: string;
+        category: string | null;
+        sort: string;
+    };
 }
 
 // 테마 데이터
@@ -44,6 +57,8 @@ const themes: Record<string, { icon: string; title: string; description: string 
 };
 
 let currentTheme = 'work';
+let currentPage = 1;
+let currentSort = 'popular';
 
 // ==================== 검색 기능 ====================
 function initSearch(): void {
@@ -72,9 +87,9 @@ function initSearch(): void {
 function getThemeFromUrl(): string {
     const urlParams = new URLSearchParams(window.location.search);
     const theme = urlParams.get('theme') || 'work';
-    
-    // 허용된 테마만 반환
-    if (['work', 'healing', 'growth', 'goals'].includes(theme)) {
+
+    const allowedThemes = ['work', 'healing', 'growth', 'goals'];
+    if (allowedThemes.indexOf(theme) !== -1) {
         return theme;
     }
     return 'work';
@@ -94,7 +109,6 @@ function updateThemeInfo(theme: string): void {
     if (themeDescription) themeDescription.textContent = themeData.description;
     if (breadcrumbTheme) breadcrumbTheme.textContent = themeData.title;
 
-    // 네비게이션 활성화
     const navItems = document.querySelectorAll('.theme-nav-item');
     navItems.forEach(item => {
         const itemTheme = item.getAttribute('data-theme');
@@ -109,16 +123,21 @@ function updateThemeInfo(theme: string): void {
 }
 
 // ==================== 테마별 도서 API 호출 ====================
-async function loadThemeBooks(theme: string): Promise<void> {
-    console.log('테마별 도서 로딩:', theme);
-    
+async function loadThemeBooks(theme: string, page: number = 1, sort: string = 'popular'): Promise<void> {
+    console.log('테마별 도서 로딩:', { theme, page, sort });
+
     try {
-        const response = await fetch(`${API_BASE_URL}/books/theme/${theme}?limit=20`);
+        let url = `${API_BASE_URL}/books/theme/${theme}?page=${page}&limit=21&sort=${sort}`;
+
+        const response = await fetch(url);
         const data: ApiResponse = await response.json();
-        
+
         if (data.success && data.data) {
             renderBooks(data.data);
-            updateBookCount(data.data.length);
+            if (data.pagination) {
+                updatePagination(data.pagination);
+                updateBookCount(data.pagination.total);
+            }
         } else {
             showEmptyState();
         }
@@ -158,6 +177,59 @@ function renderBooks(books: Book[]): void {
     initBookClick();
 
     console.log('✅ 도서 렌더링 완료:', books.length);
+}
+
+// ==================== 페이지네이션 업데이트 ====================
+function updatePagination(pagination: Pagination): void {
+    const paginationDiv = document.querySelector('.pagination');
+    if (!paginationDiv) return;
+
+    const { page, total_pages } = pagination;
+
+    let html = '';
+
+    // 이전 버튼
+    html += `<button class="page-btn prev" ${page === 1 ? 'disabled' : ''} data-page="${page - 1}">이전</button>`;
+
+    // 페이지 번호들
+    const startPage = Math.max(1, page - 2);
+    const endPage = Math.min(total_pages, page + 2);
+
+    if (startPage > 1) {
+        html += `<button class="page-btn" data-page="1">1</button>`;
+        if (startPage > 2) {
+            html += `<span class="page-dots">...</span>`;
+        }
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+        html += `<button class="page-btn ${i === page ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+
+    if (endPage < total_pages) {
+        if (endPage < total_pages - 1) {
+            html += `<span class="page-dots">...</span>`;
+        }
+        html += `<button class="page-btn" data-page="${total_pages}">${total_pages}</button>`;
+    }
+
+    // 다음 버튼
+    html += `<button class="page-btn next" ${page === total_pages ? 'disabled' : ''} data-page="${page + 1}">다음</button>`;
+
+    paginationDiv.innerHTML = html;
+
+    // 페이지 버튼 클릭 이벤트
+    const pageButtons = paginationDiv.querySelectorAll('.page-btn[data-page]');
+    pageButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const pageNum = parseInt(btn.getAttribute('data-page') || '1');
+            currentPage = pageNum;
+            loadThemeBooks(currentTheme, currentPage, currentSort);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    });
+
+    console.log('✅ 페이지네이션 업데이트:', pagination);
 }
 
 // ==================== 빈 상태 표시 ====================
@@ -207,7 +279,8 @@ function initThemeNav(): void {
             e.preventDefault();
 
             const theme = item.getAttribute('data-theme');
-            if (theme && ['work', 'healing', 'growth', 'goals'].includes(theme)) {
+            const allowedThemes = ['work', 'healing', 'growth', 'goals'];
+            if (theme && allowedThemes.indexOf(theme) !== -1) {
                 window.location.href = `?theme=${theme}`;
             }
         });
@@ -216,15 +289,14 @@ function initThemeNav(): void {
     console.log('✅ 테마 네비게이션 초기화 완료');
 }
 
-// ==================== 정렬 기능 (미구현) ====================
+// ==================== 정렬 기능 ====================
 function initSort(): void {
     const sortSelect = document.getElementById('sortSelect') as HTMLSelectElement;
 
     sortSelect?.addEventListener('change', () => {
-        const sortValue = sortSelect.value;
-        console.log('정렬:', sortValue);
-
-        // TODO: 정렬 기능 구현 (추후)
+        currentSort = sortSelect.value;
+        currentPage = 1;
+        loadThemeBooks(currentTheme, currentPage, currentSort);
     });
 
     console.log('✅ 정렬 기능 초기화 완료');
@@ -235,12 +307,12 @@ function initThemeRecommend(): void {
     console.log('🎬 ChaekMate Theme Recommend 초기화 시작...');
 
     currentTheme = getThemeFromUrl();
-    
+
     initSearch();
     updateThemeInfo(currentTheme);
     initThemeNav();
     initSort();
-    loadThemeBooks(currentTheme);
+    loadThemeBooks(currentTheme, currentPage, currentSort);
 
     console.log('✨ ChaekMate Theme Recommend 초기화 완료!');
 }
