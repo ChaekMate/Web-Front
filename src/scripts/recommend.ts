@@ -1,3 +1,4 @@
+export {};
 console.log('📖 ChaekMate Recommend 로드 완료!');
 
 // ==================== API 설정 ====================
@@ -19,7 +20,14 @@ interface BookAPI {
 
 interface CuratorPickResponse {
     success: boolean;
-    data: BookAPI[];
+    data: BookWithCurator[];
+}
+
+interface BookWithCurator extends BookAPI {
+    curator_name?: string;
+    curator_specialty?: string;
+    curator_avatar?: string;
+    curator_comment?: string;
 }
 
 interface AgeBookResponse {
@@ -32,28 +40,6 @@ interface PopularBookResponse {
     success: boolean;
     data: BookAPI[];
 }
-
-// ==================== 큐레이터 더미 데이터 ====================
-const CURATOR_DATA = [
-    {
-        name: "김서연",
-        specialty: "문학 전문",
-        avatar: "김",
-        comment: "올 겨울, 마음을 따뜻하게 녹여줄 소설입니다. 한강 작가의 섬세한 문체가 돋보이는 작품으로..."
-    },
-    {
-        name: "이준호",
-        specialty: "자기계발 전문",
-        avatar: "이",
-        comment: "2025년을 더 생산적으로 보내고 싶다면 꼭 읽어야 할 책입니다. 실용적인 팁들이 가득..."
-    },
-    {
-        name: "박민지",
-        specialty: "인문 전문",
-        avatar: "박",
-        comment: "AI 시대를 살아가는 우리에게 필요한 인문학적 통찰을 제공합니다. 깊이 있는 사유를..."
-    }
-];
 
 // ==================== 검색 기능 ====================
 function initSearch(): void {
@@ -81,6 +67,8 @@ function initSearch(): void {
 // ==================== 큐레이터 추천 로드 ====================
 async function loadCuratorPicks(): Promise<void> {
     try {
+        console.log('🔄 큐레이터 추천 로딩 중...');
+        
         const response = await fetch(`${API_BASE_URL}/books/curator-picks?limit=3`);
         
         if (!response.ok) {
@@ -89,39 +77,57 @@ async function loadCuratorPicks(): Promise<void> {
         
         const result: CuratorPickResponse = await response.json();
         
+        console.log('📦 API 응답:', result);
+        
         if (result.success && result.data.length > 0) {
             renderCuratorPicks(result.data);
+        } else {
+            console.warn('⚠️ 큐레이터 추천 데이터 없음');
         }
         
         console.log('✅ 큐레이터 추천 로드 완료:', result.data.length);
     } catch (error) {
         console.error('❌ 큐레이터 추천 로드 실패:', error);
+        // 폴백: 더미 데이터 표시
+        renderCuratorPicksFallback();
     }
 }
 
 // ==================== 큐레이터 추천 렌더링 ====================
-function renderCuratorPicks(books: BookAPI[]): void {
+function renderCuratorPicks(books: BookWithCurator[]): void {
     const curatorPicks = document.querySelector('.curator-picks');
     if (!curatorPicks) return;
 
-    curatorPicks.innerHTML = books.map((book, index) => {
-        const curator = CURATOR_DATA[index] || CURATOR_DATA[0];
+    console.log('📚 큐레이터 추천 렌더링 시작:', books);
+
+    curatorPicks.innerHTML = books.map((book) => {
+        // ✅ API에서 받은 실제 큐레이터 정보 사용 (더미 데이터 사용 안 함)
+        const curatorName = book.curator_name || '큐레이터';
+        const curatorSpecialty = book.curator_specialty || '도서 전문';
+        const curatorAvatar = book.curator_avatar || '책';
+        const curatorComment = book.curator_comment || '이 책을 추천합니다.';
+        
+        console.log(`✅ ${book.title}`);
+        console.log(`   큐레이터: ${curatorName} (${curatorSpecialty})`);
+        console.log(`   멘트: ${curatorComment.substring(0, 50)}...`);
         
         return `
             <div class="curator-card">
                 <div class="curator-info">
-                    <div class="curator-avatar">${curator.avatar}</div>
+                    <div class="curator-avatar">${curatorAvatar}</div>
                     <div class="curator-name">
-                        <strong>${curator.name}</strong> 큐레이터
-                        <span>${curator.specialty}</span>
+                        <strong>${curatorName}</strong> 큐레이터
+                        <span>${curatorSpecialty}</span>
                     </div>
                 </div>
                 <div class="curator-comment">
-                    "${curator.comment}"
+                    "${curatorComment}"
                 </div>
                 <div class="curator-book" data-book-id="${book.id}">
                     <div class="book-cover-small">
-                        <img src="${book.cover_image || 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'140\'%3E%3Crect fill=\'%23ddd\' width=\'100\' height=\'140\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23999\' font-size=\'14\'%3E책 표지%3C/text%3E%3C/svg%3E'}" alt="${book.title}">
+                        <img src="${book.cover_image || 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'140\'%3E%3Crect fill=\'%23ddd\' width=\'100\' height=\'140\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23999\' font-size=\'14\'%3E책 표지%3C/text%3E%3C/svg%3E'}" 
+                             alt="${book.title}"
+                             onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'100\' height=\'140\'%3E%3Crect fill=\'%23ddd\' width=\'100\' height=\'140\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' text-anchor=\'middle\' dy=\'.3em\' fill=\'%23999\' font-size=\'14\'%3E책 표지%3C/text%3E%3C/svg%3E'">
                     </div>
                     <div class="book-info-small">
                         <h4>${book.title}</h4>
@@ -135,6 +141,22 @@ function renderCuratorPicks(books: BookAPI[]): void {
 
     // 클릭 이벤트 재등록
     initCuratorBooks();
+    
+    console.log('✨ 큐레이터 카드 렌더링 완료');
+}
+
+// ==================== 폴백 렌더링 (API 실패 시) ====================
+function renderCuratorPicksFallback(): void {
+    const curatorPicks = document.querySelector('.curator-picks');
+    if (!curatorPicks) return;
+
+    console.log('⚠️ 폴백 데이터 사용');
+    
+    curatorPicks.innerHTML = `
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+            <p style="color: #666;">큐레이터 추천을 불러오는 중입니다...</p>
+        </div>
+    `;
 }
 
 // ==================== 테마 카드 클릭 ====================
@@ -287,7 +309,7 @@ function renderTrendingBooks(books: BookAPI[]): void {
         let badgeHTML = '';
         const change = book.ranking_change;
         
-        if (change === null) {
+        if (change === null || change === undefined) {
             badgeHTML = '<div class="trending-badge new">NEW</div>';
         } else if (change > 0) {
             badgeHTML = `<div class="trending-badge up">↑ ${change}</div>`;
