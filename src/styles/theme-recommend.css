@@ -1,4 +1,3 @@
-/* 기본 스타일 */
 * {
     margin: 0;
     padding: 0;
@@ -310,7 +309,18 @@ button {
     gap: 8px;
 }
 
-.category-select,
+/* 카테고리 셀렉트 스타일 추가 */
+.category-select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-right: 8px;
+}
+
 .sort-select {
     padding: 8px 12px;
     border: 1px solid #ddd;
@@ -321,7 +331,11 @@ button {
     border-radius: 4px;
 }
 
-.category-select:focus,
+.category-select:focus {
+    outline: none;
+    border-color: #000;
+}
+
 .sort-select:focus {
     outline: none;
     border-color: #000;
@@ -403,15 +417,19 @@ button {
 }
 
 .book-title {
-    font-size: 14px;
-    font-weight: 700;
-    margin-bottom: 7px;
-    line-height: 1.3;
+    font-size: 15px; 
+    font-weight: 600; 
+    color: #333;
+    margin: 8px 0 4px;
+    
+    /* 긴 제목 처리 */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    height: 36px;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+    max-height: 2.8em;
 }
 
 .book-author {
@@ -482,6 +500,14 @@ button {
     justify-content: center;
     align-items: center;
     gap: 6px;
+}
+
+/* 페이지 dots 스타일 추가 */
+.page-dots {
+    display: inline-block;
+    padding: 0 8px;
+    color: #999;
+    user-select: none;
 }
 
 .page-btn {
