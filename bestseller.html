@@ -70,20 +70,19 @@
             <!-- 필터 섹션 -->
             <div class="filter-section">
                 <div class="period-filter">
-                    <button class="period-btn active" data-period="weekly">주간</button>
+                    <button class="period-btn active" data-period="all">전체</button>
+                    <button class="period-btn" data-period="weekly">주간</button>
                     <button class="period-btn" data-period="monthly">월간</button>
                     <button class="period-btn" data-period="yearly">연간</button>
                 </div>
 
                 <div class="category-filter">
-                    <select class="category-select" id="categoryFilter">
-                        <option value="all">전체</option>
-                        <option value="novel">소설</option>
-                        <option value="essay">에세이</option>
-                        <option value="self-improvement">자기계발</option>
-                        <option value="economics">경제경영</option>
-                        <option value="humanities">인문</option>
-                        <option value="science">과학</option>
+                    <select class="category-select" id="themeFilter">
+                        <option value="all">전체 테마</option>
+                        <option value="work">일과 성장</option>
+                        <option value="healing">힐링과 위로</option>
+                        <option value="growth">자기계발</option>
+                        <option value="goals">목표 달성</option>
                     </select>
                 </div>
             </div>
