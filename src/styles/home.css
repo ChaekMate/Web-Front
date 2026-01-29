@@ -640,6 +640,88 @@ body {
     color: #999;
 }
 
+/* ==========================================
+   로그인 상태 헤더 - 로그아웃 버튼
+========================================== */
+
+/* 상단 메뉴바 */
+.main-header .top-bar {
+  background: #ffffff;
+  background-image: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(0,0,0,.01) 10px,
+      rgba(0,0,0,.01) 20px
+    );
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0.75rem 0;
+}
+
+.main-header .top-bar .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.main-header .top-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+}
+
+.main-header .top-menu a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 400;
+}
+
+.main-header .top-menu a:hover {
+  color: #000;
+}
+
+/* 로그아웃 버튼 - 블랙&화이트 디자인 */
+#topMenu .logout-link,
+.top-menu .logout-link {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  text-decoration: none;
+}
+
+#topMenu .logout-link::before,
+.top-menu .logout-link::before {
+  content: "👋";
+  font-size: 1rem;
+}
+
+#topMenu .logout-link:hover,
+.top-menu .logout-link:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#topMenu .logout-link:active,
+.top-menu .logout-link:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
 /* ==================== Responsive ==================== */
 @media (max-width: 1024px) {
     .curator-section .recommend-grid {
