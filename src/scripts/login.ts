@@ -76,27 +76,83 @@ const initLoginForm = (): void => {
   console.log('✅ 로그인 폼 초기화 완료');
 };
 
-// 소셜 로그인 버튼 처리
+// ==================== 소셜 로그인 ====================
 const initSocialLogin = (): void => {
   const googleBtn = document.querySelector('.btn-google');
   const kakaoBtn = document.querySelector('.btn-kakao');
   const naverBtn = document.querySelector('.btn-naver');
 
+  // Google 로그인
   if (googleBtn) {
-    googleBtn.addEventListener('click', () => {
-      alert('Google 로그인 기능은 준비 중입니다!');
+    googleBtn.addEventListener('click', async () => {
+      try {
+        console.log('🔍 Google 로그인 시작...');
+
+        const response = await fetch(`${API_BASE_URL}/auth/google`);
+        const data = await response.json();
+
+        if (data.success && data.auth_url) {
+          console.log('✅ Google 인증 URL 받음, 리다이렉트 중...');
+          // OAuth 페이지로 리다이렉트
+          window.location.href = data.auth_url;
+        } else {
+          throw new Error('Google 인증 URL을 받지 못했습니다.');
+        }
+      } catch (error) {
+        console.error('❌ Google 로그인 오류:', error);
+        alert('Google 로그인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      }
     });
   }
 
+  // Kakao 로그인
   if (kakaoBtn) {
-    kakaoBtn.addEventListener('click', () => {
-      alert('Kakao 로그인 기능은 준비 중입니다!');
+    kakaoBtn.addEventListener('click', async () => {
+      try {
+        console.log('🔍 Kakao 로그인 시작...');
+
+        const response = await fetch(`${API_BASE_URL}/auth/kakao`);
+        const data = await response.json();
+
+        if (data.success && data.auth_url) {
+          console.log('✅ Kakao 인증 URL 받음, 리다이렉트 중...');
+          window.location.href = data.auth_url;
+        } else {
+          throw new Error('Kakao 인증 URL을 받지 못했습니다.');
+        }
+      } catch (error) {
+        console.error('❌ Kakao 로그인 오류:', error);
+        alert('Kakao 로그인 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      }
     });
   }
 
+  // Naver 로그인
   if (naverBtn) {
-    naverBtn.addEventListener('click', () => {
-      alert('Naver 로그인 기능은 준비 중입니다!');
+    naverBtn.addEventListener('click', async () => {
+      try {
+        console.log('🔍 Naver 로그인 시작...');
+
+        const response = await fetch(`${API_BASE_URL}/auth/naver`);
+        const data = await response.json();
+
+        if (data.success && data.auth_url) {
+          console.log('✅ Naver 인증 URL 받음, 리다이렉트 중...');
+
+          // ✨ state 값 저장 (선택사항 - 보안 강화)
+          if (data.state) {
+            sessionStorage.setItem('naver_oauth_state', data.state);
+          }
+
+          // Naver 로그인 페이지로 이동
+          window.location.href = data.auth_url;
+        } else {
+          throw new Error('Naver 인증 URL을 받지 못했습니다.');
+        }
+      } catch (error) {
+        console.error('❌ Naver 로그인 오류:', error);
+        alert('Naver 로그인 중 오류가 발생했습니다.');
+      }
     });
   }
 
