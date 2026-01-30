@@ -1,6 +1,192 @@
-/* event.css - new-books.css 기반 간소화 버전 */
-@import url('new-books.css');
+/* event.css - 독립적인 스타일 */
 
+/* 기본 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Malgun Gothic', sans-serif;
+    background-color: #fff;
+    color: #000;
+}
+
+/* 컨테이너 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 헤더 스타일 */
+.main-header {
+    border-bottom: 3px solid #000;
+}
+
+.top-bar {
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-menu {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+.top-menu a {
+    color: #666;
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.top-menu a:hover {
+    color: #000;
+}
+
+.header-main {
+    padding: 20px 0;
+}
+
+.header-main .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 900;
+    margin: 0;
+}
+
+.logo a {
+    color: #000;
+    text-decoration: none;
+}
+
+.search-area {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    gap: 8px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #000;
+    font-size: 14px;
+    border-radius: 8px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #000;
+}
+
+.search-btn {
+    padding: 12px 20px;
+    border: 2px solid #000;
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.search-btn:hover {
+    background-color: #333;
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: #000;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.icon-link .icon {
+    font-size: 24px;
+}
+
+.icon-link:hover {
+    opacity: 0.7;
+}
+
+/* 네비게이션 */
+.main-nav {
+    background-color: #000;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-menu li {
+    flex: 1;
+}
+
+.nav-menu a {
+    display: block;
+    padding: 16px 0;
+    text-align: center;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    border-left: 1px solid #333;
+}
+
+.nav-menu li:first-child a {
+    border-left: none;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    background-color: #333;
+}
+
+/* 메인 콘텐츠 */
+.main {
+    min-height: 600px;
+    padding: 60px 0;
+}
+
+/* 페이지 헤더 */
+.page-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.page-title {
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 16px;
+}
+
+.page-description {
+    font-size: 16px;
+    color: #666;
+}
+
+/* 이벤트 탭 */
 .event-tabs {
     display: flex;
     justify-content: center;
@@ -16,10 +202,12 @@
     font-size: 15px;
     cursor: pointer;
     transition: all 0.2s;
+    border-radius: 25px; /* 둥근 모서리 */
 }
 
 .tab-btn:hover {
     background-color: #f0f0f0;
+    transform: translateY(-2px);
 }
 
 .tab-btn.active {
@@ -27,6 +215,7 @@
     color: #fff;
 }
 
+/* 이벤트 그리드 */
 .events-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -36,14 +225,17 @@
 
 .event-card {
     border: 2px solid #000;
+    background-color: #fff;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.3s ease;
     position: relative;
+    overflow: hidden;
+    border-radius: 16px; /* 둥근 모서리 */
 }
 
 .event-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 8px 8px 0 #000;
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); /* 부드러운 그림자 */
 }
 
 .event-badge {
@@ -54,6 +246,7 @@
     font-weight: 900;
     font-size: 13px;
     z-index: 1;
+    border-radius: 20px; /* 둥근 배지 */
 }
 
 .event-badge.ongoing {
@@ -74,30 +267,46 @@
 .event-image {
     width: 100%;
     aspect-ratio: 16/10;
-    border-bottom: 2px solid #000;
     overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+.event-image > div {
+    border-radius: 0; /* 이미지 내부는 직각 유지 */
 }
 
 .event-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
 .event-info {
     padding: 24px;
+    background-color: #fff;
 }
 
 .event-title {
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 12px;
+    color: #000;
+    line-height: 1.4;
 }
 
 .event-period {
     font-size: 14px;
     color: #666;
     margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.event-period::before {
+    content: "📅";
+    font-size: 14px;
 }
 
 .event-desc {
@@ -106,13 +315,115 @@
     line-height: 1.6;
 }
 
+/* 푸터 */
+.main-footer {
+    background-color: #f5f5f5;
+    border-top: 3px solid #000;
+    padding: 40px 0;
+    margin-top: 80px;
+}
+
+.footer-info {
+    text-align: center;
+}
+
+.company-name {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.footer-info p {
+    font-size: 13px;
+    color: #666;
+}
+
+/* 반응형 */
 @media (max-width: 768px) {
+    .header-main .container {
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .search-area {
+        order: 3;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .header-icons {
+        gap: 15px;
+    }
+
+    .icon-link span:not(.icon) {
+        display: none;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+    }
+
+    .nav-menu li {
+        flex: 1 1 50%;
+    }
+
+    .nav-menu a {
+        border-left: none;
+        border-top: 1px solid #333;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
     .events-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .tab-btn {
         padding: 10px 20px;
         font-size: 14px;
+    }
+
+    .event-title {
+        font-size: 18px;
+    }
+
+    .event-info {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .event-tabs {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+
+    .events-grid {
+        gap: 20px;
+    }
+
+    .event-badge {
+        top: 12px;
+        right: 12px;
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .event-card {
+        border-radius: 12px;
     }
 }

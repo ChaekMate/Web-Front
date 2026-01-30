@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>이벤트 - ChaekMate</title>
     <link rel="stylesheet" href="/src/styles/event.css">
 </head>
+
 <body>
     <!-- 헤더는 new-books.html과 동일 -->
     <header class="main-header">
@@ -66,10 +68,12 @@
             <!-- 이벤트 그리드 -->
             <div class="events-grid">
                 <!-- 이벤트 카드 1 -->
-                <div class="event-card" data-status="ongoing">
+                <div class="event-card" data-status="ongoing" data-id="1">
                     <div class="event-badge ongoing">진행중</div>
                     <div class="event-image">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23000' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E신규회원 혜택%3C/text%3E%3C/svg%3E" alt="이벤트">
+                        <div
+                            style="width: 100%; height: 100%; background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 900;">
+                            신규회원 혜택</div>
                     </div>
                     <div class="event-info">
                         <h3 class="event-title">신규회원 가입 시 즉시 1,000원 적립!</h3>
@@ -79,10 +83,12 @@
                 </div>
 
                 <!-- 이벤트 카드 2 -->
-                <div class="event-card" data-status="ongoing">
+                <div class="event-card" data-status="ongoing" data-id="2">
                     <div class="event-badge ongoing">진행중</div>
                     <div class="event-image">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23000' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E출석체크%3C/text%3E%3C/svg%3E" alt="이벤트">
+                        <div
+                            style="width: 100%; height: 100%; background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 900;">
+                            출석체크</div>
                     </div>
                     <div class="event-info">
                         <h3 class="event-title">매일 출석체크로 최대 150원 적립</h3>
@@ -92,10 +98,12 @@
                 </div>
 
                 <!-- 이벤트 카드 3 -->
-                <div class="event-card" data-status="ongoing">
+                <div class="event-card" data-status="ongoing" data-id="3">
                     <div class="event-badge ongoing">진행중</div>
                     <div class="event-image">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23000' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E베스트리뷰%3C/text%3E%3C/svg%3E" alt="이벤트">
+                        <div
+                            style="width: 100%; height: 100%; background: linear-gradient(135deg, #718096 0%, #4a5568 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 900;">
+                            베스트리뷰</div>
                     </div>
                     <div class="event-info">
                         <h3 class="event-title">베스트 리뷰 이벤트</h3>
@@ -105,10 +113,12 @@
                 </div>
 
                 <!-- 이벤트 카드 4 -->
-                <div class="event-card" data-status="ongoing">
+                <div class="event-card" data-status="ongoing" data-id="4">
                     <div class="event-badge ongoing">진행중</div>
                     <div class="event-image">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23000' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E무료배송%3C/text%3E%3C/svg%3E" alt="이벤트">
+                        <div
+                            style="width: 100%; height: 100%; background: linear-gradient(135deg, #1a202c 0%, #000000 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: 900;">
+                            무료배송</div>
                     </div>
                     <div class="event-info">
                         <h3 class="event-title">3만원 이상 구매 시 무료배송</h3>
@@ -118,10 +128,12 @@
                 </div>
 
                 <!-- 이벤트 카드 5 -->
-                <div class="event-card" data-status="upcoming">
+                <div class="event-card" data-status="upcoming" data-id="5">
                     <div class="event-badge upcoming">예정</div>
                     <div class="event-image">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23666' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E설 특가%3C/text%3E%3C/svg%3E" alt="이벤트">
+                        <div
+                            style="width: 100%; height: 100%; background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%); display: flex; align-items: center; justify-content: center; color: #1a202c; font-size: 24px; font-weight: 900;">
+                            설 특가</div>
                     </div>
                     <div class="event-info">
                         <h3 class="event-title">설 연휴 특가 할인</h3>
@@ -131,10 +143,12 @@
                 </div>
 
                 <!-- 이벤트 카드 6 -->
-                <div class="event-card" data-status="ended">
+                <div class="event-card" data-status="ended" data-id="6">
                     <div class="event-badge ended">종료</div>
                     <div class="event-image">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='250'%3E%3Crect fill='%23999' width='400' height='250'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20'%3E연말결산%3C/text%3E%3C/svg%3E" alt="이벤트">
+                        <div
+                            style="width: 100%; height: 100%; background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%); display: flex; align-items: center; justify-content: center; color: #718096; font-size: 24px; font-weight: 900;">
+                            연말결산</div>
                     </div>
                     <div class="event-info">
                         <h3 class="event-title">2024 연말결산 세일</h3>
@@ -155,6 +169,7 @@
         </div>
     </footer>
 
-    <script type="module" src="/src/scripts/event.ts"></script>
+    <script type="module" src="/src/scripts/event.js"></script>
 </body>
+
 </html>

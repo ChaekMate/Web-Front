@@ -30,9 +30,11 @@ function initTabs(): void {
         btn.addEventListener('click', () => {
             const tab = btn.getAttribute('data-tab');
             
+            // 탭 활성화
             tabBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
 
+            // 카드 필터링
             eventCards.forEach(card => {
                 const status = card.getAttribute('data-status');
                 if (tab === 'all' || tab === status) {
@@ -50,10 +52,11 @@ function initTabs(): void {
 function initEventClick(): void {
     const eventCards = document.querySelectorAll('.event-card');
     
-    eventCards.forEach(card => {
+    eventCards.forEach((card) => {
         card.addEventListener('click', () => {
-            console.log('이벤트 클릭');
-            // TODO: 이벤트 상세 페이지로 이동
+            const eventId = card.getAttribute('data-id');
+            console.log('이벤트 클릭, ID:', eventId);
+            window.location.href = `/event-detail.html?id=${eventId}`;
         });
     });
 }
