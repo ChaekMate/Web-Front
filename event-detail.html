@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이벤트 상세 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/event-detail.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#order">주문배송</a>
+                    <a href="/cs.html">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo"><a href="/home.html">ChaekMate</a></h1>
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link"><span class="icon">👤</span><span>마이페이지</span></a>
+                    <a href="/cart.html" class="icon-link"><span class="icon">🛒</span><span>장바구니</span></a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/new-books.html">신간</a></li>
+                    <li><a href="/recommend.html">추천</a></li>
+                    <li><a href="/compare.html">도서 비교</a></li>
+                    <li><a href="/discuss.html">AI 책토론</a></li>
+                    <li><a href="/event.html" class="active">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/event.html">이벤트</a>
+                <span class="separator">›</span>
+                <span class="current" id="breadcrumbTitle">이벤트 상세</span>
+            </div>
+
+            <div class="event-detail-container">
+                <div class="event-header">
+                    <div class="event-badge" id="eventBadge"></div>
+                    <h1 class="event-title" id="eventTitle"></h1>
+                    <p class="event-period" id="eventPeriod"></p>
+                </div>
+
+                <div class="event-image-main">
+                    <img id="eventImage" src="" alt="이벤트 이미지">
+                </div>
+
+                <div class="event-content">
+                    <div class="content-section">
+                        <h2>이벤트 내용</h2>
+                        <div id="eventDescription"></div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>참여 방법</h2>
+                        <div id="eventHowTo"></div>
+                    </div>
+
+                    <div class="content-section">
+                        <h2>유의사항</h2>
+                        <div id="eventNotice"></div>
+                    </div>
+                </div>
+
+                <div class="event-actions">
+                    <button class="btn-back" onclick="history.back()">목록으로</button>
+                    <button class="btn-participate" id="btnParticipate">이벤트 참여하기</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-info">
+                <p class="company-name">ChaekMate (주)책메이트</p>
+                <p>COPYRIGHT © ChaekMate Inc. ALL RIGHTS RESERVED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/event-detail.js"></script>
+</body>
+</html>
