@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>위시리스트 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/wishlist.css">
+</head>
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="#customer">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="검색어를 입력하세요" id="searchInput">
+                    <button class="search-btn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/wishlist.html" class="icon-link active">
+                        <span class="icon">❤️</span>
+                        <span>위시리스트</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="#work">업무</a></li>
+                    <li><a href="#healing">힐링</a></li>
+                    <li><a href="#growth">성장</a></li>
+                    <li><a href="#goals">목표</a></li>
+                    <li><a href="/ai-recommend.html">AI 추천</a></li>
+                    <li><a href="/events.html">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container">
+            <div class="page-header">
+                <h1 class="page-title">위시리스트</h1>
+                <p class="page-description">관심있는 도서를 저장하고 원하는 서점에서 구매하세요</p>
+            </div>
+
+            <!-- 위시리스트 비어있을 때 -->
+            <div class="empty-wishlist" id="emptyWishlist" style="display: none;">
+                <div class="empty-icon">❤️</div>
+                <p class="empty-message">위시리스트가 비어있습니다</p>
+                <p class="empty-submessage">관심있는 도서를 위시리스트에 담아보세요</p>
+                <a href="/home.html" class="btn-primary">도서 둘러보기</a>
+            </div>
+
+            <!-- 위시리스트 내용 -->
+            <div class="wishlist-content" id="wishlistContent">
+                <!-- 위시리스트 헤더 -->
+                <div class="wishlist-header">
+                    <div class="item-count">
+                        <span id="totalCount">0</span>개의 도서
+                    </div>
+                    <button class="btn-text" id="deleteSelected">선택 삭제</button>
+                </div>
+
+                <!-- 위시리스트 아이템 목록 (백엔드에서 동적 렌더링) -->
+                <div class="wishlist-items" id="wishlistItems">
+                    <!-- JavaScript로 동적 생성 -->
+                </div>
+            </div>
+
+            <!-- 추천 도서 섹션 -->
+            <section class="recommended-section">
+                <h2 class="section-title">이런 도서는 어떠세요?</h2>
+                <p class="section-description">위시리스트에 추가할 만한 추천 도서</p>
+                
+                <div class="recommended-grid" id="recommendedGrid">
+                    <!-- JavaScript로 동적 생성 -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ✨ 구매 선택 모달 -->
+    <div class="purchase-modal" id="purchaseModal">
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>구매처 선택</h2>
+                <button class="modal-close" id="modalCloseBtn">✕</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="selected-book-info" id="selectedBookInfo">
+                    <!-- 선택된 도서 정보가 여기에 표시됩니다 -->
+                </div>
+
+                <p class="modal-description">
+                    원하시는 서점에서 도서를 구매하실 수 있습니다.<br>
+                    아래 버튼을 클릭하면 해당 서점 페이지로 이동합니다.
+                </p>
+
+                <div class="store-list">
+                    <!-- 쿠팡 -->
+                    <button class="store-item" data-store="coupang">
+                        <div class="store-logo">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%23FF5A5F' width='80' height='80' rx='8'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='24' font-weight='bold'%3E쿠팡%3C/text%3E%3C/svg%3E"
+                                alt="쿠팡">
+                        </div>
+                        <div class="store-info">
+                            <h3 class="store-name">쿠팡</h3>
+                            <p class="store-desc">빠른 배송 · 로켓배송</p>
+                        </div>
+                        <div class="store-arrow">→</div>
+                    </button>
+
+                    <!-- 알라딘 -->
+                    <button class="store-item" data-store="aladin">
+                        <div class="store-logo">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%234A90E2' width='80' height='80' rx='8'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20' font-weight='bold'%3E알라딘%3C/text%3E%3C/svg%3E"
+                                alt="알라딘">
+                        </div>
+                        <div class="store-info">
+                            <h3 class="store-name">알라딘</h3>
+                            <p class="store-desc">중고도서 · 다양한 혜택</p>
+                        </div>
+                        <div class="store-arrow">→</div>
+                    </button>
+
+                    <!-- 예스24 -->
+                    <button class="store-item" data-store="yes24">
+                        <div class="store-logo">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%23FFB800' width='80' height='80' rx='8'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-size='20' font-weight='bold'%3E예스24%3C/text%3E%3C/svg%3E"
+                                alt="예스24">
+                        </div>
+                        <div class="store-info">
+                            <h3 class="store-name">예스24</h3>
+                            <p class="store-desc">포인트 적립 · 리뷰 이벤트</p>
+                        </div>
+                        <div class="store-arrow">→</div>
+                    </button>
+
+                    <!-- 교보문고 -->
+                    <button class="store-item" data-store="kyobo">
+                        <div class="store-logo">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Crect fill='%2300A651' width='80' height='80' rx='8'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23fff' font-16' font-weight='bold'%3E교보문고%3C/text%3E%3C/svg%3E"
+                                alt="교보문고">
+                        </div>
+                        <div class="store-info">
+                            <h3 class="store-name">교보문고</h3>
+                            <p class="store-desc">매장 픽업 · 바로드림</p>
+                        </div>
+                        <div class="store-arrow">→</div>
+                    </button>
+                </div>
+
+                <div class="modal-notice">
+                    <p>
+                        💡 각 서점으로 이동하며, ChaekMate는 중개 수수료를 받습니다.<br>
+                        가격과 혜택은 서점마다 다를 수 있습니다.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ChaekMate</h3>
+                    <p>AI 기반 도서 추천 및 토론 플랫폼</p>
+                </div>
+                <div class="footer-section">
+                    <h4>서비스</h4>
+                    <a href="#">도서 검색</a>
+                    <a href="/ai-recommend.html">AI 추천</a>
+                    <a href="#">북 토론</a>
+                </div>
+                <div class="footer-section">
+                    <h4>고객 지원</h4>
+                    <a href="#">FAQ</a>
+                    <a href="#">문의하기</a>
+                </div>
+                <div class="footer-section">
+                    <h4>정보</h4>
+                    <a href="#">이용약관</a>
+                    <a href="#">개인정보처리방침</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ChaekMate. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/wishlist.js"></script>
+</body>
+</html>
