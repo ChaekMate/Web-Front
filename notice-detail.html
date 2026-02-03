@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항 상세 - ChaekMate</title>
+    <link rel="stylesheet" href="/src/styles/notice-detail.css">
+</head>
+
+<body>
+    <!-- 상단 헤더 -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="top-menu">
+                    <a href="/login.html">로그인</a>
+                    <a href="/signup.html">회원가입</a>
+                    <a href="/mypage.html">마이페이지</a>
+                    <a href="/cs.html" class="active">고객센터</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-main">
+            <div class="container">
+                <h1 class="logo">
+                    <a href="/home.html">ChaekMate</a>
+                </h1>
+
+                <div class="search-area">
+                    <input type="text" class="search-input" placeholder="책 제목, 저자, 문장을 검색하세요" id="searchInput">
+                    <button class="search-btn" id="searchBtn">🔍</button>
+                </div>
+
+                <div class="header-icons">
+                    <a href="/mypage.html" class="icon-link">
+                        <span class="icon">👤</span>
+                        <span>마이페이지</span>
+                    </a>
+                    <a href="/wishlist.html" class="icon-link">
+                        <span class="icon">📚</span>
+                        <span>위시리스트</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="/bestseller.html">베스트셀러</a></li>
+                    <li><a href="/recommend.html">AI 추천</a></li>
+                    <li><a href="/compare.html">도서 비교</a></li>
+                    <li><a href="/discuss.html">AI 책토론</a></li>
+                    <li><a href="/sns.html">문장 SNS</a></li>
+                    <li><a href="/event.html">이벤트</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- 메인 컨텐츠 -->
+    <main class="main">
+        <div class="container">
+            <!-- 브레드크럼 -->
+            <div class="breadcrumb">
+                <a href="/home.html">홈</a>
+                <span>›</span>
+                <a href="/cs.html">고객센터</a>
+                <span>›</span>
+                <a href="/cs.html#notice">공지사항</a>
+                <span>›</span>
+                <span class="current">상세보기</span>
+            </div>
+
+            <!-- 공지사항 상세 컨테이너 -->
+            <div class="notice-detail-container">
+                <!-- 로딩 상태 -->
+                <div class="loading-state" id="loadingState">
+                    <div class="loading-spinner"></div>
+                    <p>공지사항을 불러오는 중...</p>
+                </div>
+
+                <!-- 에러 상태 -->
+                <div class="error-state" id="errorState" style="display: none;">
+                    <p>공지사항을 불러올 수 없습니다.</p>
+                    <button class="btn-back" onclick="window.history.back()">돌아가기</button>
+                </div>
+
+                <!-- 공지사항 내용 -->
+                <article class="notice-detail" id="noticeDetail" style="display: none;">
+                    <!-- 헤더 -->
+                    <div class="notice-header">
+                        <span class="notice-badge" id="noticeBadge"></span>
+                        <h1 class="notice-title" id="noticeTitle"></h1>
+                        <div class="notice-meta">
+                            <span class="notice-date" id="noticeDate"></span>
+                            <span class="notice-divider">|</span>
+                            <span class="notice-views">
+                                <span class="views-icon">👁️</span>
+                                <span id="noticeViews"></span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- 본문 -->
+                    <div class="notice-body">
+                        <div class="notice-content" id="noticeContent"></div>
+                    </div>
+
+                    <!-- 관리자 액션 버튼 (관리자만 표시) -->
+                    <div class="admin-actions" id="adminActions" style="display: none;">
+                        <button class="btn-edit" id="btnEdit">수정하기</button>
+                        <button class="btn-delete" id="btnDelete">삭제하기</button>
+                    </div>
+
+                    <!-- 하단 네비게이션 -->
+                    <div class="notice-navigation">
+                        <!-- 이전 글 -->
+                        <div class="nav-item prev-notice" id="prevNotice" style="display: none;">
+                            <span class="nav-label">이전 글</span>
+                            <a class="nav-link" id="prevNoticeLink">
+                                <span class="nav-title" id="prevNoticeTitle"></span>
+                            </a>
+                        </div>
+
+                        <!-- 다음 글 -->
+                        <div class="nav-item next-notice" id="nextNotice" style="display: none;">
+                            <span class="nav-label">다음 글</span>
+                            <a class="nav-link" id="nextNoticeLink">
+                                <span class="nav-title" id="nextNoticeTitle"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 목록으로 버튼 -->
+                    <div class="notice-actions">
+                        <button class="btn-list" onclick="location.href='/cs.html#notice'">목록으로</button>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <!-- 푸터 -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ChaekMate</h3>
+                    <p>AI 기반 도서 추천·비교·토론 플랫폼</p>
+                    <p>문장 공유 SNS</p>
+                </div>
+                <div class="footer-section">
+                    <h4>서비스</h4>
+                    <a href="/recommend.html">AI 도서 추천</a>
+                    <a href="/compare.html">도서 비교</a>
+                    <a href="/discuss.html">AI 책토론</a>
+                    <a href="/sns.html">문장 SNS</a>
+                </div>
+                <div class="footer-section">
+                    <h4>고객 지원</h4>
+                    <a href="/cs.html">FAQ</a>
+                    <a href="/cs.html#inquiry">1:1 문의</a>
+                </div>
+                <div class="footer-section">
+                    <h4>정보</h4>
+                    <a href="#">이용약관</a>
+                    <a href="#">개인정보처리방침</a>
+                    <a href="#">제휴 문의</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 ChaekMate. All rights reserved.</p>
+                <p style="margin-top: 8px; font-size: 13px;">ChaekMate는 도서 판매가 아닌 구매 중개 서비스를 제공합니다.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/notice-detail.js"></script>
+</body>
+
+</html>

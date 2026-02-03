@@ -1,0 +1,522 @@
+/* ==================== 공통 스타일 (cs.css와 동일) ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    background: #fff;
+    color: #000;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ==================== 헤더 ==================== */
+.main-header {
+    background: #fff;
+    border-bottom: 3px solid #000;
+}
+
+.top-bar {
+    background: #000;
+    color: #fff;
+    padding: 8px 0;
+}
+
+.top-menu {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+}
+
+.top-menu a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.top-menu a:hover,
+.top-menu a.active {
+    text-decoration: underline;
+}
+
+.header-main {
+    padding: 20px 0;
+}
+
+.header-main .container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logo a {
+    font-size: 28px;
+    font-weight: 800;
+    color: #000;
+    text-decoration: none;
+}
+
+.search-area {
+    flex: 1;
+    display: flex;
+    gap: 8px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #000;
+    font-size: 15px;
+}
+
+.search-btn {
+    padding: 12px 20px;
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.icon-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    color: #000;
+    font-size: 13px;
+}
+
+.icon-link .icon {
+    font-size: 24px;
+}
+
+.main-nav {
+    background: #f8f8f8;
+    border-top: 2px solid #000;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+    padding: 16px 0;
+}
+
+.nav-menu a {
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.nav-menu a:hover {
+    text-decoration: underline;
+}
+
+/* ==================== 메인 컨텐츠 ==================== */
+.main {
+    min-height: calc(100vh - 400px);
+    padding: 40px 0 80px;
+}
+
+/* ==================== 브레드크럼 ==================== */
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.breadcrumb a {
+    color: #666;
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.breadcrumb .current {
+    color: #000;
+    font-weight: 600;
+}
+
+/* ==================== 공지사항 상세 컨테이너 ==================== */
+.notice-detail-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 0;
+}
+
+/* ==================== 로딩/에러 상태 ==================== */
+.loading-state,
+.error-state {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 20px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-state p,
+.error-state p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.btn-back {
+    padding: 12px 24px;
+    background: #000;
+    color: #fff;
+    border: 2px solid #000;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-back:hover {
+    background: #fff;
+    color: #000;
+}
+
+/* ==================== 공지사항 상세 ==================== */
+.notice-detail {
+    background: #fff;
+    border: 3px solid #000;
+    box-shadow: 8px 8px 0 #000;
+}
+
+/* 헤더 */
+.notice-header {
+    padding: 40px;
+    border-bottom: 2px solid #eee;
+}
+
+.notice-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.notice-badge.important {
+    background: #FF4757;
+    color: #fff;
+}
+
+.notice-badge.notice {
+    background: #4A90E2;
+    color: #fff;
+}
+
+.notice-badge.update {
+    background: #26DE81;
+    color: #fff;
+}
+
+.notice-badge.event {
+    background: #FD79A8;
+    color: #fff;
+}
+
+.notice-badge.maintenance {
+    background: #A29BFE;
+    color: #fff;
+}
+
+.notice-title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 16px;
+    word-break: keep-all;
+}
+
+.notice-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #666;
+}
+
+.notice-divider {
+    color: #ddd;
+}
+
+.notice-views {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* 본문 */
+.notice-body {
+    padding: 40px;
+}
+
+.notice-content {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #333;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.notice-content p {
+    margin-bottom: 16px;
+}
+
+.notice-content p:last-child {
+    margin-bottom: 0;
+}
+
+.notice-content strong {
+    font-weight: 700;
+    color: #000;
+}
+
+.notice-content a {
+    color: #4A90E2;
+    text-decoration: underline;
+}
+
+/* 관리자 액션 버튼 */
+.admin-actions {
+    padding: 0 40px 40px;
+    display: flex;
+    gap: 12px;
+    border-bottom: 2px solid #eee;
+}
+
+.btn-edit,
+.btn-delete {
+    padding: 12px 24px;
+    border: 2px solid #000;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-edit {
+    background: #4A90E2;
+    color: #fff;
+}
+
+.btn-edit:hover {
+    background: #357ABD;
+}
+
+.btn-delete {
+    background: #E74C3C;
+    color: #fff;
+}
+
+.btn-delete:hover {
+    background: #C0392B;
+}
+
+/* 이전/다음 글 네비게이션 */
+.notice-navigation {
+    border-top: 2px solid #eee;
+    border-bottom: 2px solid #eee;
+}
+
+.nav-item {
+    padding: 20px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item + .nav-item {
+    border-top: 1px solid #eee;
+}
+
+.nav-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #000;
+    display: block;
+}
+
+.nav-title {
+    font-size: 15px;
+    font-weight: 600;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nav-link:hover .nav-title {
+    text-decoration: underline;
+    color: #4A90E2;
+}
+
+/* 액션 버튼 영역 */
+.notice-actions {
+    padding: 40px;
+    text-align: center;
+}
+
+.btn-list {
+    padding: 14px 40px;
+    background: #fff;
+    color: #000;
+    border: 2px solid #000;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.btn-list:hover {
+    background: #000;
+    color: #fff;
+}
+
+/* ==================== 푸터 ==================== */
+.footer {
+    background: #000;
+    color: #fff;
+    padding: 60px 0 40px;
+    margin-top: 80px;
+    border-top: 3px solid #000;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    margin-bottom: 40px;
+}
+
+.footer-section h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.footer-section p {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 8px;
+}
+
+.footer-section a {
+    display: block;
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.footer-section a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 40px;
+    border-top: 1px solid #333;
+}
+
+.footer-bottom p {
+    font-size: 14px;
+    color: #999;
+}
+
+/* ==================== 반응형 ==================== */
+@media (max-width: 768px) {
+    .header-main .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .search-area {
+        width: 100%;
+    }
+
+    .nav-menu {
+        gap: 20px;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .notice-detail-container {
+        padding: 20px 0;
+    }
+
+    .notice-header,
+    .notice-body,
+    .admin-actions,
+    .nav-item,
+    .notice-actions {
+        padding: 20px;
+    }
+
+    .notice-title {
+        font-size: 22px;
+    }
+
+    .notice-content {
+        font-size: 15px;
+    }
+
+    .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+}
